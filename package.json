@@ -1,0 +1,29 @@
+{
+  "name": "final_project_studio_inventory",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-cli serve --mode development --content-base docs/ --open Chrome"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gavhensley/final_project_studio_inventory.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gavhensley/final_project_studio_inventory/issues"
+  },
+  "homepage": "https://github.com/gavhensley/final_project_studio_inventory#readme",
+  "devDependencies": {
+    "webpack": "^5.30.0",
+    "webpack-cli": "^4.6.0",
+    "webpack-dev-server": "^3.11.2"
+  }
+}
