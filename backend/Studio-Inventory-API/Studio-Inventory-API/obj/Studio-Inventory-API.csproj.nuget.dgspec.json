@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Joe\\source\\repos\\final_project_studio_inventory\\backend\\Studio-Inventory-API\\Studio-Inventory-API\\Studio-Inventory-API.csproj": {}
+    "C:\\Users\\trent\\source\\repos\\final_project_studio_inventory\\backend\\Studio-Inventory-API\\Studio-Inventory-API\\Studio-Inventory-API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Joe\\source\\repos\\final_project_studio_inventory\\backend\\Studio-Inventory-API\\Studio-Inventory-API\\Studio-Inventory-API.csproj": {
+    "C:\\Users\\trent\\source\\repos\\final_project_studio_inventory\\backend\\Studio-Inventory-API\\Studio-Inventory-API\\Studio-Inventory-API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Joe\\source\\repos\\final_project_studio_inventory\\backend\\Studio-Inventory-API\\Studio-Inventory-API\\Studio-Inventory-API.csproj",
+        "projectUniqueName": "C:\\Users\\trent\\source\\repos\\final_project_studio_inventory\\backend\\Studio-Inventory-API\\Studio-Inventory-API\\Studio-Inventory-API.csproj",
         "projectName": "Studio-Inventory-API",
-        "projectPath": "C:\\Users\\Joe\\source\\repos\\final_project_studio_inventory\\backend\\Studio-Inventory-API\\Studio-Inventory-API\\Studio-Inventory-API.csproj",
-        "packagesPath": "C:\\Users\\Joe\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Joe\\source\\repos\\final_project_studio_inventory\\backend\\Studio-Inventory-API\\Studio-Inventory-API\\obj\\",
+        "projectPath": "C:\\Users\\trent\\source\\repos\\final_project_studio_inventory\\backend\\Studio-Inventory-API\\Studio-Inventory-API\\Studio-Inventory-API.csproj",
+        "packagesPath": "C:\\Users\\trent\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\trent\\source\\repos\\final_project_studio_inventory\\backend\\Studio-Inventory-API\\Studio-Inventory-API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Joe\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\trent\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -57,7 +57,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.104\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     }
