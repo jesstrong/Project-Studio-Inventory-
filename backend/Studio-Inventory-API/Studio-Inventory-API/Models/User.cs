@@ -10,17 +10,19 @@ namespace Studio_Inventory_API.Models
         public int Id {get;set;}
         public string Name {get; set;}
         public bool IsAdmin{get; set;}
+        public string Password { get; set; }
 
         public User()
         {
 
         }
 
-        public User(int id, string name, bool isAdmin)
+        public User(int id, string name, bool isAdmin, string password)
         {
             Id = id;
             Name = name;
             IsAdmin = isAdmin;
+            Password = password;
         }
     }
 }

@@ -13,11 +13,11 @@ namespace Studio_Inventory_API.Models
         public int CategoryId { get; set; }
         public virtual Category Category {get; set;}
 
-        Equipment()
+        public Equipment()
         {
         }
 
-        Equipment(int id, string serialNumber, string name, int categoryId)
+        public Equipment(int id, string serialNumber, string name, int categoryId)
         {
             Id = id;
             SerialNumber = serialNumber;
