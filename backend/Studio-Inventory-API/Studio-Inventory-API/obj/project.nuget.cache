@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "fUgdVwo6KVvHlMFWWiaEzPZKALyDLNPt2RmXMpQYTLMF32gP6Seim7PgPz6wpv3Rcf/YzCGCQ2aNAmFggm+TFA==",
+  "dgSpecHash": "nnRHJVT8Z26covb1HFqTlD5ELkI+9mIAVdDAL4G0A70lLbfzwTgId1i69nk+r90sidEXo1rCvgebirLUv4qBvQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Joe\\source\\repos\\final_project_studio_inventory\\backend\\Studio-Inventory-API\\Studio-Inventory-API\\Studio-Inventory-API.csproj",
+  "projectFilePath": "C:\\Users\\wecan\\source\\repos\\final_project_studio_inventory\\backend\\Studio-Inventory-API\\Studio-Inventory-API\\Studio-Inventory-API.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
