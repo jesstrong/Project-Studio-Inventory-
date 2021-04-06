@@ -8,19 +8,19 @@
     ".NETCoreApp,Version=v3.1": []
   },
   "packageFolders": {
-    "C:\\Users\\Joe\\.nuget\\packages\\": {}
+    "C:\\Users\\wecan\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Joe\\source\\repos\\final_project_studio_inventory\\backend\\Studio-Inventory-API\\Studio-Inventory-API\\Studio-Inventory-API.csproj",
+      "projectUniqueName": "C:\\Users\\wecan\\source\\repos\\final_project_studio_inventory\\backend\\Studio-Inventory-API\\Studio-Inventory-API\\Studio-Inventory-API.csproj",
       "projectName": "Studio-Inventory-API",
-      "projectPath": "C:\\Users\\Joe\\source\\repos\\final_project_studio_inventory\\backend\\Studio-Inventory-API\\Studio-Inventory-API\\Studio-Inventory-API.csproj",
-      "packagesPath": "C:\\Users\\Joe\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Joe\\source\\repos\\final_project_studio_inventory\\backend\\Studio-Inventory-API\\Studio-Inventory-API\\obj\\",
+      "projectPath": "C:\\Users\\wecan\\source\\repos\\final_project_studio_inventory\\backend\\Studio-Inventory-API\\Studio-Inventory-API\\Studio-Inventory-API.csproj",
+      "packagesPath": "C:\\Users\\wecan\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\wecan\\source\\repos\\final_project_studio_inventory\\backend\\Studio-Inventory-API\\Studio-Inventory-API\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Joe\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\wecan\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -63,7 +63,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.104\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
       }
     }
   }
