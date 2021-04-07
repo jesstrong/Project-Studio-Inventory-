@@ -6,6 +6,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Studio_Inventory_API.Models;
+using Studio_Inventory_API.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +28,12 @@ namespace Studio_Inventory_API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddDbContext<StudioContext>();
+            services.AddScoped<IRepository<Category>, CategoryRepository>();
+            services.AddScoped<IRepository<Equipment>, EquipmentRepository>();
+            services.AddScoped<IRepository<User>, UserRepository>();
         }
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
