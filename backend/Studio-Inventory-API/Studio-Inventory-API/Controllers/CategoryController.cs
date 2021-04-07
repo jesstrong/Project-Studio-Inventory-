@@ -71,10 +71,5 @@ namespace Studio_Inventory_API.Controllers
             _categoryRepo.Delete(category);
             return "Deleted item successfully";
         }
-
-        private bool CategoryExists(int id)
-        {
-            return _context.Categories.Any(e => e.Id == id);
-        }
     }
 }

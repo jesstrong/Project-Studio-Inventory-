@@ -20,5 +20,26 @@ namespace Studio_Inventory_API.Tests
             categoryRepo = Substitute.For<IRepository<Category>>();
             sut = new CategoryController(categoryRepo);
         }
+
+        [Fact]
+        public void GetCategories_Returns_A_List()
+        {
+            IEnumerable<Category> expectedList = new List<Category>();
+            categoryRepo.GetAll().Returns(expectedList);
+
+            var result = sut.GetCategories();
+
+            Assert.Equal(expectedList, result);
+        }
+        [Fact]
+        public void GetCategory_Returns_A_Category()
+        {
+            var expectedCategory = new Category();
+            categoryRepo.GetById(999).Returns(expectedCategory);
+
+            var result = sut.GetCategory(999);
+
+            Assert.Equal(expectedCategory, result);
+        }
     }
 }
