@@ -18,7 +18,7 @@ namespace Studio_Inventory_API.Controllers
     {
         IRepository<Equipment> _equipmentRepo;
 
-        public EquipmentListController(Irepository<Equipment> context)
+        public EquipmentListController(IRepository<Equipment> context)
         {
             this._equipmentRepo = context;
         }

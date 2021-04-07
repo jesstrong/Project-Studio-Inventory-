@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Studio_Inventory_API;
 using Studio_Inventory_API.Models;
+using Studio_Inventory_API.Repositories;
 
 namespace Studio_Inventory_API.Controllers
 {
@@ -14,7 +15,7 @@ namespace Studio_Inventory_API.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        IRepository<User>_userRepo;
+        IRepository<User> _userRepo;
 
         public UserController(IRepository<User> userRepo)
         {
