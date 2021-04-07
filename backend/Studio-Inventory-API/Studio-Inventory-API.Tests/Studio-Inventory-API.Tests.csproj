@@ -28,4 +28,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Studio-Inventory-API\Studio-Inventory-API.csproj" />
+  </ItemGroup>
+
 </Project>
