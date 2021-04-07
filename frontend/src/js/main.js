@@ -1,5 +1,10 @@
+import Home from "./components/Home";
+import Header from "./components/Header";
+
 const appDiv = document.getElementById('app');
 
 export default() => {
- appDiv.innerHTML = "<h1>Hello World</h1>";
+ appDiv.innerHTML = "Test";
+ Header.SetupHeader();
+ Home.NavHome();
 }
