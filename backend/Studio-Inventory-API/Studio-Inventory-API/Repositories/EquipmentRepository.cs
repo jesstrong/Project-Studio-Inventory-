@@ -13,6 +13,6 @@ namespace Studio_Inventory_API.Repositories
 
             }
 
-        }
+    }
 
 } 
