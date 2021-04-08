@@ -9,7 +9,7 @@ function Header(){
         <ul>
             <li class='nav_home'>Home</li>
             <li class='nav_users'>Users</li>
-            <li class='nav_equipment'>Equipment</li>
+            <li class='nav_equipmentList'>Equipment</li>
             <li class='nav_category'>Category</li>
         </ul>
     </nav>
