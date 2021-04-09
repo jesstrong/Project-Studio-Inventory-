@@ -15,7 +15,7 @@ function EquipmentList(equipmentList){
         ${equipmentList.map(equipment =>{
             return `
                 <li>
-                    ${equipment.name} 
+                    <h4 class="equipment_name" id="${equipment.id}">${equipment.name}</h4>
                 </li>
             `
         }).join('')}
@@ -23,7 +23,7 @@ function EquipmentList(equipmentList){
 
     <section class="equipmentForm">
             <input type="text" id="equipmentName" placeholder='Enter the name of this equipment' />
-            <input type="text id="serialNumber" placeholder='Enter Serial Number' />
+            <input type="text" id="serialNumber" placeholder='Enter Serial Number' />
             <select id="category">
             </select>
             <button id="saveEquipmentBtn">Save Item</button>
@@ -38,6 +38,8 @@ function NavEquipmentList() {
     homeLink.addEventListener('click', function (){
         apiAction.getRequest('https://localhost:44372/api/EquipmentList', data => {
             appDiv.innerHTML = EquipmentList(data);
+            fillCategories();
+            AddEquipment();
         })
     })
 }
@@ -45,17 +47,40 @@ function NavEquipmentList() {
 function AddEquipment(){
     const saveEquipmentButton = document.getElementById('saveEquipmentBtn');
     saveEquipmentButton.addEventListener('click', function(){
-        const equipmentName = document.getElementById('equipmentName').value;
-        const serialNumber = document.getElementById('serialNumber').value;
+        const equipName = document.getElementById('equipmentName').value;
+        const serialNum = document.getElementById('serialNumber').value;
         const categoryId = document.getElementById('category').value;
         const requestBody = {
-            Name: equipmentName,
-            SerialNumber: serialNumber,
+            Name: equipName,
+            SerialNumber: serialNum,
             CategoryId: categoryId
         }
         apiAction.postRequest('https://localhost:44372/api/EquipmentList', requestBody, data => {
             appDiv.innerHTML = EquipmentList(data);
+            AddEquipment();
         } )
 
+    })
+}
+
+function fillCategories(){
+    let dropdown = document.getElementById('category');
+    dropdown.length = 0;
+
+    let defaultOption = document.createElement('option');
+    defaultOption.text = 'Select a Category';
+    defaultOption.disabled = 'disabled';
+
+    dropdown.add(defaultOption);
+    dropdown.selectedIndex = 0;
+
+    apiAction.getRequest('https://localhost:44372/api/Category', categories => {
+        let option;
+        categories.forEach(function(category){
+            option = document.createElement('option');
+            option.text = category.name;
+            option.value = category.id;
+            dropdown.add(option);
+        })
     })
 }
