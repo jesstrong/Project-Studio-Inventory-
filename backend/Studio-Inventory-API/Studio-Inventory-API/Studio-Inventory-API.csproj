@@ -6,12 +6,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20210408183753_Login.cs" />
+    <Compile Remove="Migrations\20210408183753_Login.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
 
     <Folder Include="Repositories\" />
 
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.13" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="3.1.13" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.13" />

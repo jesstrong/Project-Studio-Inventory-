@@ -41,6 +41,7 @@ namespace Studio_Inventory_API
                     Id = 1,
                     SerialNumber = "123",
                     Name = "SM57",
+                    Description = "Good all around microphone.",
                     CategoryId = 1
                 }
                 );

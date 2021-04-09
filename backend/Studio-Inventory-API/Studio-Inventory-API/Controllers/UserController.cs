@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Studio_Inventory_API;
+using Studio_Inventory_API.Extensions;
 using Studio_Inventory_API.Models;
 using Studio_Inventory_API.Repositories;
 
@@ -60,6 +61,14 @@ namespace Studio_Inventory_API.Controllers
         {
             _userRepo.Create(user);
             return user;
+        }
+
+        [Route("api/[controller]/login")]
+        [HttpPost]
+        public LoginResult CheckLogin([FromBody] string userName, string password)
+        {
+            var result = _userRepo.CheckLogin(userName, password);
+            return result;
         }
 
         // DELETE: api/User/5
