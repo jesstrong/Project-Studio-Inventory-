@@ -12,10 +12,8 @@ namespace Studio_Inventory_API.Models
         private string _password;
 
         public int Id {get;set;}
-        [Required]
         public string Name {get; set;}
         public bool IsAdmin {get; set;}
-        [Required]
         public string Password {
             get { return _password; }
             set

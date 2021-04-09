@@ -7,12 +7,30 @@ namespace Studio_Inventory_API.Models
 {
     public class Equipment
     {
+        private string _RentalDates { get; set; }
         public int Id { get; set; }
         public string SerialNumber { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public int CategoryId { get; set; }
-        public ICollection<string> RentalDates { get; set; }
+        public string RentalDates {
+            get
+            {
+                return _RentalDates;
+            }
+            set
+            {
+                _RentalDates = _RentalDates + "," + value;
+            }
+        }
+
+        public ICollection<string> RentalDateList
+        {
+            get
+            {
+                return RentalDates.Split(',').ToList();
+            }
+        }
         public virtual Category Category {get; set;}
 
         public Equipment()

@@ -26,9 +26,7 @@ namespace Studio_Inventory_API
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddSession();
-            
+        {   
             services.AddControllers();
             services.AddDbContext<StudioContext>();
             services.AddScoped<IRepository<Category>, CategoryRepository>();
@@ -48,8 +46,6 @@ namespace Studio_Inventory_API
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
-            app.UseSession();
 
             app.UseAuthorization();
 
