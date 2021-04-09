@@ -9,7 +9,7 @@ namespace Studio_Inventory_API.Helpers
     {
         public static string EncryptPassword(string password)
         {
-            //implment encryption
+            //implement encryption
             return password;
         }
 

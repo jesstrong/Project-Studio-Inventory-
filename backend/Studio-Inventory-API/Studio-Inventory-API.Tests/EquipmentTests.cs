@@ -1,12 +1,13 @@
 using System;
 using Xunit;
 using Studio_Inventory_API.Models;
+using System.Linq;
 
 namespace Studio_Inventory_API.Tests
 {
     public class EquipmentTests
     {
-        Equipment sut = new Equipment(1, "serialnumber", "name", 1);
+        Equipment sut = new Equipment(1, "serialnumber", "name", 1, "description");
 
         [Fact]
         public void Equipment_Constructor_Should_Set_Id()
@@ -34,6 +35,13 @@ namespace Studio_Inventory_API.Tests
         {
             int resultCategoryId = sut.CategoryId;
             Assert.Equal(1, resultCategoryId);
+        }
+
+        [Fact]
+        public void Equipment_Cunstructor_Should_Set_Description()
+        {
+            string resultDescription = sut.Description;
+            Assert.Equal("description", resultDescription);
         }
     }
 }
