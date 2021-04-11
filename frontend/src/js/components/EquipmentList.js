@@ -3,7 +3,8 @@ import apiAction from "../api/api-actions";
 export default{
     EquipmentList,
     NavEquipmentList,
-    AddEquipment
+    AddEquipment,
+    UpdateEquipmentBtn
 }
 
 const appDiv = document.getElementById('app');
@@ -16,6 +17,7 @@ function EquipmentList(equipmentList){
             return `
                 <li>
                     <h4 class="equipment_name" id="${equipment.id}">${equipment.name}</h4>
+                    <button class="updateEquipmentBtn" id="${equipment.id}">Update Item</button>
                 </li>
             `
         }).join('')}
@@ -38,7 +40,8 @@ function NavEquipmentList() {
     homeLink.addEventListener('click', function (){
         apiAction.getRequest('https://localhost:44372/api/EquipmentList', data => {
             appDiv.innerHTML = EquipmentList(data);
-            fillCategories();
+            UpdateEquipmentBtn();
+            FillCategories();
             AddEquipment();
         })
     })
@@ -58,12 +61,22 @@ function AddEquipment(){
         apiAction.postRequest('https://localhost:44372/api/EquipmentList', requestBody, data => {
             appDiv.innerHTML = EquipmentList(data);
             AddEquipment();
-        } )
-
+        })
     })
 }
 
-function fillCategories(){
+function UpdateEquipmentBtn(){
+    const updateEquipmentElement = document.querySelectorAll('.updateEquipmentBtn');
+    updateEquipmentElement.forEach(element => {
+        const equipmentId = element.id;
+        apiAction.getRequest(`https://localhost:44372/api/EquipmentList/${equipmentId}`, equipment => {
+            appDiv.innerHtml = Equipment(equipment);
+            UpdateEquipmentBtn();
+        })
+    })
+}
+
+function FillCategories(){
     let dropdown = document.getElementById('category');
     dropdown.length = 0;
 
