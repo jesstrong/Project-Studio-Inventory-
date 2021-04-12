@@ -40,6 +40,7 @@ function UpdateEquipment(){
                 EquipmentList.UpdateEquipmentBtn();
                 EquipmentList.FillCategories();
                 EquipmentList.AddEquipment();
+                EquipmentList.RemoveEquipment();
             })
         })
     })

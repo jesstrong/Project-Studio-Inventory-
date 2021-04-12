@@ -6,7 +6,8 @@ export default{
     NavEquipmentList,
     AddEquipment,
     UpdateEquipmentBtn,
-    FillCategories
+    FillCategories,
+    RemoveEquipment
 }
 
 const appDiv = document.getElementById('app');
@@ -21,6 +22,7 @@ function EquipmentList(equipmentList){
                 <li>
                     <h4 class="equipment_name">${equipment.name}</h4>
                     <button class="updateEquipmentBtn" id="${equipment.id}">Update Item</button>
+                    <button class="deleteEquipmentBtn" id="${equipment.id}">Delete Item</button>
                 </li>
             `
         }).join('')}
@@ -46,6 +48,7 @@ function NavEquipmentList() {
             UpdateEquipmentBtn();
             FillCategories();
             AddEquipment();
+            RemoveEquipment();
         })
     })
 }
@@ -62,8 +65,13 @@ function AddEquipment(){
             CategoryId: categoryId
         }
         apiAction.postRequest('https://localhost:44372/api/EquipmentList', requestBody, data => {
-            appDiv.innerHTML = EquipmentList(data);
-            AddEquipment();
+            apiAction.getRequest('https://localhost:44372/api/EquipmentList', data => {
+                appDiv.innerHTML = EquipmentList(data);
+                UpdateEquipmentBtn();
+                FillCategories();
+                AddEquipment();
+                RemoveEquipment();
+            })
         })
     })
 }
@@ -73,7 +81,6 @@ function UpdateEquipmentBtn(){
     updateEquipmentElement.forEach(element => {
         element.addEventListener('click', function() {
             const equipmentId = element.id;
-            console.log (equipmentId);
             apiAction.getRequest(`https://localhost:44372/api/EquipmentList/${equipmentId}`, equipment => {
                 appDiv.innerHTML = Equipment.EquipmentDetails(equipment);
                 Equipment.UpdateEquipment();
@@ -100,6 +107,21 @@ function FillCategories(){
             option.text = category.name;
             option.value = category.id;
             dropdown.add(option);
+        })
+    })
+}
+
+function RemoveEquipment(){
+    const updateEquipmentElement = document.querySelectorAll('.deleteEquipmentBtn');
+    updateEquipmentElement.forEach(element => {
+        element.addEventListener('click', function() {
+            const equipmentId = element.id;
+            apiAction.deleteRequest('https://localhost:44372/api/EquipmentList', equipmentId, data => {
+                if(data.indexOf("Deleted") > -1){
+                    const liItem = document.getElementById(equipmentId).parentElement;
+                    liItem.remove();
+                }
+            })
         })
     })
 }

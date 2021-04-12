@@ -38,7 +38,7 @@ function putRequest(location, id, requestBody, callback){
 }
 
 function deleteRequest(location, id, callback){
-    fetch(`${location}${id}`, {
+    fetch(`${location}/${id}`, {
         method: "DELETE",
         headers: {
             "Content-Type" : "application/json"
