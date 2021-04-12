@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 namespace Studio_Inventory_API.Models
 {
     public class Equipment
-    {
-        //Need to link to rental model
+    {     
         private string _RentalDates { get; set; }
         public int Id { get; set; }
         public string SerialNumber { get; set; }
