@@ -1,4 +1,5 @@
 import apiAction from "../api/api-actions";
+import Equipment from "../components/Equipment";
 
 export default{
     EquipmentList,
@@ -8,6 +9,7 @@ export default{
 }
 
 const appDiv = document.getElementById('app');
+const equipmentURL = "https://localhost:44372/api/EquipmentList/";
 
 function EquipmentList(equipmentList){
     return `
@@ -16,7 +18,7 @@ function EquipmentList(equipmentList){
         ${equipmentList.map(equipment =>{
             return `
                 <li>
-                    <h4 class="equipment_name" id="${equipment.id}">${equipment.name}</h4>
+                    <h4 class="equipment_name">${equipment.name}</h4>
                     <button class="updateEquipmentBtn" id="${equipment.id}">Update Item</button>
                 </li>
             `
@@ -68,10 +70,12 @@ function AddEquipment(){
 function UpdateEquipmentBtn(){
     const updateEquipmentElement = document.querySelectorAll('.updateEquipmentBtn');
     updateEquipmentElement.forEach(element => {
-        const equipmentId = element.id;
-        apiAction.getRequest(`https://localhost:44372/api/EquipmentList/${equipmentId}`, equipment => {
-            appDiv.innerHtml = Equipment(equipment);
-            UpdateEquipmentBtn();
+        element.addEventListener('click', function() {
+            const equipmentId = element.id;
+            console.log (equipmentId);
+            apiAction.getRequest(`https://localhost:44372/api/EquipmentList/${equipmentId}`, equipment => {
+                appDiv.innerHTML = Equipment(equipment);
+            })
         })
     })
 }

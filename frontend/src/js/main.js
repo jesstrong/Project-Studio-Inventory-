@@ -10,7 +10,5 @@ export default() => {
  Header.SetupHeader();
  Home.NavHome();
  EquipmentList.NavEquipmentList();
- EquipmentList.AddEquipment();
- EquipmentList.UpdateEquipmentBtn();
 //  Equipment.Equipment();
 }

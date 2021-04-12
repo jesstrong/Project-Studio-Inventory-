@@ -22,7 +22,7 @@ function UpdateEquipment(){
     const updateEquipmentBtn = document.querySelector('.updateEquipmentBtn');
     updateEquipmentBtn.addEventListener('click', function(){
         const equipId = document.getElementById('equipmentId').value;
-        const equipName = documeny.getElementById('equipmentName').value;
+        const equipName = document.getElementById('equipmentName').value;
         const serialNum = document.getElementById('serialNumber').value;
         const categoryId = document.getElementById('category').value;
         const requestBody = {
