@@ -33,6 +33,9 @@ function EquipmentList(equipmentList){
             <input type="text" id="serialNumber" placeholder='Enter Serial Number' />
             <select id="category">
             </select>
+            <br/>
+            <input type='text' id='description' placeholder='Decription' />
+            <input type='hidden' id='rentalDates' value=""/>
             <button id="saveEquipmentBtn">Save Item</button>
         </section>
 
@@ -59,10 +62,14 @@ function AddEquipment(){
         const equipName = document.getElementById('equipmentName').value;
         const serialNum = document.getElementById('serialNumber').value;
         const categoryId = document.getElementById('category').value;
+        const description = document.getElementById('description').value;
+        const rentalDates = document.getElementById('rentalDates').value;
         const requestBody = {
             Name: equipName,
             SerialNumber: serialNum,
-            CategoryId: categoryId
+            CategoryId: categoryId,
+            Description: description,
+            RentalDates: rentalDates
         }
         apiAction.postRequest('https://localhost:44372/api/EquipmentList', requestBody, data => {
             apiAction.getRequest('https://localhost:44372/api/EquipmentList', data => {
