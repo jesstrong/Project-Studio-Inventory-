@@ -55,5 +55,7 @@ namespace Studio_Inventory_API
                 }
                 );
         }
+
+        public DbSet<Studio_Inventory_API.Models.Rental> Rental { get; set; }
     }
 }
