@@ -5,7 +5,8 @@ export default{
     EquipmentList,
     NavEquipmentList,
     AddEquipment,
-    UpdateEquipmentBtn
+    UpdateEquipmentBtn,
+    FillCategories
 }
 
 const appDiv = document.getElementById('app');
@@ -74,7 +75,8 @@ function UpdateEquipmentBtn(){
             const equipmentId = element.id;
             console.log (equipmentId);
             apiAction.getRequest(`https://localhost:44372/api/EquipmentList/${equipmentId}`, equipment => {
-                appDiv.innerHTML = Equipment(equipment);
+                appDiv.innerHTML = Equipment.EquipmentDetails(equipment);
+                Equipment.UpdateEquipment();
             })
         })
     })

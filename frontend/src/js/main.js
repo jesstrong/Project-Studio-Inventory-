@@ -1,7 +1,7 @@
 import Home from "./components/Home";
 import Header from "./components/Header";
 import EquipmentList from "./components/EquipmentList";
-// import Equipment from "./components/Equipment";
+import Equipment from "./components/Equipment";
 
 const appDiv = document.getElementById('app');
 
@@ -10,5 +10,4 @@ export default() => {
  Header.SetupHeader();
  Home.NavHome();
  EquipmentList.NavEquipmentList();
-//  Equipment.Equipment();
 }
