@@ -21,13 +21,7 @@ namespace Studio_Inventory_API.Tests
                 sut = new RentalController(rentalRepo);
             }
 
-        [Fact]
-        
-        public void RentalDate_IsApproved_On_RentalModel()
-        {
-            bool isApproved = sut.IsApproved;
-            Assert.False(isApproved);
-        }
+
 
         [Fact]
         public void Get_Rental_Returns_A_Rental()

@@ -14,6 +14,7 @@ namespace Studio_Inventory_API
         public DbSet<Category> Categories { get; set; }
         public DbSet<Equipment> EquipmentList { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Rental> Rental { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -54,8 +55,17 @@ namespace Studio_Inventory_API
                     Password = "123"
                 }
                 );
+            modelBuilder.Entity<Rental>().HasData(
+                new Models.Rental()
+                {
+                    RentalDate = "04/13/2021",
+                    Id = 1,
+                    IsApproved = false,
+                    IsDenied = false,
+                    FeedBack = "seeded feedback",
+                    UserId = 1
+                });
         }
 
-        public DbSet<Studio_Inventory_API.Models.Rental> Rental { get; set; }
     }
 }
