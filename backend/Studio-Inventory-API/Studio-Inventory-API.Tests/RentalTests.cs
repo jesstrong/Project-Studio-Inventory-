@@ -8,34 +8,58 @@ namespace Studio_Inventory_API.Tests
 {
     public class RentalTests
     {
-        Rental sut = new Rental(1, "serialnumber", "name", true, false, "05/15/2021" );
+        Rental sut = new Rental(1, true, false, "feedback", "05/15/2021", 1 );
 
-        [Fact]
-    public void Get_Serial_Number_from_Rental()
+       
+    
+
+    [Fact]
+
+    public void Rental_Constructor_Should_Set_Id()
     {
-        string resultSerialNumber = sut.SerialNumber;
-        Assert.Equal("serialnumber", resultSerialNumber);
+       int resultId = sut.Id;
+       Assert.Equal(1, resultId);
     }
 
     [Fact]
-    public void Get_Rental_Name_From_Constructor()
-    {
-        string resultName = sut.Name;
-        Assert.Equal("name", resultName);
-    }
-            
+
+    public void Constructor_sets_Approval_Bool()
+        {
+            bool resultIsApproved = sut.IsApproved;
+            Assert.True(resultIsApproved);
+        }
 
     [Fact]
-    public void Get_Rental_Date()
+
+    public void Constructor_sets_Denied_Bool()
+        {
+            bool resultIsDenied = sut.IsDenied;
+            Assert.False(resultIsDenied);
+        }
+
+    [Fact]
+        public void Constructor_Sets_Feedback()
+        {
+            string resultFeedback = sut.FeedBack;
+            Assert.Equal("feedback", resultFeedback);
+        }
+
+    [Fact]
+    public void Constructor_Sets_Rental_Date()
     {
         string resultRentalDate = sut.RentalDate;
         Assert.Equal("05/15/2021", resultRentalDate);
     }
 
+    [Fact]
+
+    public void Rental_Constructor_Should_Set_UserId()
+        {
+            int resultUserId = sut.UserId;
+            Assert.Equal(1, resultUserId);
+        }
+
+
     }
-       
-    
-
-
 
 }
