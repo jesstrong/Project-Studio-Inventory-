@@ -68,6 +68,7 @@ function NavLogin(){
     const logInLink = document.querySelector(".nav_login");
     logInLink.addEventListener('click', function (){
         appDiv.innerHTML = LoginPage();
+        Login();
     })
 }
 
@@ -83,4 +84,31 @@ function LoginPage() {
             <button id='loginButton'>Login</button>
         </section>
     `;
+}
+
+function Login(){
+    const loginButton = document.getElementById('loginButton');
+    loginButton.addEventListener('click', function(){
+        const name = document.getElementById('userName').value;
+        const password = document.getElementById('password').value;
+        const requestBody = {
+            userName: name,
+            password: password
+        }
+        
+        fetch('https://localhost:44372/api/User/login', {
+            method: "LOGIN",
+            headers: {
+                "Content-Type" : "application/json"
+            },
+        body: JSON.stringify(requestBody)
+        })
+        .then(response => response.json())
+        .then(loginResult => {
+            console.log(loginResult.result);
+            console.log(loginResult.message);
+        })
+        .catch(err => console.log(err));
+
+    })
 }
