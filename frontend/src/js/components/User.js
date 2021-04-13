@@ -3,8 +3,9 @@ import Home from "./Home";
 
 export default {
     SignUpPage,
-    NavProfile,
-    CreateProfile
+    NavSignUp,
+    CreateProfile,
+    NavLogin
 }
 
 const appDiv = document.getElementById('app');
@@ -12,7 +13,7 @@ const staticAdminKey = "IsAdmin"
 
 function SignUpPage() {
     return `
-        <h3>Please create your account or login.</h3>
+        <h3>Please create your account.</h3>
 
         <section class='equipmentForm'>
             <input type='text' id='userName' placeholder='User Name' />
@@ -26,9 +27,9 @@ function SignUpPage() {
     `;
 }
 
-function NavProfile() {
-    const homeLink = document.querySelector(".nav_profile");
-    homeLink.addEventListener('click', function (){
+function NavSignUp() {
+    const signUpLink = document.querySelector(".nav_signUp");
+    signUpLink.addEventListener('click', function (){
         appDiv.innerHTML = SignUpPage();
         CreateProfile();
     })
@@ -61,4 +62,25 @@ function CreateProfile() {
                 appDiv.innerHTML = Home.Home();
         })
     })
+}
+
+function NavLogin(){
+    const logInLink = document.querySelector(".nav_login");
+    logInLink.addEventListener('click', function (){
+        appDiv.innerHTML = LoginPage();
+    })
+}
+
+function LoginPage() {
+    return `
+        <h3>Please login.</h3>
+
+        <section class='equipmentForm'>
+            <input type='text' id='userName' placeholder='User Name' />
+            <br/>
+            <input type='password' id='password' placeholder='Password' />
+            <br/>
+            <button id='loginButton'>Login</button>
+        </section>
+    `;
 }
