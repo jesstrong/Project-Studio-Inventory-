@@ -38,6 +38,7 @@ namespace Studio_Inventory_API
             services.AddScoped<IRepository<Category>, CategoryRepository>();
             services.AddScoped<IRepository<Equipment>, EquipmentRepository>();
             services.AddScoped<IRepository<User>, UserRepository>();
+            services.AddScoped<IRepository<Rental>, RentalRepository>();
             //use for Aps.net 3.1 CORS issue
             services.AddCors(options =>
             {

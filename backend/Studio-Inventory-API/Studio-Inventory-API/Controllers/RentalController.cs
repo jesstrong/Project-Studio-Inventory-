@@ -17,8 +17,6 @@ namespace Studio_Inventory_API.Controllers
     {
         IRepository<Rental> rentalRepo;
 
-        public bool IsApproved { get; set; }
-
         public RentalController(IRepository<Rental> context)
         {
             this.rentalRepo = context;
