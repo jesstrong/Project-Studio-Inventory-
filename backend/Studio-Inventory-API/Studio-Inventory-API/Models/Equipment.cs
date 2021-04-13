@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace Studio_Inventory_API.Models
 {
     public class Equipment
-    {
+    {     
         private string _RentalDates { get; set; }
         public int Id { get; set; }
         public string SerialNumber { get; set; }
