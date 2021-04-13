@@ -23,6 +23,15 @@ namespace Studio_Inventory_API.Controllers
         {
             this.rentalRepo = context;
         }
+        
+        //IRepository<Rental> rentalRepo;
+
+        //public bool IsDenied { get; set; }
+
+        //public RentalController(IRepository<Rental> context)
+        //{
+        //    this.rentalRepo = context;
+        //}
 
         // GET: api/Rental
         [HttpGet]

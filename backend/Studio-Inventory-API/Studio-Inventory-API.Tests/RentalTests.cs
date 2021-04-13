@@ -8,7 +8,7 @@ namespace Studio_Inventory_API.Tests
 {
     public class RentalTests
     {
-        Rental sut = new Rental(1, "serialnumber", "name", true, "testFeedBack", "05/15/2021" );
+        Rental sut = new Rental(1, "serialnumber", "name", true, false, "05/15/2021" );
 
         [Fact]
     public void Get_Serial_Number_from_Rental()
