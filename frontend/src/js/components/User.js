@@ -11,7 +11,7 @@ function SignUpPage() {
         <h3>Please create your account or login.</h3>
 
         <section class='equipmentForm'>
-            <input type='text' id='equipmentName' placeholder='User Name' />
+            <input type='text' id='userName' placeholder='User Name' />
             <br/>
             <input type='password' id='password' placeholder='Password' />
             <br/>
@@ -32,9 +32,9 @@ function NavProfile() {
 function CreateProfile() {
     const saveUserButton = document.getElementById('saveUserButton');
     saveUserButton.addEventListener('click', function(){
-        const name = document.getElementById('equipmentName').value;
-        const password = document.getElementById('serialNumber').value;
-        const adminKey = document.getElementById('category').value;
+        const name = document.getElementById('userName').value;
+        const password = document.getElementById('password').value;
+        const adminKey = document.getElementById('adminKey').value;
         var isAdmin
 
         if (adminKey === staticAdminKey)
