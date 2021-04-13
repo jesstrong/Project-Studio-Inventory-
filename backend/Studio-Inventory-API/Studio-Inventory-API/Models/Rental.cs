@@ -15,7 +15,7 @@ namespace Studio_Inventory_API.Models
         public bool IsApproved { get; set; }
         public bool IsDenied { get; set; }
 
-        //public string FeedBack { get; set; }
+        public string FeedBack { get; set; }
         public virtual ICollection<Equipment> EquipmentList { get; set; }
         
         public virtual User User { get; set; }
@@ -25,13 +25,14 @@ namespace Studio_Inventory_API.Models
         {
         }
 
-        public Rental(int id, string serialNumber, string name, bool isApproved, bool isDenied, string rentalDate)
+        public Rental(int id, string serialNumber, string name, bool isApproved, bool isDenied, string feedback, string rentalDate)
         {
             Id = id;
             SerialNumber = serialNumber;
             Name = name;
             IsApproved = isApproved;
             IsDenied = isDenied;
+            FeedBack = feedback; 
             RentalDate = rentalDate;
         }
     }
