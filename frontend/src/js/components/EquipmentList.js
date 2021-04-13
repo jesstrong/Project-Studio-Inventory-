@@ -71,7 +71,7 @@ function AddEquipment(){
             Description: description,
             RentalDates: rentalDates
         }
-        apiAction.postRequest('https://localhost:44372/api/EquipmentList', requestBody, data => {
+        apiAction.postRequest('https://localhost:44372/api/EquipmentList', requestBody, () => {
             apiAction.getRequest('https://localhost:44372/api/EquipmentList', data => {
                 appDiv.innerHTML = EquipmentList(data);
                 UpdateEquipmentBtn();

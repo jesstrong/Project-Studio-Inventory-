@@ -1,6 +1,10 @@
+import apiAction from "../api/api-actions";
+import Home from "./Home";
+
 export default {
     SignUpPage,
-    NavProfile
+    NavProfile,
+    CreateProfile
 }
 
 const appDiv = document.getElementById('app');
@@ -26,6 +30,7 @@ function NavProfile() {
     const homeLink = document.querySelector(".nav_profile");
     homeLink.addEventListener('click', function (){
         appDiv.innerHTML = SignUpPage();
+        CreateProfile();
     })
 }
 
@@ -51,5 +56,9 @@ function CreateProfile() {
             Password: password,
             isAdmin: isAdmin
         }
+        
+        apiAction.postRequest('https://localhost:44372/api/User', requestBody, () => {
+                appDiv.innerHTML = Home.Home();
+        })
     })
 }
