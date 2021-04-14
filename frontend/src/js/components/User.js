@@ -92,12 +92,12 @@ function Login(){
         const name = document.getElementById('userName').value;
         const password = document.getElementById('password').value;
         const requestBody = {
-            userName: name,
-            password: password
+            Name: name,
+            Password: password
         }
         
-        fetch('https://localhost:44372/api/User/login', {
-            method: "LOGIN",
+        fetch('https://localhost:44372/api/Account', {
+            method: "POST",
             headers: {
                 "Content-Type" : "application/json"
             },
