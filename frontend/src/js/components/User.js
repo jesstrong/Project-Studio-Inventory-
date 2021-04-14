@@ -7,7 +7,7 @@ export default {
     SignUpPage,
     NavSignUp,
     CreateProfile,
-    NavLogin
+    NavLogin,
 }
 
 const appDiv = document.getElementById('app');
@@ -17,7 +17,7 @@ function SignUpPage() {
     return `
         <h3>Please create your account.</h3>
 
-        <section class='equipmentForm'>
+        <section class='signUpForm'>
             <input type='text' id='userName' placeholder='User Name' />
             <br/>
             <input type='password' id='password' placeholder='Password' />
@@ -60,8 +60,8 @@ function CreateProfile() {
             isAdmin: isAdmin
         }
         
-        apiAction.postRequest('https://localhost:44372/api/User', requestBody, () => {
-                appDiv.innerHTML = Home.Home();
+        apiAction.postRequest('https://localhost:44372/api/User', requestBody, data => {
+                appDiv.innerHTML = ProfilePage(data);
         })
     })
 }
@@ -78,7 +78,7 @@ function LoginPage() {
     return `
         <h3>Please login.</h3>
 
-        <section class='equipmentForm'>
+        <section class='loginForm'>
             <input type='text' id='userName' placeholder='User Name' />
             <br/>
             <input type='password' id='password' placeholder='Password' />
@@ -106,6 +106,7 @@ function Login(){
                 cookieActions.setCookie("userName", data.user.name, 1);
                 cookieActions.setCookie("userId", data.user.id, 1);
                 cookieActions.setCookie("userIsAdmin", data.user.isAdmin, 1);
+                appDiv.innerHTML = ProfilePage(data.user);
             }
             else{
                 const warningElement = document.getElementById('warningText');
@@ -113,4 +114,10 @@ function Login(){
             }
         })
     })
+}
+
+function ProfilePage(User){
+    return `
+    <h3>Welcome ${User.name}</h3>
+    `
 }
