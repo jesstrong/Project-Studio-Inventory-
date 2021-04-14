@@ -1,5 +1,7 @@
 import apiAction from "../api/api-actions";
 import Home from "./Home";
+import cookieAction from "../cookie/cookie-actions";
+import cookieActions from "../cookie/cookie-actions";
 
 export default {
     SignUpPage,
@@ -82,6 +84,7 @@ function LoginPage() {
             <input type='password' id='password' placeholder='Password' />
             <br/>
             <button id='loginButton'>Login</button>
+            <div id="warningText"></div>
         </section>
     `;
 }
@@ -99,8 +102,15 @@ function Login(){
         apiAction.postRequest('https://localhost:44372/api/Account', requestBody, data =>
         {
             console.log(data.result)
+            if(data.result == true){
+                cookieActions.setCookie("userName", data.user.name, 1);
+                cookieActions.setCookie("userId", data.user.id, 1);
+                cookieActions.setCookie("userIsAdmin", data.user.isAdmin, 1);
+            }
+            else{
+                const warningElement = document.getElementById('warningText');
+                warningElement.innerHTML = data.message;
+            }
         })
-        
-
     })
 }
