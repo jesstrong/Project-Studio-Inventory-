@@ -2,8 +2,8 @@ import apiAction from "../api/api-actions";
 
 export default {
 CategoryList,
-NavCategoryList
-
+NavCategoryList,
+AddCategory
 }
 
 const appDiv = document.getElementById('app');
@@ -36,9 +36,38 @@ function NavCategoryList() {
     const homeLink = document.querySelector(".nav_category");
     
     homeLink.addEventListener('click', function (){
-        apiAction.getRequest('https://localhost:44372/api/Category', data => {
+        apiAction.getRequest(categoryURL, data => {
             appDiv.innerHTML = CategoryList(data);
-            
+            AddCategory();
+        })
+    })
+}
+
+function AddCategory(){
+    const saveCategoryButton = document.getElementById('saveCategoryBtn');
+    saveCategoryButton.addEventListener('click', function(){
+        const categoryName = document.getElementById('categoryName').value;
+        const requestBody = {
+            Name: categoryName
+        }
+        apiAction.postRequest(categoryURL, requestBody, () => {
+            apiAction.getRequest(categoryURL, data => {
+                appDiv.innerHTML = CategoryList(data);
+                AddCategory();
+            })
+        })
+    })
+}
+
+function UpdateCategoryBtn(){
+    const updateEquipmentElement = document.querySelectorAll('.updateEquipmentBtn');
+    updateEquipmentElement.forEach(element => {
+        element.addEventListener('click', function() {
+            const equipmentId = element.id;
+            apiAction.getRequest(`https://localhost:44372/api/EquipmentList/${equipmentId}`, equipment => {
+                appDiv.innerHTML = Equipment.EquipmentDetails(equipment);
+                Equipment.UpdateEquipment();
+            })
         })
     })
 }
