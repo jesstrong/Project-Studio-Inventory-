@@ -1,6 +1,8 @@
 import apiAction from "../api/api-actions";
 
 export default {
+CategoryList,
+NavCategoryList
 
 }
 
@@ -11,7 +13,7 @@ function CategoryList(CategoryList){
     return `
     <h1>Categories</h1>
     <ol>
-        ${category.map(category =>{
+        ${CategoryList.map(category =>{
             return `
                 <li>
                     <h4 class="category_name">${category.name}</h4>
@@ -28,4 +30,15 @@ function CategoryList(CategoryList){
         </section>
 
     `
+}
+
+function NavCategoryList() {
+    const homeLink = document.querySelector(".nav_category");
+    
+    homeLink.addEventListener('click', function (){
+        apiAction.getRequest('https://localhost:44372/api/Category', data => {
+            appDiv.innerHTML = CategoryList(data);
+            
+        })
+    })
 }
