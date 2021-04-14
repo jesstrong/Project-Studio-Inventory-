@@ -63,14 +63,6 @@ namespace Studio_Inventory_API.Controllers
             return user;
         }
 
-        [Route("api/[controller]/login")]
-        [HttpPost]
-        public LoginResult CheckLogin([FromBody] string userName, string password)
-        {
-            var result = _userRepo.CheckLogin(userName, password);
-            return result;
-        }
-
         // DELETE: api/User/5
         [HttpDelete("{id}")]
         public string DeleteUser(int id)

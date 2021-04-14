@@ -50,7 +50,7 @@ namespace Studio_Inventory_API.Repositories
 
             if (user == null)
             {
-                return new LoginResult() { Result = false, Message = "No such user could be found.", User = null };
+                return new LoginResult() { Result = false, Message = "Invalid User Name or Password.", User = null };
             }
             else
             {

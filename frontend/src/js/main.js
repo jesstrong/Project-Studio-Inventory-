@@ -11,6 +11,7 @@ export default() => {
  Header.SetupHeader();
  Home.NavHome();
  EquipmentList.NavEquipmentList();
- User.NavProfile();
  CategoryList.NavCategoryList();
+ User.NavSignUp();
+ User.NavLogin();
 }
