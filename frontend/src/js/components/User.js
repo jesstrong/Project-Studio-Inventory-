@@ -96,19 +96,11 @@ function Login(){
             Password: password
         }
         
-        fetch('https://localhost:44372/api/Account', {
-            method: "POST",
-            headers: {
-                "Content-Type" : "application/json"
-            },
-        body: JSON.stringify(requestBody)
+        apiAction.postRequest('https://localhost:44372/api/Account', requestBody, data =>
+        {
+            console.log(data.result)
         })
-        .then(response => response.json())
-        .then(loginResult => {
-            console.log(loginResult.result);
-            console.log(loginResult.message);
-        })
-        .catch(err => console.log(err));
+        
 
     })
 }
