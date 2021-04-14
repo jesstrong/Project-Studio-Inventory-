@@ -123,7 +123,7 @@ function RemoveEquipment(){
     updateEquipmentElement.forEach(element => {
         element.addEventListener('click', function() {
             const equipmentId = element.id;
-            apiAction.deleteRequest('https://localhost:44372/api/EquipmentList', equipmentId, data => {
+            apiAction.deleteRequest('https://localhost:44372/api/EquipmentList/', equipmentId, data => {
                 if(data.indexOf("Deleted") > -1){
                     const liItem = document.getElementById(equipmentId).parentElement;
                     liItem.remove();

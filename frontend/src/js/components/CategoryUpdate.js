@@ -34,7 +34,9 @@ function UpdateCategory(){
                 appDiv.innerHTML = CategoryList.CategoryList(data);
                 CategoryList.AddCategory();
                 CategoryList.UpdateCategoryBtn();
+                CategoryList.RemoveCategory();
             })
         })
     })
 }
+

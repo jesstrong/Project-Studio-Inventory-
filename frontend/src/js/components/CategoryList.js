@@ -5,7 +5,8 @@ export default {
 CategoryList,
 NavCategoryList,
 AddCategory,
-UpdateCategoryBtn
+UpdateCategoryBtn,
+RemoveCategory
 }
 
 const appDiv = document.getElementById('app');
@@ -42,6 +43,7 @@ function NavCategoryList() {
             appDiv.innerHTML = CategoryList(data);
             AddCategory();
             UpdateCategoryBtn();
+            RemoveCategory();
         })
     })
 }
@@ -58,6 +60,7 @@ function AddCategory(){
                 appDiv.innerHTML = CategoryList(data);
                 AddCategory();
                 UpdateCategoryBtn();
+                RemoveCategory();
             })
         })
     })
@@ -71,6 +74,21 @@ function UpdateCategoryBtn(){
             apiAction.getRequest(`https://localhost:44372/api/Category/${categoryId}`, category => {
                 appDiv.innerHTML = CategoryUpdate.EditCategoryForm(category);
                 CategoryUpdate.UpdateCategory();
+            })
+        })
+    })
+}
+
+function RemoveCategory(){
+    const updateCategoryElement = document.querySelectorAll('.deleteCategoryBtn');
+    updateCategoryElement.forEach(element => {
+        element.addEventListener('click', function() {
+            const categoryId = element.id;
+            apiAction.deleteRequest(categoryURL, categoryId, data => {
+                if(data.indexOf("Deleted") > -1){
+                    const liItem = document.getElementById(categoryId).parentElement;
+                    liItem.remove();
+                }
             })
         })
     })
