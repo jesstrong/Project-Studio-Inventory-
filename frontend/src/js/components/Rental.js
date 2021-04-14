@@ -55,6 +55,16 @@ function PopulateEquipmentDiv(categories){
             return `
             <li>
                 <h4>${category.name}</h4>
+                <ol>
+                ${category.map(equipment =>{
+                    return`
+                    <li>
+                        <input type="checkbox" id="${equipment.name}" name="${equipment.name}" value="${equipment.id}">
+                        <label for="${equipment.name}">${equipment.name}</label><br>
+                    </li>
+                    `
+                })}
+                </ol>
             </li>
             `
         }).join('')}
