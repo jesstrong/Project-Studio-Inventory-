@@ -40,7 +40,7 @@ function UpdateEquipment(){
             Description: description,
             RentalDates: rentalDates
         }
-        apiAction.putRequest('https://localhost:44372/api/EquipmentList/', equipId, requestBody, data => {
+        apiAction.putRequest('https://localhost:44372/api/EquipmentList/', equipId, requestBody, () => {
             apiAction.getRequest('https://localhost:44372/api/EquipmentList', data => {
                 appDiv.innerHTML = EquipmentList.EquipmentList(data);
                 EquipmentList.UpdateEquipmentBtn();

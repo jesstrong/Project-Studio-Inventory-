@@ -1,9 +1,11 @@
 import apiAction from "../api/api-actions";
+import CategoryUpdate from "./CategoryUpdate";
 
 export default {
 CategoryList,
 NavCategoryList,
-AddCategory
+AddCategory,
+UpdateCategoryBtn
 }
 
 const appDiv = document.getElementById('app');
@@ -39,6 +41,7 @@ function NavCategoryList() {
         apiAction.getRequest(categoryURL, data => {
             appDiv.innerHTML = CategoryList(data);
             AddCategory();
+            UpdateCategoryBtn();
         })
     })
 }
@@ -54,19 +57,20 @@ function AddCategory(){
             apiAction.getRequest(categoryURL, data => {
                 appDiv.innerHTML = CategoryList(data);
                 AddCategory();
+                UpdateCategoryBtn();
             })
         })
     })
 }
 
 function UpdateCategoryBtn(){
-    const updateEquipmentElement = document.querySelectorAll('.updateEquipmentBtn');
-    updateEquipmentElement.forEach(element => {
+    const updateCategoryElement = document.querySelectorAll('.updateCategoryBtn');
+    updateCategoryElement.forEach(element => {
         element.addEventListener('click', function() {
-            const equipmentId = element.id;
-            apiAction.getRequest(`https://localhost:44372/api/EquipmentList/${equipmentId}`, equipment => {
-                appDiv.innerHTML = Equipment.EquipmentDetails(equipment);
-                Equipment.UpdateEquipment();
+            const categoryId = element.id;
+            apiAction.getRequest(`https://localhost:44372/api/Category/${categoryId}`, category => {
+                appDiv.innerHTML = CategoryUpdate.EditCategoryForm(category);
+                CategoryUpdate.UpdateCategory();
             })
         })
     })
