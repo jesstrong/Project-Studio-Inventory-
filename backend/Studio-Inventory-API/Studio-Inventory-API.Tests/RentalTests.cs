@@ -8,7 +8,7 @@ namespace Studio_Inventory_API.Tests
 {
     public class RentalTests
     {
-        Rental sut = new Rental(1, true, false, "feedback", "05/15/2021", 1 );
+        Rental sut = new Rental(1, true, false, "feedback", "05/15/2021", 1, "1,2,6");
 
        
     
@@ -59,7 +59,12 @@ namespace Studio_Inventory_API.Tests
             Assert.Equal(1, resultUserId);
         }
 
-
+        [Fact]
+        public void Constructor_Sets_EqupmentIds()
+        {
+            string resultEquipmentIds = sut.EquipmentIds;
+            Assert.Equal("1,2,6", resultEquipmentIds);
+        }
     }
 
 }

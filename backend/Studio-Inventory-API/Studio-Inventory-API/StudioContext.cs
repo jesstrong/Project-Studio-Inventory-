@@ -43,7 +43,8 @@ namespace Studio_Inventory_API
                     SerialNumber = "123",
                     Name = "SM57",
                     Description = "Good all around microphone.",
-                    CategoryId = 1
+                    CategoryId = 1,
+                    RentalDates = "2021-04-20"
                 }
                 );
             modelBuilder.Entity<User>().HasData(
@@ -58,12 +59,13 @@ namespace Studio_Inventory_API
             modelBuilder.Entity<Rental>().HasData(
                 new Models.Rental()
                 {
-                    RentalDate = "04/13/2021",
+                    RentalDate = "2021-04-20",
                     Id = 1,
                     IsApproved = false,
                     IsDenied = false,
                     FeedBack = "seeded feedback",
-                    UserId = 1
+                    UserId = 1,
+                    EquipmentIds = "1"
                 });
         }
 

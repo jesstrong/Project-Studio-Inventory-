@@ -59,15 +59,15 @@ function DateBtn(){
     const equipmentDiv = document.getElementById("availableEquipment");
     dateBtnElement.addEventListener('click', function(){
         apiAction.getRequest('https://localhost:44372/api/Category', data =>{
-            const date = document.getElementById('rentalDate');
-            equipmentDiv.innerHTML = PopulateEquipmentDiv(data);
+            const date = document.getElementById('rentalDate').value;
+            equipmentDiv.innerHTML = PopulateEquipmentDiv(data, date);
             CheckboxFunctionality();
             SubmitRentalBtn(date.value);
         })
     })
 }
 
-function PopulateEquipmentDiv(categories){
+function PopulateEquipmentDiv(categories, rentalDate){
     return `
     <h2>Available Equipment</h2>
     <ul>
@@ -77,12 +77,21 @@ function PopulateEquipmentDiv(categories){
                 <h4>${category.name}</h4>
                 <ol>
                 ${category.equipmentList.map(equipment =>{
+                    var isRented = false;
+                    equipment.rentalDateList.forEach(date =>{
+                        if(date === rentalDate){
+                            isRented = true;
+                        }
+                    })
+
+                    if (isRented == false){
                     return`
                     <li>
                         <input type="checkbox" class="equipmentSelector" id="${equipment.id}" name="${equipment.name}" value="${equipment.id}">
                         <label for="${equipment.name}">${equipment.name}</label><br>
                     </li>
                     `
+                    }
                 }).join('')}
                 </ol>
             </li>
@@ -111,6 +120,9 @@ function SubmitRentalBtn(rentalDate){
     const SubmitBtnElement = document.querySelector(".submitRentalBtn");
     SubmitBtnElement.addEventListener('click', () =>{
         const userId = Cookie.getCookie("userId");
+        const approvedBool = false;
+        const deiniedBool = true;
+        const message = "Awaiting Approval"
         var rentalIdString = "empty";
         equipmentIds.forEach(id =>{
             if(rentalIdString == "empty")
@@ -122,6 +134,14 @@ function SubmitRentalBtn(rentalDate){
                 rentalIdString += ',' + id;
             }
         })
-        
+        const requestBody = {
+            UserId: userId,
+            Date: rentalDate,
+            IsApproved: approvedBool,
+            IsDenied: deiniedBool,
+            Feedback: message,
+            EquipmentIds: equipmentIds
+        } 
+
     })
 }

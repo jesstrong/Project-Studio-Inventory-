@@ -13,7 +13,7 @@ namespace Studio_Inventory_API.Models
         public bool IsApproved { get; set; }
         public bool IsDenied { get; set; }
         public string FeedBack { get; set; }
-        public virtual ICollection<Equipment> EquipmentList { get; set; }        
+        public string EquipmentIds { get; set; }        
         public int UserId { get; set; }
         public virtual User User { get; set; }
         
@@ -21,14 +21,15 @@ namespace Studio_Inventory_API.Models
         {
         }
 
-        public Rental(int id, bool isApproved, bool isDenied, string feedback, string rentalDate, int userId)
+        public Rental(int id, bool isApproved, bool isDenied, string feedback, string rentalDate, int userId, string equipmentIds)
         {
             Id = id;
             IsApproved = isApproved;
             IsDenied = isDenied;
             FeedBack = feedback; 
             RentalDate = rentalDate;
-            UserId = userId; 
+            UserId = userId;
+            EquipmentIds = equipmentIds;
         }
     }
 }
