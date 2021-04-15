@@ -13,6 +13,7 @@ function Header(){
             <li class='nav_profile'>Profile</li>
             <li class='nav_equipmentList'>Equipment</li>
             <li class='nav_category'>Category</li>
+            <li class='nav_rental'>Create Rental</li>
         </ul>
     </nav>
     `;
