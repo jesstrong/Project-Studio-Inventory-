@@ -1,4 +1,5 @@
 import apiAction from "../api/api-actions";
+import Cookie from "../cookie/cookie-actions";
 
 export default{
     NavRentalForm
@@ -27,7 +28,6 @@ function RentalFormPage(){
         var maxYear = year;
     }
 
-    console.log(year + 1);
     const maxDate = maxYear + '-' + maxMonth + '-' + day;
 
     return `
@@ -55,12 +55,14 @@ function NavRentalForm() {
 }
 
 function DateBtn(){
-    const dateBtnElement = document.querySelector(".dateBtn");
+    const dateBtnElement = document.querySelector(".dateBtn");  
     const equipmentDiv = document.getElementById("availableEquipment");
     dateBtnElement.addEventListener('click', function(){
         apiAction.getRequest('https://localhost:44372/api/Category', data =>{
+            const date = document.getElementById('rentalDate');
             equipmentDiv.innerHTML = PopulateEquipmentDiv(data);
             CheckboxFunctionality();
+            SubmitRentalBtn(date.value);
         })
     })
 }
@@ -87,6 +89,7 @@ function PopulateEquipmentDiv(categories){
             `
         }).join('')}
     </ul>
+    <button class="submitRentalBtn">Submit Rental for Approval</button>
     `
 }
 
@@ -96,12 +99,29 @@ function CheckboxFunctionality(){
         checkbox.addEventListener('change', () => {
             if (checkbox.checked) {
               equipmentIds.push(`${checkbox.id}`);
-              console.log(equipmentIds);
             } else {
               let index = equipmentIds.indexOf(`${checkbox.id}`);
               equipmentIds.splice(index,1);
-              console.log(equipmentIds);
             }
           })
+    })
+}
+
+function SubmitRentalBtn(rentalDate){
+    const SubmitBtnElement = document.querySelector(".submitRentalBtn");
+    SubmitBtnElement.addEventListener('click', () =>{
+        const userId = Cookie.getCookie("userId");
+        var rentalIdString = "empty";
+        equipmentIds.forEach(id =>{
+            if(rentalIdString == "empty")
+            {
+                rentalIdString = id;
+            }
+            else
+            {
+                rentalIdString += ',' + id;
+            }
+        })
+        
     })
 }
