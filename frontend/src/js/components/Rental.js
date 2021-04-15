@@ -62,7 +62,7 @@ function DateBtn(){
             const date = document.getElementById('rentalDate').value;
             equipmentDiv.innerHTML = PopulateEquipmentDiv(data, date);
             CheckboxFunctionality();
-            SubmitRentalBtn(date.value);
+            SubmitRentalBtn(date);
         })
     })
 }
@@ -121,7 +121,7 @@ function SubmitRentalBtn(rentalDate){
     SubmitBtnElement.addEventListener('click', () =>{
         const userId = Cookie.getCookie("userId");
         const approvedBool = false;
-        const deiniedBool = true;
+        const deniedBool = false;
         const message = "Awaiting Approval"
         var rentalIdString = "empty";
         equipmentIds.forEach(id =>{
@@ -136,12 +136,17 @@ function SubmitRentalBtn(rentalDate){
         })
         const requestBody = {
             UserId: userId,
-            Date: rentalDate,
+            RentalDate: rentalDate,
             IsApproved: approvedBool,
-            IsDenied: deiniedBool,
-            Feedback: message,
-            EquipmentIds: equipmentIds
+            IsDenied: deniedBool,
+            FeedBack: message,
+            EquipmentIds: rentalIdString
         } 
 
+        console.log(requestBody);
+
+        apiAction.postRequest('https://localhost:44372/api/Rental', requestBody, data =>{
+            appDiv.innerHTML = `Your rental for ${data.rentalDate} has been submitted for approval.`;
+        })
     })
 }
