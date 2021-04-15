@@ -7,6 +7,44 @@
     color: rgb(34, 34, 34);
     justify-items: center;
 }
+
+#aboutUs{
+    margin:0px 0px 30px 0px;
+}
+
+.loginForm{
+    margin:0px 0px 202px 0px;
+}
+
+.signUpForm{
+    margin:0px 0px 174px 0px;
+}
+
+.equipmentForm{
+    margin:0px 0px 92px 0px;
+}
+
+.categoryForm{
+    margin:0px 0px 179px 0px;
+}
+
+#categoryName{
+    width: 15%;
+}
+
+#equipmentName{
+    width: 15%;
+}
+
+button{
+    font-size:15px;
+    font-weight: 550;
+}
+
+button:hover{
+    background-color:blue;
+}
+
 html {
     font-size: 18px;
     background: rgb(255, 255, 255);
