@@ -29,6 +29,7 @@ function CategoryList(CategoryList){
 
     <section class="categoryForm">
             <input type="text" id="categoryName" placeholder='Enter the name of this category' />
+            <div id='helpName' class="text-danger"></div>
             <button id="saveCategoryBtn">Save Item</button>
         </section>
 
@@ -55,14 +56,20 @@ function AddCategory(){
         const requestBody = {
             Name: categoryName
         }
-        apiAction.postRequest(categoryURL, requestBody, () => {
-            apiAction.getRequest(categoryURL, data => {
-                appDiv.innerHTML = CategoryList(data);
-                AddCategory();
-                UpdateCategoryBtn();
-                RemoveCategory();
+        if(categoryName == "")
+        {
+            document.getElementById('helpName').innerText = "*This Field Is Required.";
+        } 
+        else{
+            apiAction.postRequest(categoryURL, requestBody, () => {
+                apiAction.getRequest(categoryURL, data => {
+                    appDiv.innerHTML = CategoryList(data);
+                    AddCategory();
+                    UpdateCategoryBtn();
+                    RemoveCategory();
+                })
             })
-        })
+        }
     })
 }
 
