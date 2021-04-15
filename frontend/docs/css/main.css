@@ -42,7 +42,14 @@ button{
 }
 
 button:hover{
-    background-color:blue;
+    /* background-color:blue; */
+    color: white;
+    border-radius: 9px;
+    background: rgb(36, 36, 36);
+    font-weight: lighter;
+    box-shadow: 0 0 12px rgb(182, 182, 182);
+    padding: .075em;
+    transition: background-color .7s ease;
 }
 
 html {
@@ -85,6 +92,10 @@ main{
     background-repeat: no-repeat;
     text-align: center;
     border-radius: 2.5px;
+}
+
+#aboutUs{
+    padding-bottom: 10px;
 }
 
 .picture {
