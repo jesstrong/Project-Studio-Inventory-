@@ -6,8 +6,7 @@ import cookieActions from "../cookie/cookie-actions";
 export default {
     SignUpPage,
     NavSignUp,
-    CreateProfile,
-    NavLogin,
+    NavLogin
 }
 
 const appDiv = document.getElementById('app');
@@ -18,13 +17,16 @@ function SignUpPage() {
         <h3>Please create your account.</h3>
 
         <section class='signUpForm'>
-            <input type='text' id='userName' placeholder='User Name' />
+            <input type='text' id='userName' placeholder='User Name'>
+            <div id='helpName' class="text-danger"></div>
             <br/>
-            <input type='password' id='password' placeholder='Password' />
+            <input type='password' id='password' placeholder='Password'>
+            <div id='helpPass' class="text-danger"></div>
             <br/>
-            <input type='password' id='adminKey' placeholder='Admin Key' />
+            <input type='password' id='adminKey' placeholder='Admin Key'/>
             <br/>
             <button id='saveUserButton'>Create Account</button>
+            
         </section>
     `;
 }
@@ -60,9 +62,27 @@ function CreateProfile() {
             isAdmin: isAdmin
         }
         
-        apiAction.postRequest('https://localhost:44372/api/User', requestBody, data => {
-                appDiv.innerHTML = ProfilePage(data);
-        })
+        if(name == "" && password == "")
+        {
+            document.getElementById('helpName').innerText = "*This Field Is Required.";
+            document.getElementById('helpPass').innerText = "*This Field Is Required.";
+        } 
+        else if (name == "")
+        {
+            document.getElementById('helpName').innerText = "*This Field Is Required.";
+            document.getElementById('helpPass').innerText = "";
+        } 
+        else if(password == "")
+        {
+            document.getElementById('helpName').innerText = "";
+            document.getElementById('helpPass').innerText = "*This Field Is Required.";
+        }
+        else{
+            apiAction.postRequest('https://localhost:44372/api/User', requestBody, data => {
+                    appDiv.innerHTML = ProfilePage(data);
+        
+            })
+        }
     })
 }
 

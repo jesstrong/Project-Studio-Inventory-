@@ -30,7 +30,9 @@ function EquipmentList(equipmentList){
 
     <section class="equipmentForm">
             <input type="text" id="equipmentName" placeholder='Enter the name of this equipment' />
+            <div id='helpName' class="text-danger"></div>
             <input type="text" id="serialNumber" placeholder='Enter Serial Number' />
+            <div id='helpSerial' class="text-danger"></div>
             <select id="category">
             </select>
             <br/>
@@ -71,15 +73,33 @@ function AddEquipment(){
             Description: description,
             RentalDates: rentalDates
         }
-        apiAction.postRequest('https://localhost:44372/api/EquipmentList', requestBody, () => {
-            apiAction.getRequest('https://localhost:44372/api/EquipmentList', data => {
-                appDiv.innerHTML = EquipmentList(data);
-                UpdateEquipmentBtn();
-                FillCategories();
-                AddEquipment();
-                RemoveEquipment();
+
+        if(equipName == "" && serialNum == "")
+        {
+            document.getElementById('helpName').innerText = "*This Field Is Required.";
+            document.getElementById('helpSerial').innerText = "*This Field Is Required.";
+        } 
+        else if (equipName == "")
+        {
+            document.getElementById('helpName').innerText = "*This Field Is Required.";
+            document.getElementById('helpSerial').innerText = "";
+        } 
+        else if(serialNum == "")
+        {
+            document.getElementById('helpName').innerText = "";
+            document.getElementById('helpSerial').innerText = "*This Field Is Required.";
+        }
+        else{
+            apiAction.postRequest('https://localhost:44372/api/EquipmentList', requestBody, () => {
+                apiAction.getRequest('https://localhost:44372/api/EquipmentList', data => {
+                    appDiv.innerHTML = EquipmentList(data);
+                    UpdateEquipmentBtn();
+                    FillCategories();
+                    AddEquipment();
+                    RemoveEquipment();
+                })
             })
-        })
+        }
     })
 }
 
