@@ -78,9 +78,24 @@ function CreateProfile() {
             document.getElementById('helpPass').innerText = "*This Field Is Required.";
         }
         else{
-            apiAction.postRequest('https://localhost:44372/api/User', requestBody, data => {
-                    appDiv.innerHTML = ProfilePage(data);
-        
+            var isUnique = true;
+
+            apiAction.getRequest('https://localhost:44372/api/User', users =>{
+                users.forEach(user => {
+                    if (user.name === name){
+                        isUnique = false;
+                    }
+                });
+
+                if (isUnique == true){
+                    apiAction.postRequest('https://localhost:44372/api/User', requestBody, data => {
+                        appDiv.innerHTML = ProfilePage(data);
+                    })
+                }
+                else{
+                    document.getElementById('helpName').innerText = "*This User Name Already Exists.";
+                    document.getElementById('helpPass').innerText = "";
+                }
             })
         }
     })
@@ -121,7 +136,6 @@ function Login(){
         
         apiAction.postRequest('https://localhost:44372/api/Account', requestBody, data =>
         {
-            console.log(data.result)
             if(data.result == true){
                 cookieActions.setCookie("userName", data.user.name, 1);
                 cookieActions.setCookie("userId", data.user.id, 1);
