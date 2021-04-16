@@ -77,9 +77,27 @@ function CreateProfile() {
             document.getElementById('helpPass').innerText = "*This Field Is Required.";
         }
         else{
-            apiAction.postRequest('https://localhost:44372/api/User', requestBody, data => {
-                    appDiv.innerHTML = Profile.ProfilePage(data);
-        
+            var isUnique = true;
+
+            apiAction.getRequest('https://localhost:44372/api/User', users =>{
+                users.forEach(user => {
+                    if (user.name === name){
+                        isUnique = false;
+                    }
+                });
+
+                if (isUnique == true){
+                    apiAction.postRequest('https://localhost:44372/api/User', requestBody, data => {
+                        cookieActions.setCookie("userName", data.name, 1);
+                        cookieActions.setCookie("userId", data.id, 1);
+                        cookieActions.setCookie("userIsAdmin", data.isAdmin, 1);
+                        appDiv.innerHTML = ProfilePage(data);
+                    })
+                }
+                else{
+                    document.getElementById('helpName').innerText = "*This User Name Already Exists.";
+                    document.getElementById('helpPass').innerText = "";
+                }
             })
         }
     })
@@ -87,10 +105,23 @@ function CreateProfile() {
 
 function NavLogin(){
     const logInLink = document.querySelector(".nav_login");
-    logInLink.addEventListener('click', function (){
-        appDiv.innerHTML = LoginPage();
-        Login();
-    })
+    const userId = cookieActions.getCookie("userId");
+    if(userId == ""){
+        logInLink.innerText = "Login";
+        logInLink.addEventListener('click', function (){
+            appDiv.innerHTML = LoginPage();
+            Login();
+        })
+    }
+    else{
+        logInLink.innerHTML = "Logout";
+        logInLink.addEventListener('click', function (){
+            appDiv.innerHTML = LogoutPage();
+            Logout();
+            Login();
+        })
+    }
+    
 }
 
 function LoginPage() {
@@ -120,12 +151,12 @@ function Login(){
         
         apiAction.postRequest('https://localhost:44372/api/Account', requestBody, data =>
         {
-            console.log(data.result)
             if(data.result == true){
                 cookieActions.setCookie("userName", data.user.name, 1);
                 cookieActions.setCookie("userId", data.user.id, 1);
                 cookieActions.setCookie("userIsAdmin", data.user.isAdmin, 1);
-                appDiv.innerHTML = Profile.ProfilePage(data.user);
+                appDiv.innerHTML = ProfilePage(data.user);
+                NavLogin();
             }
             else{
                 const warningElement = document.getElementById('warningText');
@@ -134,4 +165,3 @@ function Login(){
         })
     })
 }
-
