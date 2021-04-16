@@ -15,32 +15,36 @@ const equipmentURL = "https://localhost:44372/api/EquipmentList/";
 
 function EquipmentList(equipmentList){
     return `
-    <h1>Equipment List</h1>
-    <ol>
-        ${equipmentList.map(equipment =>{
-            return `
-                <li>
-                    <h4 class="equipment_name">${equipment.name}</h4>
-                    <button class="updateEquipmentBtn" id="${equipment.id}">Update Item</button>
-                    <button class="deleteEquipmentBtn" id="${equipment.id}">Delete Item</button>
-                </li>
-            `
-        }).join('')}
-    </ol>
+    <section class="equipment">
+        <h1>Equipment List</h1>
+        <div class="equipment_list">
+            ${equipmentList.map(equipment =>{
+                return `
+                    <article>
+                        <h3 class="equipment_name">${equipment.name}</h3>
+                        <p class="equipment_category">${equipment.category.name}</p>
+                        <p class="equipment_description">${equipment.description}</p>
+                        <button class="updateEquipmentBtn" id="${equipment.id}">Update Item</button>
+                        <button class="deleteEquipmentBtn" id="${equipment.id}">Delete Item</button>
+                    </article>
+                    `
+                }).join('')}
+        </div>
 
-    <section class="equipmentForm">
-            <input type="text" id="equipmentName" placeholder='Enter the name of this equipment' />
-            <div id='helpName' class="text-danger"></div>
-            <input type="text" id="serialNumber" placeholder='Enter Serial Number' />
-            <div id='helpSerial' class="text-danger"></div>
-            <select id="category">
-            </select>
-            <br/>
-            <input type='text' id='description' placeholder='Decription' />
-            <input type='hidden' id='rentalDates' value=""/>
-            <button id="saveEquipmentBtn">Save Item</button>
+        <section class="equipmentForm">
+            <h3>Add Item</h3>
+                <input type="text" id="equipmentName" placeholder='Enter the name of this equipment' />
+                <div id='helpName' class="text-danger"></div>
+                <input type="text" id="serialNumber" placeholder='Enter Serial Number' />
+                <div id='helpSerial' class="text-danger"></div>
+                <select id="category">
+                </select>
+                <br/>
+                <input type='text' id='description' placeholder='Description' />
+                <input type='hidden' id='rentalDates' value=""/>
+                <button id="saveEquipmentBtn">Save Item</button>
         </section>
-
+    </section>
     `
 }
 

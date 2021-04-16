@@ -39,10 +39,89 @@
 button{
     font-size:15px;
     font-weight: 550;
+    border-radius: 5px;
+    border-width: 1px;
 }
 
 button:hover{
-    /* background-color:blue; */
+    background-color:rgb(204, 204, 204);
+    /* color: white;
+    border-radius: 9px;
+    background: rgb(36, 36, 36);
+    font-weight: lighter;
+    box-shadow: 0 0 12px rgb(182, 182, 182);
+    padding: .075em;
+    transition: background-color .7s ease; */
+}
+
+html {
+    font-size: 18px;
+    background: rgb(255, 255, 255);
+    margin-top: 0em;
+    background-image: url("");
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: center;
+    text-align: center;
+    top: 0;
+    padding: 0 0%;
+    /* position: fixed; */
+    width: 100%;
+    background: rgba(248, 248, 248);
+    border-bottom: 1.5px solid rgb(245, 245, 245);
+}
+
+header h3{
+    font-size: 30px;
+    margin-bottom: -1rem;
+}
+
+.user_nav{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#user{
+    width: 30px;
+    padding-top: 15px;
+    margin-bottom: -15px;
+}
+
+.login_links{
+   margin: -1rem;
+}
+
+.nav_links, .login_links{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    margin-top: 0em;
+    align-content: space-between;
+    letter-spacing: 0em;
+    height: 50px;
+}
+
+.nav_links li, .login_links li{
+    padding: 0px 10px;
+    font-size: 19px;
+    text-decoration: none;
+    color: rgb(36, 36, 36);
+}
+
+.login_links li{
+    font-size: 17px;
+    padding: 0px 5px;
+}
+
+.nav_links li:hover, .login_links li:hover {
     color: white;
     border-radius: 9px;
     background: rgb(36, 36, 36);
@@ -52,11 +131,8 @@ button:hover{
     transition: background-color .7s ease;
 }
 
-html {
-    font-size: 18px;
-    background: rgb(255, 255, 255);
-    margin-top: 0em;
-    background-image: url("");
+h1{
+    font-size: 35px;
 }
 
 main{
@@ -91,11 +167,21 @@ main{
     width: 450px;
     background-repeat: no-repeat;
     text-align: center;
-    border-radius: 2.5px;
+    border-radius: 10.5px;
 }
 
-#aboutUs{
+#aboutUs, .equipment{
     padding-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: -.5em auto;
+    max-width: 1260px;
+    width: auto;
+    text-align: center;
+    letter-spacing: .015em;
+    padding-top: 3rem;
+    padding-bottom: 5rem;
 }
 
 .picture {
@@ -103,6 +189,33 @@ main{
     width: calc(130px + 10vw);
     border-radius: 5px;
     box-shadow: 0 0 12px rgb(182, 182, 182);
+}
+
+.equipment_list{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    column-gap: 1em;
+    font-size: 16px;
+    align-items: space-around;
+}
+
+.equipment_list article{
+    padding: 1.5em;
+    margin: 1em;
+    border-radius: 5.5px;
+    max-width: 21em;
+}
+
+h3 {
+    font-weight: 600;
+    padding-bottom: 0em;
+}
+
+.equipment_list article p{
+    padding-top: 0;
+    font-size: 14px;
 }
 
 footer {
