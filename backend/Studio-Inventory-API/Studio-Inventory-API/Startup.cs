@@ -70,16 +70,6 @@ namespace Studio_Inventory_API
 
             app.UseEndpoints(endpoints =>
             {
-                //endpoints.MapControllerRoute(
-                //    name: "actionBased",
-                //    pattern: "api/{controller=EquipmentList}/{action=GetMultiple}/{id?}");
-                
-                //endpoints.MapControllerRoute(
-                //    name: "defaultAPI",
-                //    pattern: "api/{controller=EquipmentList}/{id?}");
-
-
-
                 endpoints.MapControllers();
             });
         }

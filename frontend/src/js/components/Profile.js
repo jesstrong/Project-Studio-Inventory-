@@ -11,16 +11,15 @@ NavUserProfile
 function ProfilePage(User){
     return `
     <h3>Welcome ${User.name}</h3>
-
+    
     <h4>Here is a record of your rentals:</h4>
     <ul>
     ${User.rentals.map(rental =>{
+        var blah = "";
         return `
-            <li>
-                <h4 class="equipment_name">${rental.rentalDate}</h4>
-                
+        <li>
+        <h4 class="equipment_name">${rental.rentalDate}</h4>
                 <p>Is approved: ${rental.isApproved}</p>
-                <p>Feedback: ${rental.feedBack}</p>
             </li>
         `
     }).join('')}
@@ -38,3 +37,14 @@ const homeLink = document.querySelector(".nav_profile");
     })
 }
 
+//Action for calling equipment array from rental
+// ${apiAction.getRequest(`https://localhost:44372/api/EquipmentList/GetMultiple/${rental.equipmentIds}`, equipmentList =>{
+//     equipmentList.forEach(equipment => {
+//         console.log(equipment);
+//         blah += `
+//         <p>${equipment.name}</p>
+//         `
+//     })
+//     console.log(blah);
+//     return blah;
+// })}
