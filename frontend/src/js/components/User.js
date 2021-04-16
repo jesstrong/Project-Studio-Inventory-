@@ -185,4 +185,5 @@ function Logout() {
     cookieActions.deleteCookie("userName");
     cookieActions.deleteCookie("userId");
     cookieActions.deleteCookie("userIsAdmin");
+    NavLogin();
 }
