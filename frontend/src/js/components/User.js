@@ -1,6 +1,4 @@
 import apiAction from "../api/api-actions";
-import Home from "./Home";
-import cookieAction from "../cookie/cookie-actions";
 import cookieActions from "../cookie/cookie-actions";
 
 export default {
@@ -89,6 +87,9 @@ function CreateProfile() {
 
                 if (isUnique == true){
                     apiAction.postRequest('https://localhost:44372/api/User', requestBody, data => {
+                        cookieActions.setCookie("userName", data.name, 1);
+                        cookieActions.setCookie("userId", data.id, 1);
+                        cookieActions.setCookie("userIsAdmin", data.isAdmin, 1);
                         appDiv.innerHTML = ProfilePage(data);
                     })
                 }
@@ -103,10 +104,23 @@ function CreateProfile() {
 
 function NavLogin(){
     const logInLink = document.querySelector(".nav_login");
-    logInLink.addEventListener('click', function (){
-        appDiv.innerHTML = LoginPage();
-        Login();
-    })
+    const userId = cookieActions.getCookie("userId");
+    if(userId == ""){
+        logInLink.innerText = "Login";
+        logInLink.addEventListener('click', function (){
+            appDiv.innerHTML = LoginPage();
+            Login();
+        })
+    }
+    else{
+        logInLink.innerHTML = "Logout";
+        logInLink.addEventListener('click', function (){
+            appDiv.innerHTML = LogoutPage();
+            Logout();
+            Login();
+        })
+    }
+    
 }
 
 function LoginPage() {
@@ -141,6 +155,7 @@ function Login(){
                 cookieActions.setCookie("userId", data.user.id, 1);
                 cookieActions.setCookie("userIsAdmin", data.user.isAdmin, 1);
                 appDiv.innerHTML = ProfilePage(data.user);
+                NavLogin();
             }
             else{
                 const warningElement = document.getElementById('warningText');
@@ -154,4 +169,26 @@ function ProfilePage(User){
     return `
     <h3>Welcome ${User.name}</h3>
     `
+}
+
+function LogoutPage(){
+    return `
+    <h3>You have successfully logged out.</h3>
+
+    <section class='loginForm'>
+        <input type='text' id='userName' placeholder='User Name' />
+        <br/>
+        <input type='password' id='password' placeholder='Password' />
+        <br/>
+        <button id='loginButton'>Login</button>
+        <div id="warningText"></div>
+    </section>
+`;
+}
+
+function Logout(){
+    cookieActions.deleteCookie("userName");
+    cookieActions.deleteCookie("userId");
+    cookieActions.deleteCookie("userIsAdmin");
+    NavLogin();
 }
