@@ -1,5 +1,6 @@
 import apiAction from "../api/api-actions";
 import cookieActions from "../cookie/cookie-actions";
+import Profile from "../components/Profile";
 
 export default {
     SignUpPage,
@@ -163,32 +164,4 @@ function Login(){
             }
         })
     })
-}
-
-function ProfilePage(User){
-    return `
-    <h3>Welcome ${User.name}</h3>
-    `
-}
-
-function LogoutPage(){
-    return `
-    <h3>You have successfully logged out.</h3>
-
-    <section class='loginForm'>
-        <input type='text' id='userName' placeholder='User Name' />
-        <br/>
-        <input type='password' id='password' placeholder='Password' />
-        <br/>
-        <button id='loginButton'>Login</button>
-        <div id="warningText"></div>
-    </section>
-`;
-}
-
-function Logout(){
-    cookieActions.deleteCookie("userName");
-    cookieActions.deleteCookie("userId");
-    cookieActions.deleteCookie("userIsAdmin");
-    NavLogin();
 }

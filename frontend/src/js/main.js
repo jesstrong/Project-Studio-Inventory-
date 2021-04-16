@@ -5,6 +5,7 @@ import EquipmentList from "./components/EquipmentList";
 import User from "./components/User";
 import Rental from "./components/Rental";
 import CategoryList from "./components/CategoryList";
+import Profile from "./components/Profile";
 
 const appDiv = document.getElementById('app');
 
@@ -18,6 +19,7 @@ export default() => {
  User.NavSignUp();
  User.NavLogin();
  Rental.NavRentalForm();
+ Profile.NavUserProfile();
 }
 
 //test comment

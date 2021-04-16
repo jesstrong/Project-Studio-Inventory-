@@ -37,6 +37,21 @@ namespace Studio_Inventory_API.Controllers
             return _equipmentRepo.GetById(id);
         }
 
+        [HttpGet("GetMultiple/{idArray?}")]
+        public IEnumerable<Equipment> GetMultiple(string idArray)
+        {
+            if (String.IsNullOrEmpty(idArray))
+            {
+                return null;
+            }
+            var myArray = idArray.Split(",");
+            var myInt = Array.ConvertAll(myArray, s => int.Parse(s)).ToList();
+            var allEquipment = _equipmentRepo.GetAll();
+            var myEquipmentList = allEquipment.Where(a => myInt.Contains(a.Id)).ToList();
+            return myEquipmentList;
+            //return _equipmentRepo.GetById(idArray);
+        }
+
         // PUT: api/EquipmentList/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
