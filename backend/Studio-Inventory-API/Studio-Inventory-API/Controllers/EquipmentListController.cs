@@ -12,7 +12,6 @@ using Studio_Inventory_API.Repositories;
 
 namespace Studio_Inventory_API.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
     public class EquipmentListController : ControllerBase
     {
@@ -24,6 +23,7 @@ namespace Studio_Inventory_API.Controllers
         }
 
         // GET: api/EquipmentList
+        [Route("api/[controller]")]
         [HttpGet]
         public IEnumerable<Equipment> GetEquipmentList()
         {
@@ -31,15 +31,24 @@ namespace Studio_Inventory_API.Controllers
         }
 
         // GET: api/EquipmentList/5
+        [Route("api/[controller]")]
         [HttpGet("{id}")]
         public Equipment GetEquipment(int id)
         {
             return _equipmentRepo.GetById(id);
         }
 
+        [Route ("api/[controller]/GetMultiple")]
+        public string GetMultiple(string idArray)
+        {
+            return idArray;
+            //return _equipmentRepo.GetById(idArray);
+        }
+
         // PUT: api/EquipmentList/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        [Route("api/[controller]")]
         [HttpPut("{id}")]
         public Equipment PutEquipment(int id, Equipment equipment)
         {
@@ -54,6 +63,7 @@ namespace Studio_Inventory_API.Controllers
         // POST: api/EquipmentList
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        [Route("api/[controller]")]
         [HttpPost]
         public Equipment PostEquipment([FromBody] Equipment equipment)
         {
@@ -62,6 +72,7 @@ namespace Studio_Inventory_API.Controllers
         }
 
         // DELETE: api/EquipmentList/5
+        [Route("api/[controller]")]
         [HttpDelete("{id}")]
         public string DeleteEquipment(int id)
         {

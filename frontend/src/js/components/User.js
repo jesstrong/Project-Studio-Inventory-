@@ -1,7 +1,6 @@
 import apiAction from "../api/api-actions";
-import Home from "./Home";
-import cookieAction from "../cookie/cookie-actions";
 import cookieActions from "../cookie/cookie-actions";
+import Profile from "../components/Profile";
 
 export default {
     SignUpPage,
@@ -79,7 +78,7 @@ function CreateProfile() {
         }
         else{
             apiAction.postRequest('https://localhost:44372/api/User', requestBody, data => {
-                    appDiv.innerHTML = ProfilePage(data);
+                    appDiv.innerHTML = Profile.ProfilePage(data);
         
             })
         }
@@ -126,7 +125,7 @@ function Login(){
                 cookieActions.setCookie("userName", data.user.name, 1);
                 cookieActions.setCookie("userId", data.user.id, 1);
                 cookieActions.setCookie("userIsAdmin", data.user.isAdmin, 1);
-                appDiv.innerHTML = ProfilePage(data.user);
+                appDiv.innerHTML = Profile.ProfilePage(data.user);
             }
             else{
                 const warningElement = document.getElementById('warningText');
@@ -136,8 +135,3 @@ function Login(){
     })
 }
 
-function ProfilePage(User){
-    return `
-    <h3>Welcome ${User.name}</h3>
-    `
-}
