@@ -155,7 +155,7 @@ function Login(){
                 cookieActions.setCookie("userName", data.user.name, 1);
                 cookieActions.setCookie("userId", data.user.id, 1);
                 cookieActions.setCookie("userIsAdmin", data.user.isAdmin, 1);
-                appDiv.innerHTML = ProfilePage(data.user);
+                appDiv.innerHTML = Profile.ProfilePage(data.user);
                 NavLogin();
             }
             else{
@@ -164,4 +164,25 @@ function Login(){
             }
         })
     })
+}
+
+function LogoutPage() {
+    return `
+        <h3>You have logged out</h3>
+
+        <section class='loginForm'>
+            <input type='text' id='userName' placeholder='User Name' />
+            <br/>
+            <input type='password' id='password' placeholder='Password' />
+            <br/>
+            <button id='loginButton'>Login</button>
+            <div id="warningText"></div>
+        </section>
+    `;
+}
+
+function Logout() {
+    cookieActions.deleteCookie("userName");
+    cookieActions.deleteCookie("userId");
+    cookieActions.deleteCookie("userIsAdmin");
 }
