@@ -13,6 +13,7 @@ function EquipmentDetails(equipment){
     <h1>Edit Equipment</h1>
         <section class='equipmentForm'>
             <input type='text' id='equipmentName' value='${equipment.name}' />
+            <input type='text' id='changeEquipmentImage' value='${equipment.image}' />
             <input type='hidden' id='categoryId' value='${equipment.categoryId}' />
             <input type='hidden' id='equipmentId' value='${equipment.id}' />
             <input type='text' id='serialNumber' value='${equipment.serialNumber}' />
@@ -31,6 +32,7 @@ function UpdateEquipment(){
         const serialNum = document.getElementById('serialNumber').value;
         const categoryId = document.getElementById('categoryId').value;
         const description = document.getElementById('description').value;
+        const changeEquipmentImage = document.getElementById('changeEquipmentImage').value;
         const rentalDates = document.getElementById('rentalDates').value;
         const requestBody = {
             Id: equipId,
@@ -38,6 +40,7 @@ function UpdateEquipment(){
             SerialNumber: serialNum,
             CategoryId: categoryId,
             Description: description,
+            Image: changeEquipmentImage,
             RentalDates: rentalDates
         }
         apiAction.putRequest('https://localhost:44372/api/EquipmentList/', equipId, requestBody, () => {
