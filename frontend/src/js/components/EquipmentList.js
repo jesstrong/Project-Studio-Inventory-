@@ -69,7 +69,6 @@ function NavEquipmentList() {
     homeLink.addEventListener('click', function (){
         apiAction.getRequest('https://localhost:44372/api/EquipmentList', data => {
             var isAdmin = cookieAction.getCookie("userIsAdmin");
-            console.log(isAdmin);
             if(isAdmin === "true"){
                 appDiv.innerHTML = AdminEquipmentList(data);
                 UpdateEquipmentBtn();
