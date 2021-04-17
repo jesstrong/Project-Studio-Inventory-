@@ -12,6 +12,7 @@ namespace Studio_Inventory_API.Models
         public string SerialNumber { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        public string Image { get; set; }
         public int CategoryId { get; set; }
         public string RentalDates {
             get
@@ -37,13 +38,14 @@ namespace Studio_Inventory_API.Models
         {
         }
 
-        public Equipment(int id, string serialNumber, string name, int categoryId, string description)
+        public Equipment(int id, string serialNumber, string name, int categoryId, string description, string image)
         {
             Id = id;
             SerialNumber = serialNumber;
             Name = name;
             CategoryId = categoryId;
             Description = description;
+            Image = image;
         }
     }
 }
