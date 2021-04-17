@@ -28,9 +28,9 @@ function ProfilePage(User){
 }
 
 function NavUserProfile(){
-const homeLink = document.querySelector(".nav_profile");
-    const userId = cookieActions.getCookie("userId");
+const homeLink = document.querySelector(".nav_profile");  
     homeLink.addEventListener('click', ()=>{
+        const userId = cookieActions.getCookie("userId");
         apiAction.getRequest(`https://localhost:44372/api/User/${userId}`, user => {
             appDiv.innerHTML = ProfilePage(user);
         })
