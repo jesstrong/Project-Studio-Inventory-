@@ -16,7 +16,7 @@ function AdminCategoryList(CategoryList){
         ${CategoryList.map(category =>{
             return `
                 <li>
-                    <h4 class="category_name">${category.name}</h4>
+                    <h4 class="category_name_user" id="${category.id}">${category.name}</h4>
                     <button class="updateCategoryBtn" id="${category.id}">Update Item</button>
                     <button class="deleteCategoryBtn" id="${category.id}">Delete Item</button>
                 </li>
@@ -40,13 +40,46 @@ function UserCategoryList(CategoryList){
         ${CategoryList.map(category =>{
             return `
                 <li>
-                    <h4 class="category_name">${category.name}</h4>
+                    <h4 class="category_name_user" id="${category.id}">${category.name}</h4>
                 </li>
             `
         }).join('')}
     </ol>
     `
 }
+
+function CategorySingle(Category){
+    return `
+    <section class="category">
+        <h1>${Category.name}</h1>
+        <div class="equipment_list">
+            ${Category.equipmentList.map(item =>{
+                console.log(item);
+                return `
+                    <article>
+                        <h3 class="equipment_name">${item.name}</h3>
+                        <img src="${item.image}" class="equipment_image">
+                        <p class="equipment_description">${item.description}</p>
+                    </article>
+                    `
+                }).join('')}
+        </div>
+    </section>
+    `
+}
+
+function NavCategorySingle(){
+    const categoryNameElements = document.querySelectorAll(".category_name_user");
+    categoryNameElements.forEach(element =>{
+        element.addEventListener("click", function(){
+            const categoryId = element.id;
+            apiAction.getRequest(`https://localhost:44372/api/Category/${categoryId}`, data =>{
+                appDiv.innerHTML = CategorySingle(data);
+            })
+        })
+    })
+}
+
 
 function NavCategoryList() {
     const homeLink = document.querySelector(".nav_category");
@@ -59,9 +92,11 @@ function NavCategoryList() {
                 AddCategory();
                 UpdateCategoryBtn();
                 RemoveCategory();
+                NavCategorySingle();
             }
             else{
                 appDiv.innerHTML = UserCategoryList(data);
+                NavCategorySingle();
             }
         })
     })
