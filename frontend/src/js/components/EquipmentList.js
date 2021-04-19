@@ -55,6 +55,7 @@ function UserEquipmentList(equipmentList){
                 return `
                     <article>
                         <h3 class="equipment_name">${equipment.name}</h3>
+                        <img src="${equipment.image}" class="equipment_image">
                         <p class="equipment_category">${equipment.category.name}</p>
                         <p class="equipment_description">${equipment.description}</p>
                     </article>
