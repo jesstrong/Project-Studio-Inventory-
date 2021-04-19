@@ -20,7 +20,6 @@ export default() => {
  User.NavSignUp();
  User.NavLogin();
  Rental.NavRentalForm();
- Profile.NavUserProfile();
  ContactPage.ContactPage();
  ContactPage.NavContact();
 }

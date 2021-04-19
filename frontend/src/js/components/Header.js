@@ -9,14 +9,13 @@ function Header(){
     <div class="user_nav">
         <img id="user" src="images/User_Icon.png">
         <ul class="login_links">
-            <li class='nav_signUp'>Sign Up</li>
-            <li class='nav_login'>Login</li>
+            <li class='nav_signUp'></li>
+            <li class='nav_login'></li>
         </ul>
     </div>
     <nav>
         <ul class="nav_links">
             <li class='nav_home'>Home</li>
-            <li class='nav_profile'>Profile</li>
             <li class='nav_equipmentList'>Equipment</li>
             <li class='nav_category'>Category</li>
             <li class='nav_rental'>Create Rental</li>

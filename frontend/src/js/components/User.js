@@ -10,6 +10,7 @@ export default {
 
 const appDiv = document.getElementById('app');
 const staticAdminKey = "IsAdmin"
+let NavBundle = "";
 
 function SignUpPage() {
     return `
@@ -32,10 +33,34 @@ function SignUpPage() {
 
 function NavSignUp() {
     const signUpLink = document.querySelector(".nav_signUp");
-    signUpLink.addEventListener('click', function (){
-        appDiv.innerHTML = SignUpPage();
-        CreateProfile();
-    })
+    ChangeSignUp();
+    signUpLink.addEventListener('click', function(){
+        NavBundle();
+    });
+}
+
+function ChangeSignUp(){
+    const signUpLink = document.querySelector(".nav_signUp");
+    const userId = cookieActions.getCookie("userId");
+    if (userId == "")
+    {
+        signUpLink.innerText = "Sign Up";
+        NavBundle = SignUpBundle;
+    }
+    else{
+        signUpLink.innerText = "Profile";
+        NavBundle = ProfileBundle;
+    }
+}
+
+function SignUpBundle(){
+    appDiv.innerHTML = SignUpPage();
+    CreateProfile();
+}
+
+function ProfileBundle(){
+    const userId = cookieActions.getCookie("userId");
+    appDiv.innerHTML = Profile.NavUserProfile(userId);
 }
 
 function CreateProfile() {
@@ -93,6 +118,7 @@ function CreateProfile() {
                         cookieActions.setCookie("userIsAdmin", data.isAdmin, 1);
                         appDiv.innerHTML = Profile.ProfilePage(data);
                         NavLogin();
+                        ChangeSignUp();
                     })
                 }
                 else{
@@ -108,7 +134,7 @@ function NavLogin(){
     const logInLink = document.querySelector(".nav_login");
     const userId = cookieActions.getCookie("userId");
     if(userId == ""){
-        logInLink.innerText = "Login";
+        logInLink.innerHTML = "Login";
         logInLink.addEventListener('click', function (){
             appDiv.innerHTML = LoginPage();
             Login();
@@ -158,6 +184,7 @@ function Login(){
                 cookieActions.setCookie("userIsAdmin", data.user.isAdmin, 1);
                 appDiv.innerHTML = Profile.ProfilePage(data.user);
                 NavLogin();
+                ChangeSignUp();
             }
             else{
                 const warningElement = document.getElementById('warningText');
@@ -187,4 +214,5 @@ function Logout() {
     cookieActions.deleteCookie("userId");
     cookieActions.deleteCookie("userIsAdmin");
     NavLogin();
+    ChangeSignUp();
 }
