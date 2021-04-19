@@ -20,6 +20,7 @@ function Header(){
             <li class='nav_equipmentList'>Equipment</li>
             <li class='nav_category'>Category</li>
             <li class='nav_rental'>Create Rental</li>
+            <li class='nav_contact'>Contact Us</li>
         </ul>
     </nav>
     `;
