@@ -9,6 +9,11 @@ NavUserProfile
 }
 
 function ProfilePage(User){
+    if(User.rentals == null)
+    {
+        User.rentals = [];
+    }
+    
     return `
     <h3>Welcome ${User.name}</h3>
     

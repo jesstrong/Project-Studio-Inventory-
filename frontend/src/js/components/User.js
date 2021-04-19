@@ -92,6 +92,7 @@ function CreateProfile() {
                         cookieActions.setCookie("userId", data.id, 1);
                         cookieActions.setCookie("userIsAdmin", data.isAdmin, 1);
                         appDiv.innerHTML = Profile.ProfilePage(data);
+                        NavLogin();
                     })
                 }
                 else{
