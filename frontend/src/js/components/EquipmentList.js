@@ -22,7 +22,7 @@ function EquipmentList(equipmentList){
                 return `
                     <article>
                         <h3 class="equipment_name">${equipment.name}</h3>
-                        <p class="equipment_image">${equipment.image}</p>
+                        <img src="${equipment.image}" class="equipment_image">
                         <p class="equipment_category">${equipment.category.name}</p>
                         <p class="equipment_description">${equipment.description}</p>
                         <button class="updateEquipmentBtn" id="${equipment.id}">Update Item</button>
