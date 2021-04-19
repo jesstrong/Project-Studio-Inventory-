@@ -1,5 +1,6 @@
 import apiAction from "../api/api-actions";
 import Cookie from "../cookie/cookie-actions";
+import User from "../components/User";
 
 export default{
     NavRentalForm,
@@ -58,10 +59,21 @@ function NavRentalForm() {
     UpdateNavRental();
     
     rentalLink.addEventListener('click', function (){
-        apiAction.getRequest('https://localhost:44372/api/Rental', data => {
-            appDiv.innerHTML = RentalFormPage(data);
-            DateBtn();
-        })
+        const isAdmin = Cookie.getCookie("userIsAdmin");
+        const userId = Cookie.getCookie("userId");
+        if (userId == ""){
+            appDiv.innerHTML = User.LoginPage();
+            User.Login();
+        }
+        else if(isAdmin === "true"){
+            appDiv.innerHTML = "Hey Admin";
+        }
+        else{
+            apiAction.getRequest('https://localhost:44372/api/Rental', data => {
+                appDiv.innerHTML = RentalFormPage(data);
+                DateBtn();
+            })
+        }
     })
 }
 

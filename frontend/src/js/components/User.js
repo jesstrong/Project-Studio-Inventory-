@@ -6,7 +6,9 @@ import Rental from "../components/Rental";
 export default {
     SignUpPage,
     NavSignUp,
-    NavLogin
+    NavLogin,
+    LoginPage,
+    Login
 }
 
 const appDiv = document.getElementById('app');
