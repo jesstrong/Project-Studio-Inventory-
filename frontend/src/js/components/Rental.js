@@ -2,7 +2,8 @@ import apiAction from "../api/api-actions";
 import Cookie from "../cookie/cookie-actions";
 
 export default{
-    NavRentalForm
+    NavRentalForm,
+    UpdateNavRental
 }
 
 const appDiv = document.getElementById('app');
@@ -41,12 +42,22 @@ function RentalFormPage(){
     `
 }
 
-
+function UpdateNavRental(){
+    const isAdmin = Cookie.getCookie("userIsAdmin");
+    const rentalLink = document.querySelector(".nav_rental");
+    if (isAdmin === "true"){
+        rentalLink.innerText = "Pending Rentals";
+    }
+    else{
+        rentalLink.innerText = "Create Rental";
+    }
+}
 
 function NavRentalForm() {
-    const homeLink = document.querySelector(".nav_rental");
+    const rentalLink = document.querySelector(".nav_rental");
+    UpdateNavRental();
     
-    homeLink.addEventListener('click', function (){
+    rentalLink.addEventListener('click', function (){
         apiAction.getRequest('https://localhost:44372/api/Rental', data => {
             appDiv.innerHTML = RentalFormPage(data);
             DateBtn();
