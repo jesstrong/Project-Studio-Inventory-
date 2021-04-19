@@ -3,7 +3,11 @@ import CategoryUpdate from "./CategoryUpdate";
 import cookieAction from "../cookie/cookie-actions";
 
 export default {
-    NavCategoryList
+    NavCategoryList,
+    AdminCategoryList,
+    AddCategory,
+    UpdateCategoryBtn,
+    RemoveCategory
 }
 
 const appDiv = document.getElementById('app');

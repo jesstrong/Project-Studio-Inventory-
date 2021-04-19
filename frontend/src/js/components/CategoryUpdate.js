@@ -31,7 +31,7 @@ function UpdateCategory(){
         }
         apiAction.putRequest(categoryURL, categoryId, requestBody, () => {
             apiAction.getRequest(categoryURL, data => {
-                appDiv.innerHTML = CategoryList.CategoryList(data);
+                appDiv.innerHTML = CategoryList.AdminCategoryList(data);
                 CategoryList.AddCategory();
                 CategoryList.UpdateCategoryBtn();
                 CategoryList.RemoveCategory();
