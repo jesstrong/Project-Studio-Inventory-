@@ -1,6 +1,7 @@
 import apiAction from "../api/api-actions";
 import Cookie from "../cookie/cookie-actions";
 import User from "../components/User";
+import apiActions from "../api/api-actions";
 
 export default{
     NavRentalForm,
@@ -66,7 +67,10 @@ function NavRentalForm() {
             User.Login();
         }
         else if(isAdmin === "true"){
-            appDiv.innerHTML = "Hey Admin";
+            apiAction.getRequest('https://localhost:44372/api/Rental', data => {
+                appDiv.innerHTML = ApprovalPage(data);
+            })
+            appDiv.innerHTML = ApprovalPage();
         }
         else{
             apiAction.getRequest('https://localhost:44372/api/Rental', data => {
@@ -172,4 +176,40 @@ function SubmitRentalBtn(rentalDate){
             appDiv.innerHTML = `Your rental for ${data.rentalDate} has been submitted for approval.`;
         })
     })
+}
+
+function ApprovalPage(data){
+    return`
+        <h1>Pending Rentals</h1>
+        <ol>
+            ${data.map(rental =>{
+                if(rental.isApproved == false && rental.isDenied == false){
+                    return`
+                        <li>${rental.user.name}, ${rental.rentalDate}</li>
+                    `
+                }
+            }).join("")}
+        </ol>
+
+        <h1>Approved Rentals</h1>
+        <ol>
+            ${data.map(rental =>{
+                if(rental.isApproved == true){
+                    return`
+                        <li>${rental.user.name}, ${rental.rentalDate}</li>
+                    `
+                }
+            }).join("")}
+        </ol>
+        <h1>Denied Rentals</h1>
+        <ol>
+            ${data.map(rental =>{
+                if(rental.isDenied == true){
+                    return`
+                        <li>${rental.user.name}, ${rental.rentalDate}</li>
+                    `
+                }
+            }).join("")}
+        </ol>
+    `
 }
