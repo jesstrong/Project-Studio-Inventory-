@@ -43,6 +43,7 @@ namespace Studio_Inventory_API
                     SerialNumber = "123",
                     Name = "SM57",
                     Description = "Good all around microphone.",
+                    Image = "https://media.sweetwater.com/api/i/b-original__w-300__h-300__bg-ffffff__q-85__ha-dde2192b5ddfa7d1__hmac-b5b5985e3aa2e68b005b31f94060a683b2ccf4fc/images/items/350/SM57.jpg",
                     CategoryId = 1,
                     RentalDates = "2021-04-20"
                 }

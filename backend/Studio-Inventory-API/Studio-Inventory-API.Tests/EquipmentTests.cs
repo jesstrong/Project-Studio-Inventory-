@@ -7,7 +7,7 @@ namespace Studio_Inventory_API.Tests
 {
     public class EquipmentTests
     {
-        Equipment sut = new Equipment(1, "serialnumber", "name", 1, "description");
+        Equipment sut = new Equipment(1, "serialnumber", "name", 1, "description", "image");
 
         [Fact]
         public void Equipment_Constructor_Should_Set_Id()

@@ -18,6 +18,7 @@ function AdminEquipmentList(equipmentList){
                 return `
                     <article>
                         <h3 class="equipment_name">${equipment.name}</h3>
+                        <img src="${equipment.image}" class="equipment_image">
                         <p class="equipment_category">${equipment.category.name}</p>
                         <p class="equipment_description">${equipment.description}</p>
                         <button class="updateEquipmentBtn" id="${equipment.id}">Update Item</button>
@@ -33,6 +34,7 @@ function AdminEquipmentList(equipmentList){
                 <div id='helpName' class="text-danger"></div>
                 <input type="text" id="serialNumber" placeholder='Enter Serial Number' />
                 <div id='helpSerial' class="text-danger"></div>
+                <input type = "text" id = "equipmentImage" placeholder = "Image URL"/>
                 <select id="category">
                 </select>
                 <br/>
@@ -90,12 +92,14 @@ function AddEquipment(){
         const serialNum = document.getElementById('serialNumber').value;
         const categoryId = document.getElementById('category').value;
         const description = document.getElementById('description').value;
+        const equipmentImage = document.getElementById('equipmentImage').value;
         const rentalDates = document.getElementById('rentalDates').value;
         const requestBody = {
             Name: equipName,
             SerialNumber: serialNum,
             CategoryId: categoryId,
             Description: description,
+            Image: equipmentImage,
             RentalDates: rentalDates
         }
 
