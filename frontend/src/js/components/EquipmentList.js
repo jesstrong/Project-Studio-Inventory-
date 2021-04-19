@@ -1,19 +1,15 @@
 import apiAction from "../api/api-actions";
 import Equipment from "../components/Equipment";
+import cookieAction from "../cookie/cookie-actions";
 
 export default{
-    EquipmentList,
-    NavEquipmentList,
-    AddEquipment,
-    UpdateEquipmentBtn,
-    FillCategories,
-    RemoveEquipment
+    NavEquipmentList
 }
 
 const appDiv = document.getElementById('app');
 const equipmentURL = "https://localhost:44372/api/EquipmentList/";
 
-function EquipmentList(equipmentList){
+function AdminEquipmentList(equipmentList){
     return `
     <section class="equipment">
         <h1>Equipment List</h1>
@@ -48,16 +44,41 @@ function EquipmentList(equipmentList){
     `
 }
 
+function UserEquipmentList(equipmentList){
+    return `
+    <section class="equipment">
+        <h1>Equipment List</h1>
+        <div class="equipment_list">
+            ${equipmentList.map(equipment =>{
+                return `
+                    <article>
+                        <h3 class="equipment_name">${equipment.name}</h3>
+                        <p class="equipment_category">${equipment.category.name}</p>
+                        <p class="equipment_description">${equipment.description}</p>
+                    </article>
+                    `
+                }).join('')}
+        </div>
+    </section>
+    `
+}
+
 function NavEquipmentList() {
     const homeLink = document.querySelector(".nav_equipmentList");
     
     homeLink.addEventListener('click', function (){
         apiAction.getRequest('https://localhost:44372/api/EquipmentList', data => {
-            appDiv.innerHTML = EquipmentList(data);
-            UpdateEquipmentBtn();
-            FillCategories();
-            AddEquipment();
-            RemoveEquipment();
+            var isAdmin = cookieAction.getCookie("userIsAdmin");
+            if(isAdmin === "true"){
+                appDiv.innerHTML = AdminEquipmentList(data);
+                UpdateEquipmentBtn();
+                FillCategories();
+                AddEquipment();
+                RemoveEquipment();
+            }
+            else{
+                appDiv.innerHTML = UserEquipmentList(data);
+            }
         })
     })
 }

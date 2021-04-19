@@ -1,18 +1,15 @@
 import apiAction from "../api/api-actions";
 import CategoryUpdate from "./CategoryUpdate";
+import cookieAction from "../cookie/cookie-actions";
 
 export default {
-CategoryList,
-NavCategoryList,
-AddCategory,
-UpdateCategoryBtn,
-RemoveCategory
+    NavCategoryList
 }
 
 const appDiv = document.getElementById('app');
 const categoryURL = "https://localhost:44372/api/Category/";
 
-function CategoryList(CategoryList){
+function AdminCategoryList(CategoryList){
     return `
     <h1>Categories</h1>
     <ol>
@@ -36,15 +33,36 @@ function CategoryList(CategoryList){
     `
 }
 
+function UserCategoryList(CategoryList){
+    return `
+    <h1>Categories</h1>
+    <ol>
+        ${CategoryList.map(category =>{
+            return `
+                <li>
+                    <h4 class="category_name">${category.name}</h4>
+                </li>
+            `
+        }).join('')}
+    </ol>
+    `
+}
+
 function NavCategoryList() {
     const homeLink = document.querySelector(".nav_category");
     
     homeLink.addEventListener('click', function (){
         apiAction.getRequest(categoryURL, data => {
-            appDiv.innerHTML = CategoryList(data);
-            AddCategory();
-            UpdateCategoryBtn();
-            RemoveCategory();
+            var isAdmin = cookieAction.getCookie("userIsAdmin");
+            if(isAdmin === "true"){
+                appDiv.innerHTML = AdminCategoryList(data);
+                AddCategory();
+                UpdateCategoryBtn();
+                RemoveCategory();
+            }
+            else{
+                appDiv.innerHTML = UserCategoryList(data);
+            }
         })
     })
 }
