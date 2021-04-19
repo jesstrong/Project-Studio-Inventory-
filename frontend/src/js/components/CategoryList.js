@@ -81,7 +81,7 @@ function AddCategory(){
         else{
             apiAction.postRequest(categoryURL, requestBody, () => {
                 apiAction.getRequest(categoryURL, data => {
-                    appDiv.innerHTML = CategoryList(data);
+                    appDiv.innerHTML = AdminCategoryList(data);
                     AddCategory();
                     UpdateCategoryBtn();
                     RemoveCategory();

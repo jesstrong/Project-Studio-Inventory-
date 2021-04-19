@@ -3,7 +3,13 @@ import Equipment from "../components/Equipment";
 import cookieAction from "../cookie/cookie-actions";
 
 export default{
-    NavEquipmentList
+    NavEquipmentList,
+    AdminEquipmentList,
+    FillCategories,
+    CategoryDropdownNav,
+    UpdateEquipmentBtn,
+    AddEquipment,
+    RemoveEquipment
 }
 
 const appDiv = document.getElementById('app');
@@ -13,6 +19,7 @@ function AdminEquipmentList(equipmentList){
     return `
     <section class="equipment">
         <h1>Equipment List</h1>
+        <select id="category_dropdown"></select>
         <div class="equipment_list">
             ${equipmentList.map(equipment =>{
                 return `
@@ -48,6 +55,8 @@ function UserEquipmentList(equipmentList){
     return `
     <section class="equipment">
         <h1>Equipment List</h1>
+        </br>
+        <select id="category_dropdown"></select>
         <div class="equipment_list">
             ${equipmentList.map(equipment =>{
                 return `
@@ -71,13 +80,17 @@ function NavEquipmentList() {
             var isAdmin = cookieAction.getCookie("userIsAdmin");
             if(isAdmin === "true"){
                 appDiv.innerHTML = AdminEquipmentList(data);
+                FillCategories('category');
+                FillCategories('category_dropdown');
+                CategoryDropdownNav();
                 UpdateEquipmentBtn();
-                FillCategories();
                 AddEquipment();
                 RemoveEquipment();
             }
             else{
                 appDiv.innerHTML = UserEquipmentList(data);
+                FillCategories('category_dropdown');
+                CategoryDropdownNav();
             }
         })
     })
@@ -117,9 +130,10 @@ function AddEquipment(){
         else{
             apiAction.postRequest('https://localhost:44372/api/EquipmentList', requestBody, () => {
                 apiAction.getRequest('https://localhost:44372/api/EquipmentList', data => {
-                    appDiv.innerHTML = EquipmentList(data);
+                    appDiv.innerHTML = AdminEquipmentList(data);
                     UpdateEquipmentBtn();
-                    FillCategories();
+                    FillCategories('category');
+                    FillCategories('category_dropdown');
                     AddEquipment();
                     RemoveEquipment();
                 })
@@ -141,8 +155,8 @@ function UpdateEquipmentBtn(){
     })
 }
 
-function FillCategories(){
-    let dropdown = document.getElementById('category');
+function FillCategories(dropdownId){
+    let dropdown = document.getElementById(`${dropdownId}`);
     dropdown.length = 0;
 
     let defaultOption = document.createElement('option');
@@ -161,6 +175,86 @@ function FillCategories(){
             dropdown.add(option);
         })
     })
+}
+
+function CategoryDropdownNav(){
+    const dropdownNavElement = document.getElementById("category_dropdown");
+    dropdownNavElement.addEventListener('change', function() {
+        const dropdownValue = dropdownNavElement.value;
+        apiAction.getRequest(`https://localhost:44372/api/Category/${dropdownValue}`, category => {
+            var isAdmin = cookieAction.getCookie("userIsAdmin");
+            if(isAdmin === "true"){
+                appDiv.innerHTML = AdminCategoryDropdownList(category);
+                CategoryDropdownNav();
+                FillCategories('category_dropdown');
+                UpdateEquipmentBtn();
+                FillCategories('category');
+                AddEquipment();
+                RemoveEquipment();
+            }
+            else{
+
+                appDiv.innerHTML = UserCategoryDropdownList(category);
+                CategoryDropdownNav();
+                FillCategories('category_dropdown');
+            }
+        })
+    })
+}
+
+function AdminCategoryDropdownList(category){
+    return `
+    <section class="equipment">
+        <h1>${category.name} List</h1>
+        </br>
+        <select id="category_dropdown"></select>
+        <div class="equipment_list">
+            ${category.equipmentList.map(equipment =>{
+                return `
+                    <article>
+                        <h3 class="equipment_name">${equipment.name}</h3>
+                        <p class="equipment_description">${equipment.description}</p>
+                        <button class="updateEquipmentBtn" id="${equipment.id}">Update Item</button>
+                        <button class="deleteEquipmentBtn" id="${equipment.id}">Delete Item</button>
+                    </article>
+                    `
+                }).join('')}
+        </div>
+        <section class="equipmentForm">
+            <h3>Add Item</h3>
+                <input type="text" id="equipmentName" placeholder='Enter the name of this equipment' />
+                <div id='helpName' class="text-danger"></div>
+                <input type="text" id="serialNumber" placeholder='Enter Serial Number' />
+                <div id='helpSerial' class="text-danger"></div>
+                <select id="category">
+                </select>
+                <br/>
+                <input type='text' id='description' placeholder='Description' />
+                <input type='hidden' id='rentalDates' value=""/>
+                <button id="saveEquipmentBtn">Save Item</button>
+        </section>
+    </section>
+    `
+}
+
+function UserCategoryDropdownList(category){
+    return `
+    <section class="equipment">
+        <h1>${category.name} List</h1>
+        </br>
+        <select id="category_dropdown"></select>
+        <div class="equipment_list">
+            ${category.equipmentList.map(equipment =>{
+                return `
+                    <article>
+                        <h3 class="equipment_name">${equipment.name}</h3>
+                        <p class="equipment_description">${equipment.description}</p>
+                    </article>
+                    `
+                }).join('')}
+        </div>
+    </section>
+    `
 }
 
 function RemoveEquipment(){

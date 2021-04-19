@@ -42,9 +42,11 @@ function UpdateEquipment(){
         }
         apiAction.putRequest('https://localhost:44372/api/EquipmentList/', equipId, requestBody, () => {
             apiAction.getRequest('https://localhost:44372/api/EquipmentList', data => {
-                appDiv.innerHTML = EquipmentList.EquipmentList(data);
+                appDiv.innerHTML = EquipmentList.AdminEquipmentList(data);
+                EquipmentList.FillCategories('category');
+                EquipmentList.FillCategories('category_dropdown');
+                EquipmentList.CategoryDropdownNav();
                 EquipmentList.UpdateEquipmentBtn();
-                EquipmentList.FillCategories();
                 EquipmentList.AddEquipment();
                 EquipmentList.RemoveEquipment();
             })
