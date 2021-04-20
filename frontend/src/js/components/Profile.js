@@ -4,8 +4,9 @@ import cookieActions from "../cookie/cookie-actions";
 const appDiv = document.getElementById('app');
 
 export default{
-ProfilePage,
-NavUserProfile
+    ProfilePage,
+    NavUserProfile,
+    CancelRentalRequest
 }
 
 function ProfilePage(User){
@@ -20,12 +21,16 @@ function ProfilePage(User){
     <h4>Here is a record of your rentals:</h4>
     <ul>
     ${User.rentals.map(rental =>{
-        var blah = "";
+        var cancelButton = "";
+        if(rental.isApproved === false)
+        {
+            cancelButton = `<button class="cancelRequest" id="${rental.id}">Cancel</button>`
+        }
         return `
         <li>
         <h4 class="equipment_name">${rental.rentalDate}</h4>
                 <p>Is approved: ${rental.isApproved}</p>
-                <button id="cancelRequest">Cancel</button>
+                ${cancelButton}
             </li>
         `
     }).join('')}
@@ -45,11 +50,10 @@ function CancelRentalRequest(){
     cancelRentalElement.forEach(element => {
       element.addEventListener('click',function(){
           const rentalId = element.id;
-          console.log(rentalId);
-          apiAction.deleteRequest('https://localhost:44372/api/Rental', rentalId, data => {
+          apiAction.deleteRequest('https://localhost:44372/api/Rental/', rentalId, data => {  
             if(data.indexOf("denied!") > -1){
-                const liItem = document.getElementById(rentalId).parentElement;
-                liItem.remove();
+                    const liItem = document.getElementById(rentalId).parentElement;
+                    liItem.remove();
             }
         })
       })  
