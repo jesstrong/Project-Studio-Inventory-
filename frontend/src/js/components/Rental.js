@@ -223,8 +223,8 @@ function RentalDetailsButton(){
                 apiAction.getRequest(`https://localhost:44372/api/EquipmentList/GetMultiple/${rental.equipmentIds}`, equipmentList =>{
                     const equipmentListDiv = document.getElementById('equipmentList');
                     equipmentListDiv.innerHTML = PopulateEquipmentList(equipmentList);
-                    ApproveButton();
-                    DenyButton();
+                    ApproveButton(rental);
+                    DenyButton(rental);
                 })
             })
         })
@@ -238,8 +238,9 @@ function RentalDetailsView(data){
         <h4>User: ${data.user.name}</h4>
         <br/>
         <div id="equipmentList"></div>
-        <input type='text' id='feedBack' value='${data.feedBack}'/>
+        <textarea rows="4" cols="50" id='feedBack'>${data.feedBack}</textarea>
         </br>
+        <div id="warningText"></div>
         <button class="aprroveBtn">Approve Request</button>
         <button class="denyBtn">Deny Request</button>
     `
@@ -257,16 +258,36 @@ function PopulateEquipmentList(data){
     `
 }
 
-function ApproveButton(){
+function ApproveButton(rental){
     const approvalButtonElement = document.querySelector('.aprroveBtn');
     approvalButtonElement.addEventListener('click', () =>{
         appDiv.innerHTML = "Request Approved";
     })
 }
 
-function DenyButton(){
+function DenyButton(rental){
     const denialButtonElement = document.querySelector('.denyBtn');
     denialButtonElement.addEventListener('click', () =>{
-        appDiv.innerHTML = "Request Denied";
+        const feedBack = document.getElementById('feedBack').value;
+        if (feedBack === "Awaiting Approval"){
+            const warningText = document.getElementById('warningText');
+            warningText.innerHTML = "Please explain why the request is being denied."
+        }
+        else{
+            const requestBody = {
+                Id: rental.id,
+                IsApproved: false,
+                IsDenied: true,
+                FeedBack: feedBack,
+                RentalDate: rental.rentalDate,
+                UserId: rental.userId,
+                EquipmentIds: rental.EquipmentIds
+            }
+            apiAction.putRequest('https://localhost:44372/api/Rental/', rental.id, requestBody, () => {
+                apiAction.getRequest('https://localhost:44372/api/Rental', data => {
+                    appDiv.innerHTML = ApprovalPage(data);
+                })
+            })
+        }
     })
 }
