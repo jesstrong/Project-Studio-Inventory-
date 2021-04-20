@@ -223,6 +223,8 @@ function RentalDetailsButton(){
                 apiAction.getRequest(`https://localhost:44372/api/EquipmentList/GetMultiple/${rental.equipmentIds}`, equipmentList =>{
                     const equipmentListDiv = document.getElementById('equipmentList');
                     equipmentListDiv.innerHTML = PopulateEquipmentList(equipmentList);
+                    ApproveButton();
+                    DenyButton();
                 })
             })
         })
@@ -253,4 +255,18 @@ function PopulateEquipmentList(data){
             }).join("")}
         </ol>
     `
+}
+
+function ApproveButton(){
+    const approvalButtonElement = document.querySelector('.aprroveBtn');
+    approvalButtonElement.addEventListener('click', () =>{
+        appDiv.innerHTML = "Request Approved";
+    })
+}
+
+function DenyButton(){
+    const denialButtonElement = document.querySelector('.denyBtn');
+    denialButtonElement.addEventListener('click', () =>{
+        appDiv.innerHTML = "Request Denied";
+    })
 }
