@@ -15,11 +15,17 @@ function Home() {
     </div>
     <div class="slideshow-container">
 
-        <!-- Full-width images with number and caption text -->
         <div class="mySlides fade">
           <img class="studioImage" src='/images/StudioInventoryProjectPhoto1.jpg'>
-          <!-- <div class="text"><button>CLICKABLE BUTTON?</button></div> -->
         </div>
+
+        <div class="mySlides fade">
+        <img src="/images/StudioInventoryMicrophone.jpg">
+      </div>
+    
+      <div class="mySlides fade">
+        <img src="/images/StudioInventoryAmp.jpg">
+      </div>
       
     </div>
 
@@ -42,6 +48,21 @@ function Home() {
 function NavHome() {
     const homeLink = document.querySelector(".nav_home");
     homeLink.addEventListener('click', function (){
-        appDiv.innerHTML = Home();
+      appDiv.innerHTML = Home();
+      ShowSlides();
     })
+}
+
+var slideIndex = 0;
+
+function ShowSlides() {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+  }
+  slideIndex++;
+  if (slideIndex > slides.length) {slideIndex = 1}
+  slides[slideIndex-1].style.display = "block";
+  setTimeout(ShowSlides, 5000);
 }
