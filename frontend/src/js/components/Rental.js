@@ -1,6 +1,7 @@
 import apiAction from "../api/api-actions";
 import Cookie from "../cookie/cookie-actions";
 import User from "../components/User";
+import EquipmentList from "./EquipmentList";
 
 export default{
     NavRentalForm,
@@ -223,7 +224,7 @@ function RentalDetailsButton(){
                 apiAction.getRequest(`https://localhost:44372/api/EquipmentList/GetMultiple/${rental.equipmentIds}`, equipmentList =>{
                     const equipmentListDiv = document.getElementById('equipmentList');
                     equipmentListDiv.innerHTML = PopulateEquipmentList(equipmentList);
-                    ApproveButton(rental);
+                    ApproveButton(rental, equipmentList);
                     DenyButton(rental);
                 })
             })
@@ -234,6 +235,7 @@ function RentalDetailsButton(){
 function RentalDetailsView(data){
     return`
         <br/>
+        <h4>Request Status: Pending</h4>
         <h4>Date: ${data.rentalDate}</h4>
         <h4>User: ${data.user.name}</h4>
         <br/>
@@ -258,10 +260,38 @@ function PopulateEquipmentList(data){
     `
 }
 
-function ApproveButton(rental){
+function ApproveButton(rental, equipmentList){
     const approvalButtonElement = document.querySelector('.aprroveBtn');
     approvalButtonElement.addEventListener('click', () =>{
-        appDiv.innerHTML = "Request Approved";
+        equipmentList.forEach(equipment =>{
+            const requestBody = {
+                Id: equipment.id,
+                Name: equipment.name,
+                SerialNumber: equipment.serialNumber,
+                CategoryId: equipment.categoryId,
+                Description: equipment.description,
+                Image: equipment.image,
+                RentalDates: rental.rentalDate
+            }
+            apiAction.putRequest('https://localhost:44372/api/EquipmentList/', equipment.id, requestBody, () => {})
+        })
+
+        const requestBody = {
+            Id: rental.id,
+            IsApproved: true,
+            IsDenied: false,
+            FeedBack: "Your rental has been approved, we look forward to working with you.",
+            RentalDate: rental.rentalDate,
+            UserId: rental.userId,
+            EquipmentIds: rental.EquipmentIds
+        }
+
+        apiAction.putRequest('https://localhost:44372/api/Rental/', rental.id, requestBody, () => {
+            apiAction.getRequest('https://localhost:44372/api/Rental', data => {
+                appDiv.innerHTML = ApprovalPage(data);
+                RentalDetailsButton();
+            })
+        })    
     })
 }
 
@@ -286,6 +316,7 @@ function DenyButton(rental){
             apiAction.putRequest('https://localhost:44372/api/Rental/', rental.id, requestBody, () => {
                 apiAction.getRequest('https://localhost:44372/api/Rental', data => {
                     appDiv.innerHTML = ApprovalPage(data);
+                    RentalDetailsButton();
                 })
             })
         }
