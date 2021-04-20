@@ -69,6 +69,7 @@ function NavRentalForm() {
         else if(isAdmin === "true"){
             apiAction.getRequest('https://localhost:44372/api/Rental', data => {
                 appDiv.innerHTML = ApprovalPage(data);
+                RentalDetailsButton();
             })
         }
         else{
@@ -184,7 +185,7 @@ function ApprovalPage(data){
             ${data.map(rental =>{
                 if(rental.isApproved == false && rental.isDenied == false){
                     return`
-                        <li>${rental.user.name}, ${rental.rentalDate}</li>
+                        <li class ="rental_element" id ="${rental.id}">${rental.user.name}, ${rental.rentalDate}</li>
                     `
                 }
             }).join("")}
@@ -210,5 +211,23 @@ function ApprovalPage(data){
                 }
             }).join("")}
         </ol>
+    `
+}
+
+function RentalDetailsButton(){
+    const rentalDetailsElement = document.querySelectorAll('.rental_element');
+    rentalDetailsElement.forEach(element => {
+        element.addEventListener('click', function() {
+            const rentalId = element.id;
+            apiAction.getRequest(`https://localhost:44372/api/Rental/${rentalId}`, rental => {
+                appDiv.innerHTML = RentalDetailsView(rental);
+            })
+        })
+    })
+}
+
+function RentalDetailsView(data){
+    return`
+        ${data.id}
     `
 }
