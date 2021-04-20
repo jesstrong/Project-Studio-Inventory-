@@ -25,9 +25,9 @@ function AdminEquipmentList(equipmentList){
                 return `
                     <article>
                         <h3 class="equipment_name" id="${equipment.id}">${equipment.name}</h3>
-                        <img src="${equipment.image}" class="equipment_image">
-                        <p class="equipment_category">${equipment.category.name}</p>
-                        <p class="equipment_description">${equipment.description}</p>
+                        <img src="${equipment.image}" class="equipment_image" id="${equipment.id}">
+                        <p class="equipment_category"><strong>${equipment.category.name}</strong></p>
+                        <p class="equipment_description">${equipment.description.slice(0, 70)}<a class="description_link" id="${equipment.id}">...</a></p>
                         <button class="updateEquipmentBtn" id="${equipment.id}">Update Item</button>
                         <button class="deleteEquipmentBtn" id="${equipment.id}">Delete Item</button>
                     </article>
@@ -43,7 +43,7 @@ function AdminEquipmentList(equipmentList){
                 <input type = "text" id = "equipmentImage" placeholder = "*Image URL"/>               
                 <select id="category">
                 </select>
-                <input type='text' id='description' placeholder='Description' />
+                <textarea rows="4" cols="100" id='description' placeholder='Description'></textarea>
                 <input type='hidden' id='rentalDates' value=""/>
                 <button id="saveEquipmentBtn">Save Item</button>
         </section>
@@ -62,9 +62,9 @@ function UserEquipmentList(equipmentList){
                 return `
                     <article>
                         <h3 class="equipment_name" id="${equipment.id}">${equipment.name}</h3>
-                        <img src="${equipment.image}" class="equipment_image">
-                        <p class="equipment_category">${equipment.category.name}</p>
-                        <p class="equipment_description">${equipment.description}</p>
+                        <img src="${equipment.image}" id="${equipment.id}" class="equipment_image">
+                        <p class="equipment_category"><strong>${equipment.category.name}</strong></p>
+                        <p class="equipment_description">${equipment.description.slice(0, 20)}</p>
                     </article>
                     `
                 }).join('')}
@@ -100,7 +100,7 @@ function NavEquipmentList() {
 }
 
 function NavEquipmentSingle(){
-    const equipmentNameElements = document.querySelectorAll(".equipment_name");
+    const equipmentNameElements = document.querySelectorAll(".equipment_name, .equipment_image, .description_link");
     equipmentNameElements.forEach(element =>{
         element.addEventListener("click", function(){
             const equipmentId = element.id;
@@ -180,7 +180,7 @@ function FillCategories(dropdownId){
     dropdown.length = 0;
 
     let defaultOption = document.createElement('option');
-    defaultOption.text = 'Select a Category';
+    defaultOption.text = '*Select a Category';
     defaultOption.disabled = 'disabled';
 
     dropdown.add(defaultOption);
