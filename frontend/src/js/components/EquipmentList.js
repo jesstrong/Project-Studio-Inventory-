@@ -24,7 +24,7 @@ function AdminEquipmentList(equipmentList){
             ${equipmentList.map(equipment =>{
                 return `
                     <article>
-                        <h3 class="equipment_name">${equipment.name}</h3>
+                        <h3 class="equipment_name" id="${equipment.id}">${equipment.name}</h3>
                         <img src="${equipment.image}" class="equipment_image">
                         <p class="equipment_category">${equipment.category.name}</p>
                         <p class="equipment_description">${equipment.description}</p>
@@ -61,7 +61,7 @@ function UserEquipmentList(equipmentList){
             ${equipmentList.map(equipment =>{
                 return `
                     <article>
-                        <h3 class="equipment_name">${equipment.name}</h3>
+                        <h3 class="equipment_name" id="${equipment.id}">${equipment.name}</h3>
                         <img src="${equipment.image}" class="equipment_image">
                         <p class="equipment_category">${equipment.category.name}</p>
                         <p class="equipment_description">${equipment.description}</p>
@@ -87,15 +87,30 @@ function NavEquipmentList() {
                 UpdateEquipmentBtn();
                 AddEquipment();
                 RemoveEquipment();
+                NavEquipmentSingle();
             }
             else{
                 appDiv.innerHTML = UserEquipmentList(data);
                 FillCategories('category_dropdown');
                 CategoryDropdownNav();
+                NavEquipmentSingle();
             }
         })
     })
 }
+
+function NavEquipmentSingle(){
+    const equipmentNameElements = document.querySelectorAll(".equipment_name");
+    equipmentNameElements.forEach(element =>{
+        element.addEventListener("click", function(){
+            const equipmentId = element.id;
+            apiAction.getRequest(`https://localhost:44372/api/EquipmentList/${equipmentId}`, data =>{
+                appDiv.innerHTML = Equipment.UserEquipmentDetails(data);
+            })
+        })
+    })
+}
+
 
 function AddEquipment(){
     const saveEquipmentButton = document.getElementById('saveEquipmentBtn');

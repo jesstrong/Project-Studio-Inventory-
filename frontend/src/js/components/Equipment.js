@@ -3,7 +3,8 @@ import EquipmentList from "./EquipmentList";
 
 export default{
     EquipmentDetails,
-    UpdateEquipment
+    UpdateEquipment,
+    UserEquipmentDetails
 }
 
 const appDiv = document.getElementById('app');
@@ -20,6 +21,15 @@ function EquipmentDetails(equipment){
             <input type='text' id='description' value='${equipment.description}' />
             <input type='hidden' id='rentalDates' value='${equipment.rentalDates}' />
             <button id='btnEditEquipment'>Save</button>
+        </section>
+    `
+}
+
+function UserEquipmentDetails(equipment){
+    return `
+    <h1>${equipment.name}</h1>
+        <section class='equipmentView'>
+            <p></p>
         </section>
     `
 }

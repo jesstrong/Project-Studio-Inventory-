@@ -1,6 +1,7 @@
 export default {
     Home,
-    NavHome
+    NavHome,
+    ShowSlides
 }
 
 const appDiv = document.getElementById('app');
