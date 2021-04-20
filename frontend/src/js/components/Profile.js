@@ -1,5 +1,5 @@
 import apiAction from "../api/api-actions";
-import cookieActions from "../cookie/cookie-actions";
+import Rental from "../components/Rental";
 
 const appDiv = document.getElementById('app');
 
@@ -20,12 +20,11 @@ function ProfilePage(User){
     <h4>Here is a record of your rentals:</h4>
     <ul>
     ${User.rentals.map(rental =>{
-        var blah = "";
         return `
         <li>
-        <h4 class="equipment_name">${rental.rentalDate}</h4>
-                <p>Is approved: ${rental.isApproved}</p>
-            </li>
+        <h4 class ="rental_detail_element" id ="${rental.id}">${rental.rentalDate}</h4>
+            <p>Is approved: ${rental.isApproved}</p>
+        </li>
         `
     }).join('')}
     </ul>
@@ -35,6 +34,7 @@ function ProfilePage(User){
 function NavUserProfile(userId){
     apiAction.getRequest(`https://localhost:44372/api/User/${userId}`, user => {
         appDiv.innerHTML = ProfilePage(user);
+        Rental.RentalDetailslButton();
     })
 }
 

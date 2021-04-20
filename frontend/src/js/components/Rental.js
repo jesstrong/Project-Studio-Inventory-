@@ -5,7 +5,8 @@ import EquipmentList from "./EquipmentList";
 
 export default{
     NavRentalForm,
-    UpdateNavRental
+    UpdateNavRental,
+    RentalDetailslButton
 }
 
 const appDiv = document.getElementById('app');
@@ -358,6 +359,7 @@ function RentalDetailView(data){
         <h4>User: ${data.user.name}</h4>
         <br/>
         <div id="equipmentList"></div>
+        <br/>
         <p>${data.feedBack}</p>
     `
 }
