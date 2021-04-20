@@ -38,14 +38,3 @@ function NavUserProfile(userId){
     })
 }
 
-//Action for calling equipment array from rental
-// ${apiAction.getRequest(`https://localhost:44372/api/EquipmentList/GetMultiple/${rental.equipmentIds}`, equipmentList =>{
-//     equipmentList.forEach(equipment => {
-//         console.log(equipment);
-//         blah += `
-//         <p>${equipment.name}</p>
-//         `
-//     })
-//     console.log(blah);
-//     return blah;
-// })}

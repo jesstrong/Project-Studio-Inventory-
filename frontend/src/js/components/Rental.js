@@ -1,7 +1,6 @@
 import apiAction from "../api/api-actions";
 import Cookie from "../cookie/cookie-actions";
 import User from "../components/User";
-import apiActions from "../api/api-actions";
 
 export default{
     NavRentalForm,
@@ -221,6 +220,10 @@ function RentalDetailsButton(){
             const rentalId = element.id;
             apiAction.getRequest(`https://localhost:44372/api/Rental/${rentalId}`, rental => {
                 appDiv.innerHTML = RentalDetailsView(rental);
+                apiAction.getRequest(`https://localhost:44372/api/EquipmentList/GetMultiple/${rental.equipmentIds}`, equipmentList =>{
+                    const equipmentListDiv = document.getElementById('equipmentList');
+                    equipmentListDiv.innerHTML = PopulateEquipmentList(equipmentList);
+                })
             })
         })
     })
@@ -228,6 +231,22 @@ function RentalDetailsButton(){
 
 function RentalDetailsView(data){
     return`
-        ${data.id}
+        <br/>
+        <h4>Date: ${data.rentalDate}</h4>
+        <h4>User: ${data.user.name}</h4>
+        <br/>
+        <div id="equipmentList"></div>
+    `
+}
+
+function PopulateEquipmentList(data){
+    return`
+        <ol>
+            ${data.map(equipment =>{
+                return`
+                    <li>${equipment.name} | ${equipment.category.name} | ${equipment.serialNumber}</li>
+                `
+            }).join("")}
+        </ol>
     `
 }
