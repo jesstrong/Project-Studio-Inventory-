@@ -47,7 +47,7 @@ function CancelRentalRequest(){
           const rentalId = element.id;
           console.log(rentalId);
           apiAction.deleteRequest('https://localhost:44372/api/Rental', rentalId, data => {
-            if(data.indexOf("denied") > -1){
+            if(data.indexOf("denied!") > -1){
                 const liItem = document.getElementById(rentalId).parentElement;
                 liItem.remove();
             }
@@ -55,21 +55,6 @@ function CancelRentalRequest(){
       })  
     })
 }
-
-// function RemoveEquipment(){
-//     const updateEquipmentElement = document.querySelectorAll('.deleteEquipmentBtn');
-//     updateEquipmentElement.forEach(element => {
-//         element.addEventListener('click', function() {
-//             const equipmentId = element.id;
-//             apiAction.deleteRequest('https://localhost:44372/api/EquipmentList/', equipmentId, data => {
-//                 if(data.indexOf("Deleted") > -1){
-//                     const liItem = document.getElementById(equipmentId).parentElement;
-//                     liItem.remove();
-//                 }
-//             })
-//         })
-//     })
-// }
 
 //Action for calling equipment array from rental
 // ${apiAction.getRequest(`https://localhost:44372/api/EquipmentList/GetMultiple/${rental.equipmentIds}`, equipmentList =>{
