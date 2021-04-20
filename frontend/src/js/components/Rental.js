@@ -236,6 +236,10 @@ function RentalDetailsView(data){
         <h4>User: ${data.user.name}</h4>
         <br/>
         <div id="equipmentList"></div>
+        <input type='text' id='feedBack' value='${data.feedBack}'/>
+        </br>
+        <button class="aprroveBtn">Approve Request</button>
+        <button class="denyBtn">Deny Request</button>
     `
 }
 
