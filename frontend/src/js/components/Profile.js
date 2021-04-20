@@ -4,8 +4,9 @@ import cookieActions from "../cookie/cookie-actions";
 const appDiv = document.getElementById('app');
 
 export default{
-ProfilePage,
-NavUserProfile
+    ProfilePage,
+    NavUserProfile,
+    CancelRentalRequest
 }
 
 function ProfilePage(User){
@@ -20,11 +21,16 @@ function ProfilePage(User){
     <h4>Here is a record of your rentals:</h4>
     <ul>
     ${User.rentals.map(rental =>{
-        var blah = "";
+        var cancelButton = "";
+        if(rental.isApproved === false)
+        {
+            cancelButton = `<button class="cancelRequest" id="${rental.id}">Cancel</button>`
+        }
         return `
         <li>
         <h4 class="equipment_name">${rental.rentalDate}</h4>
                 <p>Is approved: ${rental.isApproved}</p>
+                ${cancelButton}
             </li>
         `
     }).join('')}
@@ -35,6 +41,22 @@ function ProfilePage(User){
 function NavUserProfile(userId){
     apiAction.getRequest(`https://localhost:44372/api/User/${userId}`, user => {
         appDiv.innerHTML = ProfilePage(user);
+        CancelRentalRequest();
+    })
+}
+
+function CancelRentalRequest(){
+    const cancelRentalElement = document.querySelectorAll('.cancelRequest');
+    cancelRentalElement.forEach(element => {
+      element.addEventListener('click',function(){
+          const rentalId = element.id;
+          apiAction.deleteRequest('https://localhost:44372/api/Rental/', rentalId, data => {  
+            if(data.indexOf("denied!") > -1){
+                    const liItem = document.getElementById(rentalId).parentElement;
+                    liItem.remove();
+            }
+        })
+      })  
     })
 }
 

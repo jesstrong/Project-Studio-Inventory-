@@ -185,6 +185,7 @@ function Login(){
                 appDiv.innerHTML = Profile.ProfilePage(data.user);
                 NavLogin();
                 ChangeSignUp();
+                Profile.CancelRentalRequest();
             }
             else{
                 const warningElement = document.getElementById('warningText');
