@@ -37,14 +37,12 @@ function AdminEquipmentList(equipmentList){
 
         <section class="equipmentForm">
             <h3>Add Item</h3>
-                <input type="text" id="equipmentName" placeholder='Enter the name of this equipment' />
-                <div id='helpName' class="text-danger"></div>
-                <input type="text" id="serialNumber" placeholder='Enter Serial Number' />
-                <div id='helpSerial' class="text-danger"></div>
-                <input type = "text" id = "equipmentImage" placeholder = "Image URL"/>
+            <div id='helpRequired' class="text-danger">*Required</div>                
+                <input type="text" id="equipmentName" placeholder='*Name' />            
+                <input type="text" id="serialNumber" placeholder="*Serial Number" />               
+                <input type = "text" id = "equipmentImage" placeholder = "*Image URL"/>               
                 <select id="category">
                 </select>
-                <br/>
                 <input type='text' id='description' placeholder='Description' />
                 <input type='hidden' id='rentalDates' value=""/>
                 <button id="saveEquipmentBtn">Save Item</button>
@@ -117,22 +115,24 @@ function AddEquipment(){
             RentalDates: rentalDates
         }
 
-        if(equipName == "" && serialNum == "")
+        if(equipName == "")
         {
-            document.getElementById('helpName').innerText = "*This Field Is Required.";
-            document.getElementById('helpSerial').innerText = "*This Field Is Required.";
+            document.getElementById('helpRequired').innerText = "*You are missing required information.";            
         } 
-        else if (equipName == "")
+        else if (serialNum == "")
         {
-            document.getElementById('helpName').innerText = "*This Field Is Required.";
-            document.getElementById('helpSerial').innerText = "";
+            document.getElementById('helpRequired').innerText = "*You are missing required information."; 
         } 
-        else if(serialNum == "")
+        else if(equipmentImage == "")
         {
-            document.getElementById('helpName').innerText = "";
-            document.getElementById('helpSerial').innerText = "*This Field Is Required.";
+            document.getElementById('helpRequired').innerText = "*You are missing required information."; 
+        }
+        else if(categoryId == "Select a Category"){
+
+            document.getElementById('helpRequired').innerText = "*You are missing required information."; 
         }
         else{
+            console.log(categoryId);
             apiAction.postRequest('https://localhost:44372/api/EquipmentList', requestBody, () => {
                 apiAction.getRequest('https://localhost:44372/api/EquipmentList', data => {
                     appDiv.innerHTML = AdminEquipmentList(data);
