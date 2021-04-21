@@ -3,7 +3,8 @@ import EquipmentList from "./EquipmentList";
 
 export default{
     EquipmentDetails,
-    UpdateEquipment
+    UpdateEquipment,
+    UserEquipmentDetails
 }
 
 const appDiv = document.getElementById('app');
@@ -17,9 +18,24 @@ function EquipmentDetails(equipment){
             <input type='hidden' id='categoryId' value='${equipment.categoryId}' />
             <input type='hidden' id='equipmentId' value='${equipment.id}' />
             <input type='text' id='serialNumber' value='${equipment.serialNumber}' />
-            <input type='text' id='description' value='${equipment.description}' />
-            <input type='hidden' id='rentalDates' value='${equipment.rentalDates}' />
+            <br/>
+            <textarea rows="4" cols="100" id='description'>${equipment.description}</textarea>
+            <input type='hidden' id='rentalDates' value='' />
             <button id='btnEditEquipment'>Save</button>
+        </section>
+    `
+}
+
+function UserEquipmentDetails(equipment){
+    return `
+    <h1>${equipment.name}</h1>
+        <section class='equipmentView'>
+            <img src="${equipment.image}">
+            <br/>
+            <p><em>${equipment.name}</em></p>
+            <br/>
+            <p>${equipment.description}</p>
+            <br/>
         </section>
     `
 }
