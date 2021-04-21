@@ -41,7 +41,7 @@ function ProfilePage(User){
 function NavUserProfile(userId){
     apiAction.getRequest(`https://localhost:44372/api/User/${userId}`, user => {
         appDiv.innerHTML = ProfilePage(user);
-        Rental.RentalDetailslButton();
+        Rental.RentalDetailsButton();
         CancelRentalRequest();
     })
 }

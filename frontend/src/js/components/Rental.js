@@ -1,12 +1,11 @@
 import apiAction from "../api/api-actions";
 import Cookie from "../cookie/cookie-actions";
 import User from "../components/User";
-import EquipmentList from "./EquipmentList";
 
 export default{
     NavRentalForm,
     UpdateNavRental,
-    RentalDetailslButton
+    RentalDetailsButton
 }
 
 const appDiv = document.getElementById('app');
@@ -292,7 +291,7 @@ function ApproveButton(rental, equipmentList){
             apiAction.getRequest('https://localhost:44372/api/Rental', data => {
                 appDiv.innerHTML = ApprovalPage(data);
                 RentalApprovalButton();
-                RentalDetailslButton();
+                RentalDetailsButton();
             })
         })    
     })
@@ -320,14 +319,14 @@ function DenyButton(rental){
                 apiAction.getRequest('https://localhost:44372/api/Rental', data => {
                     appDiv.innerHTML = ApprovalPage(data);
                     RentalApprovalButton();
-                    RentalDetailslButton();
+                    RentalDetailsButton();
                 })
             })
         }
     })
 }
 
-function RentalDetailslButton(){
+function RentalDetailsButton(){
     const rentalDetailsElement = document.querySelectorAll('.rental_detail_element');
     rentalDetailsElement.forEach(element => {
         element.addEventListener('click', function() {
