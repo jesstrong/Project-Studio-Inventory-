@@ -45,17 +45,13 @@ button{
     font-weight: 550;
     border-radius: 5px;
     border-width: 1px;
+    padding: 0 .25em;
 }
 
 button:hover{
-    background-color:rgb(204, 204, 204);
-    /* color: white;
-    border-radius: 9px;
-    background: rgb(36, 36, 36);
-    font-weight: lighter;
-    box-shadow: 0 0 12px rgb(182, 182, 182);
-    padding: .075em;
-    transition: background-color .7s ease; */
+    background-color:rgb(216, 216, 216);
+    box-shadow: 0 0 2px rgb(119, 119, 119);
+    cursor: pointer;
 }
 
 html {
@@ -73,10 +69,10 @@ header {
     text-align: center;
     top: 0;
     padding: 0 0%;
-    /* position: fixed; */
     width: 100%;
-    background: rgba(248, 248, 248);
-    border-bottom: 1.5px solid rgb(245, 245, 245);
+    background: rgb(248, 248, 248);
+    border-bottom: 1.5px solid rgb(238, 238, 238);
+    box-shadow: 0px 0px 3px rgb(223, 223, 223);
 }
 
 header h3{
@@ -94,7 +90,7 @@ header h3{
 #user{
     width: 30px;
     padding-top: 15px;
-    margin-bottom: -15px;
+    margin-bottom: -14px;
 }
 
 .login_links{
@@ -109,7 +105,7 @@ header h3{
     list-style: none;
     margin-top: 0em;
     align-content: space-between;
-    letter-spacing: 0em;
+    letter-spacing: .005em;
     height: 50px;
 }
 
@@ -128,11 +124,12 @@ header h3{
 .nav_links li:hover, .login_links li:hover {
     color: white;
     border-radius: 9px;
-    background: rgb(36, 36, 36);
+    background: rgb(46, 46, 46);
     font-weight: lighter;
     box-shadow: 0 0 12px rgb(182, 182, 182);
-    padding: .075em;
+    padding: .05em;
     transition: background-color .7s ease;
+    cursor: pointer;
 }
 
 h1{
@@ -168,10 +165,11 @@ main{
     flex-direction: column;
     justify-content: center;
     height: auto;
-    width: 450px;
+    width: 475px;
     background-repeat: no-repeat;
     text-align: center;
-    border-radius: 10.5px;
+    border-radius: 11.5px;
+    box-shadow: 0px 0px 5px rgb(48, 48, 48);
 }
 
 #aboutUs, .equipment{
@@ -180,7 +178,7 @@ main{
     flex-direction: column;
     justify-content: center;
     margin: -.5em auto;
-    max-width: 1260px;
+    max-width: 1200px;
     width: auto;
     text-align: center;
     letter-spacing: .015em;
@@ -195,6 +193,17 @@ main{
     box-shadow: 0 0 12px rgb(182, 182, 182);
 }
 
+.equipment{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.equipment_image{
+    width: auto;
+    max-width: 225px;
+}
+
 .equipment_list{
     display: flex;
     flex-direction: row;
@@ -205,11 +214,12 @@ main{
     align-items: space-around;
 }
 
+
 .equipment_list article{
-    padding: 1.5em;
-    margin: 1em;
+    padding: .5em;
+    margin: .5em;
     border-radius: 5.5px;
-    max-width: 21em;
+    max-width: 20em;
 }
 
 h3 {
@@ -253,4 +263,67 @@ footer {
 .footerContent li{
     color: rgb(255, 255, 255);
     list-style: none;
+}
+
+/* TESTING SLIDESHOW*/
+
+.slideshow-container {
+    max-width: 1000px;
+    position: relative;
+    margin: auto;
+}
+  
+/* Hide the images by default */
+.mySlides {
+    display: none;
+}
+
+/* Fading animation */
+.fade {
+    -webkit-animation-name: fade;
+    -webkit-animation-duration: 1.5s;
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+    from {opacity: .4}
+    to {opacity: 1}
+}
+
+@keyframes fade {
+    from {opacity: .4}
+    to {opacity: 1}
+}
+
+.mySlides img{
+    width: 50%;
+    border-radius: 15px;
+}
+
+.category_name_user{
+    cursor: pointer;
+}
+
+input {
+    cursor: pointer;
+}
+
+.text-danger{
+    color: rgb(255, 70, 70);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/*EquipmentList*/
+#category_dropdown{
+    width: 200px;
+}
+
+/*SignUpForm*/
+.signUpForm, .loginForm{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }

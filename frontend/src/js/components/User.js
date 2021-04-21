@@ -190,6 +190,7 @@ function Login(){
                 NavLogin();
                 ChangeSignUp();
                 Rental.UpdateNavRental();
+                Profile.CancelRentalRequest();
             }
             else{
                 const warningElement = document.getElementById('warningText');

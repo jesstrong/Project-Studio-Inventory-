@@ -24,10 +24,10 @@ function AdminEquipmentList(equipmentList){
             ${equipmentList.map(equipment =>{
                 return `
                     <article>
-                        <h3 class="equipment_name">${equipment.name}</h3>
-                        <img src="${equipment.image}" class="equipment_image">
-                        <p class="equipment_category">${equipment.category.name}</p>
-                        <p class="equipment_description">${equipment.description}</p>
+                        <h3 class="equipment_name" id="${equipment.id}">${equipment.name}</h3>
+                        <img src="${equipment.image}" class="equipment_image" id="${equipment.id}">
+                        <p class="equipment_category"><strong>${equipment.category.name}</strong></p>
+                        <p class="equipment_description">${equipment.description.slice(0, 70)}<a class="description_link" id="${equipment.id}">...</a></p>
                         <button class="updateEquipmentBtn" id="${equipment.id}">Update Item</button>
                         <button class="deleteEquipmentBtn" id="${equipment.id}">Delete Item</button>
                     </article>
@@ -37,15 +37,13 @@ function AdminEquipmentList(equipmentList){
 
         <section class="equipmentForm">
             <h3>Add Item</h3>
-                <input type="text" id="equipmentName" placeholder='Enter the name of this equipment' />
-                <div id='helpName' class="text-danger"></div>
-                <input type="text" id="serialNumber" placeholder='Enter Serial Number' />
-                <div id='helpSerial' class="text-danger"></div>
-                <input type = "text" id = "equipmentImage" placeholder = "Image URL"/>
+            <div id='helpRequired' class="text-danger">*Required</div>                
+                <input type="text" id="equipmentName" placeholder='*Name' />            
+                <input type="text" id="serialNumber" placeholder="*Serial Number" />               
+                <input type = "text" id = "equipmentImage" placeholder = "*Image URL"/>               
                 <select id="category">
                 </select>
-                <br/>
-                <input type='text' id='description' placeholder='Description' />
+                <textarea rows="4" cols="100" id='description' placeholder='Description'></textarea>
                 <input type='hidden' id='rentalDates' value=""/>
                 <button id="saveEquipmentBtn">Save Item</button>
         </section>
@@ -63,10 +61,10 @@ function UserEquipmentList(equipmentList){
             ${equipmentList.map(equipment =>{
                 return `
                     <article>
-                        <h3 class="equipment_name">${equipment.name}</h3>
-                        <img src="${equipment.image}" class="equipment_image">
-                        <p class="equipment_category">${equipment.category.name}</p>
-                        <p class="equipment_description">${equipment.description}</p>
+                        <h3 class="equipment_name" id="${equipment.id}">${equipment.name}</h3>
+                        <img src="${equipment.image}" id="${equipment.id}" class="equipment_image">
+                        <p class="equipment_category"><strong>${equipment.category.name}</strong></p>
+                        <p class="equipment_description">${equipment.description.slice(0, 20)}</p>
                     </article>
                     `
                 }).join('')}
@@ -89,15 +87,30 @@ function NavEquipmentList() {
                 UpdateEquipmentBtn();
                 AddEquipment();
                 RemoveEquipment();
+                NavEquipmentSingle();
             }
             else{
                 appDiv.innerHTML = UserEquipmentList(data);
                 FillCategories('category_dropdown');
                 CategoryDropdownNav();
+                NavEquipmentSingle();
             }
         })
     })
 }
+
+function NavEquipmentSingle(){
+    const equipmentNameElements = document.querySelectorAll(".equipment_name, .equipment_image, .description_link");
+    equipmentNameElements.forEach(element =>{
+        element.addEventListener("click", function(){
+            const equipmentId = element.id;
+            apiAction.getRequest(`https://localhost:44372/api/EquipmentList/${equipmentId}`, data =>{
+                appDiv.innerHTML = Equipment.UserEquipmentDetails(data);
+            })
+        })
+    })
+}
+
 
 function AddEquipment(){
     const saveEquipmentButton = document.getElementById('saveEquipmentBtn');
@@ -117,22 +130,24 @@ function AddEquipment(){
             RentalDates: rentalDates
         }
 
-        if(equipName == "" && serialNum == "")
+        if(equipName == "")
         {
-            document.getElementById('helpName').innerText = "*This Field Is Required.";
-            document.getElementById('helpSerial').innerText = "*This Field Is Required.";
+            document.getElementById('helpRequired').innerText = "*You are missing required information.";            
         } 
-        else if (equipName == "")
+        else if (serialNum == "")
         {
-            document.getElementById('helpName').innerText = "*This Field Is Required.";
-            document.getElementById('helpSerial').innerText = "";
+            document.getElementById('helpRequired').innerText = "*You are missing required information."; 
         } 
-        else if(serialNum == "")
+        else if(equipmentImage == "")
         {
-            document.getElementById('helpName').innerText = "";
-            document.getElementById('helpSerial').innerText = "*This Field Is Required.";
+            document.getElementById('helpRequired').innerText = "*You are missing required information."; 
+        }
+        else if(categoryId == "Select a Category"){
+
+            document.getElementById('helpRequired').innerText = "*You are missing required information."; 
         }
         else{
+            console.log(categoryId);
             apiAction.postRequest('https://localhost:44372/api/EquipmentList', requestBody, () => {
                 apiAction.getRequest('https://localhost:44372/api/EquipmentList', data => {
                     appDiv.innerHTML = AdminEquipmentList(data);
@@ -165,7 +180,7 @@ function FillCategories(dropdownId){
     dropdown.length = 0;
 
     let defaultOption = document.createElement('option');
-    defaultOption.text = 'Select a Category';
+    defaultOption.text = '*Select a Category';
     defaultOption.disabled = 'disabled';
 
     dropdown.add(defaultOption);

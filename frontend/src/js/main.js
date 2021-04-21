@@ -15,6 +15,7 @@ export default() => {
  Header.SetupHeader();
  Footer.SetupFooter();
  Home.NavHome();
+ Home.ShowSlides();
  EquipmentList.NavEquipmentList();
  CategoryList.NavCategoryList();
  User.NavSignUp();
