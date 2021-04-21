@@ -191,6 +191,7 @@ function Login(){
                 ChangeSignUp();
                 Rental.UpdateNavRental();
                 Profile.CancelRentalRequest();
+                Rental.RentalDetailsButton();
             }
             else{
                 const warningElement = document.getElementById('warningText');

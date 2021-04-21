@@ -70,7 +70,7 @@ function NavRentalForm() {
             apiAction.getRequest('https://localhost:44372/api/Rental', data => {
                 appDiv.innerHTML = ApprovalPage(data);
                 RentalApprovalButton();
-                RentalDetailslButton();
+                RentalDetailsButton();
             })
         }
         else{
