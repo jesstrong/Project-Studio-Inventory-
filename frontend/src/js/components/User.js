@@ -1,11 +1,14 @@
 import apiAction from "../api/api-actions";
 import cookieActions from "../cookie/cookie-actions";
 import Profile from "../components/Profile";
+import Rental from "../components/Rental";
 
 export default {
     SignUpPage,
     NavSignUp,
-    NavLogin
+    NavLogin,
+    LoginPage,
+    Login
 }
 
 const appDiv = document.getElementById('app');
@@ -119,6 +122,7 @@ function CreateProfile() {
                         appDiv.innerHTML = Profile.ProfilePage(data);
                         NavLogin();
                         ChangeSignUp();
+                        Rental.UpdateNavRental();
                     })
                 }
                 else{
@@ -185,6 +189,7 @@ function Login(){
                 appDiv.innerHTML = Profile.ProfilePage(data.user);
                 NavLogin();
                 ChangeSignUp();
+                Rental.UpdateNavRental();
                 Profile.CancelRentalRequest();
             }
             else{
@@ -216,4 +221,5 @@ function Logout() {
     cookieActions.deleteCookie("userIsAdmin");
     NavLogin();
     ChangeSignUp();
+    Rental.UpdateNavRental();
 }

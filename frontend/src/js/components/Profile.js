@@ -1,5 +1,5 @@
 import apiAction from "../api/api-actions";
-import cookieActions from "../cookie/cookie-actions";
+import Rental from "../components/Rental";
 
 const appDiv = document.getElementById('app');
 
@@ -28,10 +28,10 @@ function ProfilePage(User){
         }
         return `
         <li>
-        <h4 class="equipment_name">${rental.rentalDate}</h4>
-                <p>Is approved: ${rental.isApproved}</p>
-                ${cancelButton}
-            </li>
+            <h4 class ="rental_detail_element" id ="${rental.id}">${rental.rentalDate}</h4>
+            <p>Is approved: ${rental.isApproved}</p>
+            ${cancelButton}
+        </li>
         `
     }).join('')}
     </ul>
@@ -41,6 +41,7 @@ function ProfilePage(User){
 function NavUserProfile(userId){
     apiAction.getRequest(`https://localhost:44372/api/User/${userId}`, user => {
         appDiv.innerHTML = ProfilePage(user);
+        Rental.RentalDetailslButton();
         CancelRentalRequest();
     })
 }
@@ -60,14 +61,3 @@ function CancelRentalRequest(){
     })
 }
 
-//Action for calling equipment array from rental
-// ${apiAction.getRequest(`https://localhost:44372/api/EquipmentList/GetMultiple/${rental.equipmentIds}`, equipmentList =>{
-//     equipmentList.forEach(equipment => {
-//         console.log(equipment);
-//         blah += `
-//         <p>${equipment.name}</p>
-//         `
-//     })
-//     console.log(blah);
-//     return blah;
-// })}

@@ -1,8 +1,12 @@
 import apiAction from "../api/api-actions";
 import Cookie from "../cookie/cookie-actions";
+import User from "../components/User";
+import EquipmentList from "./EquipmentList";
 
 export default{
-    NavRentalForm
+    NavRentalForm,
+    UpdateNavRental,
+    RentalDetailslButton
 }
 
 const appDiv = document.getElementById('app');
@@ -41,16 +45,41 @@ function RentalFormPage(){
     `
 }
 
-
+function UpdateNavRental(){
+    const isAdmin = Cookie.getCookie("userIsAdmin");
+    const rentalLink = document.querySelector(".nav_rental");
+    if (isAdmin === "true"){
+        rentalLink.innerText = "Pending Rentals";
+    }
+    else{
+        rentalLink.innerText = "Create Rental";
+    }
+}
 
 function NavRentalForm() {
-    const homeLink = document.querySelector(".nav_rental");
+    const rentalLink = document.querySelector(".nav_rental");
+    UpdateNavRental();
     
-    homeLink.addEventListener('click', function (){
-        apiAction.getRequest('https://localhost:44372/api/Rental', data => {
-            appDiv.innerHTML = RentalFormPage(data);
-            DateBtn();
-        })
+    rentalLink.addEventListener('click', function (){
+        const isAdmin = Cookie.getCookie("userIsAdmin");
+        const userId = Cookie.getCookie("userId");
+        if (userId == ""){
+            appDiv.innerHTML = User.LoginPage();
+            User.Login();
+        }
+        else if(isAdmin === "true"){
+            apiAction.getRequest('https://localhost:44372/api/Rental', data => {
+                appDiv.innerHTML = ApprovalPage(data);
+                RentalApprovalButton();
+                RentalDetailslButton();
+            })
+        }
+        else{
+            apiAction.getRequest('https://localhost:44372/api/Rental', data => {
+                appDiv.innerHTML = RentalFormPage(data);
+                DateBtn();
+            })
+        }
     })
 }
 
@@ -149,4 +178,188 @@ function SubmitRentalBtn(rentalDate){
             appDiv.innerHTML = `Your rental for ${data.rentalDate} has been submitted for approval.`;
         })
     })
+}
+
+function ApprovalPage(data){
+    return`
+        <h1>Pending Rentals</h1>
+        <ol>
+            ${data.map(rental =>{
+                if(rental.isApproved == false && rental.isDenied == false){
+                    return`
+                        <li class ="rental_element" id ="${rental.id}">${rental.user.name}, ${rental.rentalDate}</li>
+                    `
+                }
+            }).join("")}
+        </ol>
+
+        <h1>Approved Rentals</h1>
+        <ol>
+            ${data.map(rental =>{
+                if(rental.isApproved == true){
+                    return`
+                        <li class ="rental_detail_element" id ="${rental.id}">${rental.user.name}, ${rental.rentalDate}</li>
+                    `
+                }
+            }).join("")}
+        </ol>
+        <h1>Denied Rentals</h1>
+        <ol>
+            ${data.map(rental =>{
+                if(rental.isDenied == true){
+                    return`
+                        <li  class ="rental_detail_element" id ="${rental.id}">${rental.user.name}, ${rental.rentalDate}</li>
+                    `
+                }
+            }).join("")}
+        </ol>
+    `
+}
+
+function RentalApprovalButton(){
+    const rentalDetailsElement = document.querySelectorAll('.rental_element');
+    rentalDetailsElement.forEach(element => {
+        element.addEventListener('click', function() {
+            const rentalId = element.id;
+            apiAction.getRequest(`https://localhost:44372/api/Rental/${rentalId}`, rental => {
+                appDiv.innerHTML = RentalApprovalView(rental);
+                apiAction.getRequest(`https://localhost:44372/api/EquipmentList/GetMultiple/${rental.equipmentIds}`, equipmentList =>{
+                    const equipmentListDiv = document.getElementById('equipmentList');
+                    equipmentListDiv.innerHTML = PopulateEquipmentList(equipmentList);
+                    ApproveButton(rental, equipmentList);
+                    DenyButton(rental);
+                })
+            })
+        })
+    })
+}
+
+function RentalApprovalView(data){
+    return`
+        <br/>
+        <h4>Request Status: Pending</h4>
+        <h4>Date: ${data.rentalDate}</h4>
+        <h4>User: ${data.user.name}</h4>
+        <br/>
+        <div id="equipmentList"></div>
+        <textarea rows="4" cols="50" id='feedBack'>${data.feedBack}</textarea>
+        </br>
+        <div id="warningText"></div>
+        <button class="aprroveBtn">Approve Request</button>
+        <button class="denyBtn">Deny Request</button>
+    `
+}
+
+function PopulateEquipmentList(data){
+    return`
+        <ol>
+            ${data.map(equipment =>{
+                return`
+                    <li>${equipment.name} | ${equipment.category.name} | ${equipment.serialNumber}</li>
+                `
+            }).join("")}
+        </ol>
+    `
+}
+
+function ApproveButton(rental, equipmentList){
+    const approvalButtonElement = document.querySelector('.aprroveBtn');
+    approvalButtonElement.addEventListener('click', () =>{
+        equipmentList.forEach(equipment =>{
+            const requestBody = {
+                Id: equipment.id,
+                Name: equipment.name,
+                SerialNumber: equipment.serialNumber,
+                CategoryId: equipment.categoryId,
+                Description: equipment.description,
+                Image: equipment.image,
+                RentalDates: rental.rentalDate
+            }
+            apiAction.putRequest('https://localhost:44372/api/EquipmentList/', equipment.id, requestBody, () => {})
+        })
+
+        const requestBody = {
+            Id: rental.id,
+            IsApproved: true,
+            IsDenied: false,
+            FeedBack: "Your rental has been approved, we look forward to working with you.",
+            RentalDate: rental.rentalDate,
+            UserId: rental.userId,
+            EquipmentIds: rental.equipmentIds
+        }
+
+        apiAction.putRequest('https://localhost:44372/api/Rental/', rental.id, requestBody, () => {
+            apiAction.getRequest('https://localhost:44372/api/Rental', data => {
+                appDiv.innerHTML = ApprovalPage(data);
+                RentalApprovalButton();
+                RentalDetailslButton();
+            })
+        })    
+    })
+}
+
+function DenyButton(rental){
+    const denialButtonElement = document.querySelector('.denyBtn');
+    denialButtonElement.addEventListener('click', () =>{
+        const feedBack = document.getElementById('feedBack').value;
+        if (feedBack === "Awaiting Approval"){
+            const warningText = document.getElementById('warningText');
+            warningText.innerHTML = "Please explain why the request is being denied."
+        }
+        else{
+            const requestBody = {
+                Id: rental.id,
+                IsApproved: false,
+                IsDenied: true,
+                FeedBack: feedBack,
+                RentalDate: rental.rentalDate,
+                UserId: rental.userId,
+                EquipmentIds: rental.equipmentIds
+            }
+            apiAction.putRequest('https://localhost:44372/api/Rental/', rental.id, requestBody, () => {
+                apiAction.getRequest('https://localhost:44372/api/Rental', data => {
+                    appDiv.innerHTML = ApprovalPage(data);
+                    RentalApprovalButton();
+                    RentalDetailslButton();
+                })
+            })
+        }
+    })
+}
+
+function RentalDetailslButton(){
+    const rentalDetailsElement = document.querySelectorAll('.rental_detail_element');
+    rentalDetailsElement.forEach(element => {
+        element.addEventListener('click', function() {
+            const rentalId = element.id;
+            apiAction.getRequest(`https://localhost:44372/api/Rental/${rentalId}`, rental => {
+                appDiv.innerHTML = RentalDetailView(rental);
+                apiAction.getRequest(`https://localhost:44372/api/EquipmentList/GetMultiple/${rental.equipmentIds}`, equipmentList =>{
+                    const equipmentListDiv = document.getElementById('equipmentList');
+                    equipmentListDiv.innerHTML = PopulateEquipmentList(equipmentList);
+                })
+            })
+        })
+    })
+}
+
+function RentalDetailView(data){
+    var rentalStatus = "";
+    if(data.isApproved === "true"){
+        rentalStatus = "Approved";
+    }
+    else{
+        rentalStatus = "Denied";
+    }
+
+    return`
+        <br/>
+        <h4>Request Status: ${rentalStatus}</h4>
+        <h4>Date: ${data.rentalDate}</h4>
+        <h4>User: ${data.user.name}</h4>
+        <br/>
+        <div id="equipmentList"></div>
+        <br/>
+        <p>${data.feedBack}</p>
+    `
 }
