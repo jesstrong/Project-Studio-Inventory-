@@ -35,11 +35,9 @@ function Home() {
 
 <section id="aboutUs">
     <h2>ABOUT US</h2>
-    <p>We do stuff and thing.  Sometimes we're busy doing stuff, other times we're busy doing things.  
-    It just depends on who you ask.  But don't ask me.  I don't know any thing.  Rent some stuff ya idiot.  
-    Or maybe I should have added that lorem ipsum BS here.  Whatever. We do stuff and thing.  
-    Sometimes we're busy doing stuff, other times we're busy doing things.  It just depends on who you ask.  
-    But don't ask me.  I don't know any thing.  Rent some stuff ya idiot.  Or maybe I should have added that lorem ipsum BS here.  Whatever. We do stuff and thing.  Sometimes we're busy doing stuff, other times we're busy doing things.  It just depends on who you ask.  But don't ask me.  I don't know any thing.  Rent some stuff ya idiot.  Or maybe I should have added that lorem ipsum BS here.  Whatever. We do stuff and thing.  Sometimes we're busy doing stuff, other times we're busy doing things.  It just depends on who you ask.  But don't ask me.  I don't know any thing.  Rent some stuff ya idiot.  Or maybe I should have added that lorem ipsum BS here.  Whatever.</p>
+    <p>This site was created out of a need for having inventory accessibility for studio equipment along with an entire studio readily available. As a collaborative team effort, keeping in mind the user will have an ease of viewing inventoried items by category and open rental date(s). As equipment becomes available, the administrator can readily upload new pieces of equipment and as a logged-in user, that user can choose their required items and set up their own studio in minutes! No more streams of paper or antiquated filing systems to try and find out what is available and when it can be used. 
+    We would love to hear your thoughts as well on how you like our studio equipment inventory solution, questions you may have and always your feedback is welcome!
+    </p>
 </section>
 
 
@@ -50,7 +48,6 @@ function NavHome() {
     const homeLink = document.querySelector(".nav_home");
     homeLink.addEventListener('click', function (){
       appDiv.innerHTML = Home();
-      ShowSlides();
     })
 }
 
