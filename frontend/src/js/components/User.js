@@ -123,6 +123,7 @@ function CreateProfile() {
                         NavLogin();
                         ChangeSignUp();
                         Rental.UpdateNavRental();
+                        Profile.UpdateProfileButton();
                     })
                 }
                 else{
@@ -192,6 +193,7 @@ function Login(){
                 Rental.UpdateNavRental();
                 Profile.CancelRentalRequest();
                 Rental.RentalDetailsButton();
+                Profile.UpdateProfileButton(); 
             }
             else{
                 const warningElement = document.getElementById('warningText');
