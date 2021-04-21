@@ -127,7 +127,6 @@ header h3{
     background: rgb(46, 46, 46);
     font-weight: lighter;
     box-shadow: 0 0 12px rgb(182, 182, 182);
-    padding: .05em;
     transition: background-color .7s ease;
     cursor: pointer;
 }
@@ -232,6 +231,10 @@ h3 {
     font-size: 14px;
 }
 
+#app{
+    min-height: calc(100vh - 280px);
+}
+
 footer {
     padding: .5em;
     text-align: center;
@@ -243,6 +246,7 @@ footer {
     background-color: rgb(36, 36, 36);
     height: auto;
     box-shadow: 1px -1px 12px rgb(138, 138, 138);
+
 }
 
 #footerStuff{
@@ -251,6 +255,8 @@ footer {
     justify-content: center;
     align-items: center;
     gap: 5em;
+    bottom: 0;
+    left: 0;
 }
 
 .footerContent h4{

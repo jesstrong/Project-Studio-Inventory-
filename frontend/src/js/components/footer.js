@@ -7,16 +7,6 @@ function Footer(){
     return `
     <section id="footerStuff">   
         <div class="footerContent">
-            <h4>Categories</h4>
-            <ul>
-                <li>Amps </li>
-                <li>Mics</li>
-                <li>Instruments</li>
-                <li>Drums</li>
-                <li>More</li>
-            </ul>
-        </div>
-        <div class="footerContent">
             <h4>Contact Us</h4>
             <ul>
                 <li>Email | vinnie@blah.edu </li>
