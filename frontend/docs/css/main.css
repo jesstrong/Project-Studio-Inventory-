@@ -207,6 +207,17 @@ main{
     max-width: 225px;
 }
 
+.imageDiv{
+    display: flex;
+    height: 235px;
+    align-items: center;
+}
+
+.equipmentDetailsImage{
+    width: auto;
+    max-width: 400px;
+}
+
 .equipment_list{
     display: flex;
     flex-direction: row;
@@ -215,6 +226,7 @@ main{
     column-gap: 1em;
     font-size: 16px;
     align-items: space-around;
+    
 }
 
 
@@ -222,7 +234,18 @@ main{
     padding: .5em;
     margin: .5em;
     border-radius: 5.5px;
-    max-width: 20em;
+    width: 250px;
+    height: 30em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:center;
+}
+
+#testing{
+    width: 150px;
+    height: 150px;
+    align-content: center;
 }
 
 h3 {

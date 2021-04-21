@@ -30,7 +30,7 @@ function UserEquipmentDetails(equipment){
     return `
     <h1>${equipment.name}</h1>
         <section class='equipmentView'>
-            <img src="${equipment.image}">
+            <img src="${equipment.image}" class='equipmentDetailsImage'>
             <br/>
             <p><em>${equipment.name}</em></p>
             <br/>
