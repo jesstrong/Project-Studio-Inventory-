@@ -16,6 +16,7 @@ export default() => {
  Footer.SetupFooter();
  Home.NavHome();
  Home.ShowSlides();
+ setInterval(Home.ShowSlides, 5000);
  EquipmentList.NavEquipmentList();
  CategoryList.NavCategoryList();
  User.NavSignUp();

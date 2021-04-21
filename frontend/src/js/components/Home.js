@@ -1,14 +1,14 @@
 export default {
-    Home,
-    NavHome,
-    ShowSlides
-}
+  Home,
+  NavHome,
+  ShowSlides,
+};
 
-const appDiv = document.getElementById('app');
+const appDiv = document.getElementById("app");
 var slides = document.getElementsByClassName("mySlides");
 
 function Home() {
-    return `
+  return `
     <section id="studioImages">
     <div id="images_Container">
         <div class="text">
@@ -46,22 +46,25 @@ function Home() {
 }
 
 function NavHome() {
-    const homeLink = document.querySelector(".nav_home");
-    homeLink.addEventListener('click', function (){
-      appDiv.innerHTML = Home();
-      slides[0].style.display = "block";
-    })
+  const homeLink = document.querySelector(".nav_home");
+  homeLink.addEventListener("click", function () {
+    appDiv.innerHTML = Home();
+    slides[0].style.display = "block";
+  });
 }
 
 var slideIndex = 0;
 
 function ShowSlides() {
-  var i;
-  for (i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";
+  if (slides.length != 0) {
+    var i;
+    for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+    }
+    slideIndex++;
+    if (slideIndex > slides.length) {
+      slideIndex = 1;
+    }
+    slides[slideIndex - 1].style.display = "block";
   }
-  slideIndex++;
-  if (slideIndex > slides.length) {slideIndex = 1}
-  slides[slideIndex-1].style.display = "block";
-  setTimeout(ShowSlides, 5000);
 }
