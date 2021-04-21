@@ -1,6 +1,7 @@
 import apiAction from "../api/api-actions";
 import CategoryUpdate from "./CategoryUpdate";
 import cookieAction from "../cookie/cookie-actions";
+import EquipmentList from "../components/EquipmentList";
 
 export default {
     NavCategoryList,
@@ -61,9 +62,9 @@ function CategorySingle(Category){
                 console.log(item);
                 return `
                     <article>
-                        <h3 class="equipment_name">${item.name}</h3>
-                        <img src="${item.image}" class="equipment_image">
-                        <p class="equipment_description">${item.description}</p>
+                        <h3 class="equipment_name" id="${item.id}">${item.name}</h3>
+                        <img src="${item.image}" class="equipment_image" id="${item.id}">
+                        <p class="equipment_description">${item.description.slice(0, 70)}<a class="description_link" id="${item.id}">...</a></p>
                     </article>
                     `
                 }).join('')}
@@ -79,6 +80,7 @@ function NavCategorySingle(){
             const categoryId = element.id;
             apiAction.getRequest(`https://localhost:44372/api/Category/${categoryId}`, data =>{
                 appDiv.innerHTML = CategorySingle(data);
+                EquipmentList.NavEquipmentSingle();
             })
         })
     })

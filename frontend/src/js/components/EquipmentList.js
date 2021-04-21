@@ -9,7 +9,8 @@ export default{
     CategoryDropdownNav,
     UpdateEquipmentBtn,
     AddEquipment,
-    RemoveEquipment
+    RemoveEquipment,
+    NavEquipmentSingle
 }
 
 const appDiv = document.getElementById('app');
@@ -64,7 +65,7 @@ function UserEquipmentList(equipmentList){
                         <h3 class="equipment_name" id="${equipment.id}">${equipment.name}</h3>
                         <img src="${equipment.image}" id="${equipment.id}" class="equipment_image">
                         <p class="equipment_category"><strong>${equipment.category.name}</strong></p>
-                        <p class="equipment_description">${equipment.description.slice(0, 20)}</p>
+                        <p class="equipment_description">${equipment.description.slice(0, 70)}<a class="description_link" id="${equipment.id}">...</a></p>
                     </article>
                     `
                 }).join('')}
@@ -211,12 +212,14 @@ function CategoryDropdownNav(){
                 FillCategories('category');
                 AddEquipment();
                 RemoveEquipment();
+                NavEquipmentSingle();
             }
             else{
 
                 appDiv.innerHTML = UserCategoryDropdownList(category);
                 CategoryDropdownNav();
                 FillCategories('category_dropdown');
+                NavEquipmentSingle();
             }
         })
     })
@@ -232,8 +235,9 @@ function AdminCategoryDropdownList(category){
             ${category.equipmentList.map(equipment =>{
                 return `
                     <article>
-                        <h3 class="equipment_name">${equipment.name}</h3>
-                        <p class="equipment_description">${equipment.description}</p>
+                        <h3 class="equipment_name" id="${equipment.id}">${equipment.name}</h3>
+                        <img src="${equipment.image}" class="equipment_image" id="${equipment.id}">
+                        <p class="equipment_description">${equipment.description.slice(0, 70)}<a class="description_link" id="${equipment.id}">...</a></p>
                         <button class="updateEquipmentBtn" id="${equipment.id}">Update Item</button>
                         <button class="deleteEquipmentBtn" id="${equipment.id}">Delete Item</button>
                     </article>
@@ -267,8 +271,9 @@ function UserCategoryDropdownList(category){
             ${category.equipmentList.map(equipment =>{
                 return `
                     <article>
-                        <h3 class="equipment_name">${equipment.name}</h3>
-                        <p class="equipment_description">${equipment.description}</p>
+                        <h3 class="equipment_name" id="${equipment.id}">${equipment.name}</h3>
+                        <img src="${equipment.image}" class="equipment_image" id="${equipment.id}">
+                        <p class="equipment_description">${equipment.description.slice(0, 70)}<a class="description_link" id="${equipment.id}">...</a></p>
                     </article>
                     `
                 }).join('')}
