@@ -16,20 +16,34 @@ function ProfilePage(User){
     }
     
     return `
+    </br>
     <h3>Welcome ${User.name}</h3>
-    
     <h4>Here is a record of your rentals:</h4>
     <ul>
     ${User.rentals.map(rental =>{
         var cancelButton = "";
+        var rentalStatus = "";
+
         if(rental.isApproved === false)
         {
             cancelButton = `<button class="cancelRequest" id="${rental.id}">Cancel</button>`
         }
+
+        if(rental.isApproved == true){
+            rentalStatus = "Approved";
+        }
+        else if (rental.isDenied == true){
+            rentalStatus = "Denied";
+        }
+        else{
+            rentalStatus = "Pending";
+        }
+
         return `
         <li>
+        </br>
             <h4 class ="rental_detail_element" id ="${rental.id}">${rental.rentalDate}</h4>
-            <p>Is approved: ${rental.isApproved}</p>
+            <p>Request Status: ${rentalStatus}</p>
             ${cancelButton}
         </li>
         `
