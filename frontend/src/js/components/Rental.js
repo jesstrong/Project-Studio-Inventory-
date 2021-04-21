@@ -345,11 +345,14 @@ function RentalDetailslButton(){
 
 function RentalDetailView(data){
     var rentalStatus = "";
-    if(data.isApproved === "true"){
+    if(data.isApproved == true){
         rentalStatus = "Approved";
     }
-    else{
+    else if(data.isDenied == true){
         rentalStatus = "Denied";
+    }
+    else{
+        rentalStatus = "Pending";
     }
 
     return`
