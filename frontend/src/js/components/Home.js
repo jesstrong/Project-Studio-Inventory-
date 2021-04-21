@@ -5,6 +5,7 @@ export default {
 }
 
 const appDiv = document.getElementById('app');
+var slides = document.getElementsByClassName("mySlides");
 
 function Home() {
     return `
@@ -48,6 +49,7 @@ function NavHome() {
     const homeLink = document.querySelector(".nav_home");
     homeLink.addEventListener('click', function (){
       appDiv.innerHTML = Home();
+      slides[0].style.display = "block";
     })
 }
 
@@ -55,7 +57,6 @@ var slideIndex = 0;
 
 function ShowSlides() {
   var i;
-  var slides = document.getElementsByClassName("mySlides");
   for (i = 0; i < slides.length; i++) {
     slides[i].style.display = "none";
   }
