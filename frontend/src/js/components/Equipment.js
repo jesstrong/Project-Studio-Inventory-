@@ -11,32 +11,44 @@ const appDiv = document.getElementById('app');
 
 function EquipmentDetails(equipment){
     return `
-    <h1>Edit Equipment</h1>
+    <section class="equipmentDetails">
+        <h1>Edit Equipment</h1>
+        </br>
         <section class='equipmentForm'>
-            <input type='text' id='equipmentName' value='${equipment.name}' />
-            <input type='text' id='changeEquipmentImage' value='${equipment.image}' />
-            <input type='hidden' id='categoryId' value='${equipment.categoryId}' />
-            <input type='hidden' id='equipmentId' value='${equipment.id}' />
-            <input type='text' id='serialNumber' value='${equipment.serialNumber}' />
+            <div class="inputDiv"> 
+                <h5>Equipment Name:</h5>
+                <input type='text' id='equipmentName' value='${equipment.name}' />
+                <h5>Image URL:</h5>
+                <input type='text' id='changeEquipmentImage' value='${equipment.image}' />
+                <input type='hidden' id='categoryId' value='${equipment.categoryId}' />
+                <input type='hidden' id='equipmentId' value='${equipment.id}' />
+                <h5>Serial Number:</h5>
+                <input type='text' id='serialNumber' value='${equipment.serialNumber}' />
+            </div>
             <br/>
-            <textarea rows="4" cols="100" id='description'>${equipment.description}</textarea>
+            <h5>Description:</h5>
+            <textarea rows="4" cols="90" id='description'>${equipment.description}</textarea>
             <input type='hidden' id='rentalDates' value='' />
+            </br>
             <button id='btnEditEquipment'>Save</button>
         </section>
+    </section>    
     `
 }
 
 function UserEquipmentDetails(equipment){
     return `
-    <h1>${equipment.name}</h1>
-        <section class='equipmentView'>
-            <img src="${equipment.image}" class='equipmentDetailsImage'>
-            <br/>
-            <p><em>${equipment.name}</em></p>
-            <br/>
-            <p>${equipment.description}</p>
-            <br/>
-        </section>
+    <section class="equipmentDetailPage">
+        <h1>${equipment.name}</h1>
+            <section class='equipmentView'>
+                <img src="${equipment.image}" class='equipmentDetailsImage'>
+                <br/>
+                <p><em>${equipment.name}</em></p>
+                <br/>
+                <p>${equipment.description}</p>
+                <br/>
+            </section>
+    <section>
     `
 }
 
