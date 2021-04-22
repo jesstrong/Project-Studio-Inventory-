@@ -7,7 +7,8 @@ const appDiv = document.getElementById('app');
 
 function ContactPage() {
     return `
-    <h2>Contact Info</h2>
+    <section class="contact">
+    <h1>Contact Info</h1>
     
     <br/>
 
@@ -42,11 +43,10 @@ function ContactPage() {
         <p>Friday: Closed</p>
         <p>Saturday: 12pm-6pm</p>
         <br/>
-        <p>Note: These are regular hours, but special accomodations can be made. Be sure to email or call us at least a week ahead of time, and we will do our best to accomodate your needs.</p>
+        <p><i>Note: These are regular hours, but special accommodations can be made. Be sure to email or call us at least a week ahead of time, and we will do our best to accommodate your needs.</i></p>
     </section>
-
-    <br/>
-
+    </section>
+    
     `;
 }
 

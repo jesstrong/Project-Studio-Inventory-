@@ -22,8 +22,7 @@ function AdminEquipmentList(equipmentList) {
         <h1>Equipment List</h1>
         <select id="category_dropdown"></select>
         <div class="equipment_list">
-            ${equipmentList
-              .map((equipment) => {
+            ${equipmentList.map((equipment) => {
                 return `
                     <article>
                         <h3 class="equipment_name" id="${equipment.id}">${equipment.name}</h3>
@@ -44,15 +43,18 @@ function AdminEquipmentList(equipmentList) {
 
         <section class="equipmentForm">
             <h3>Add Item</h3>
-            <div id='helpRequired' class="text-danger">*Required</div>                
+            <div id='helpRequired' class="text-danger">*Required</div>
+            <div class="inputDiv">                
                 <input type="text" id="equipmentName" placeholder='*Name' />            
                 <input type="text" id="serialNumber" placeholder="*Serial Number" />               
                 <input type = "text" id = "equipmentImage" placeholder = "*Image URL"/>               
-                <select id="category">
-                </select>
-                <textarea rows="4" cols="100" id='description' placeholder='Description'></textarea>
-                <input type='hidden' id='rentalDates' value=""/>
-                <button id="saveEquipmentBtn">Save Item</button>
+                <select id="category"></select>
+            </div>
+            </br>    
+            <textarea rows="4" cols="90" id='description' placeholder='Description'></textarea>
+            <input type='hidden' id='rentalDates' value=""/>
+            </br>
+            <button id="saveEquipmentBtn">Save Item</button>
         </section>
     </section>
     `;
@@ -62,28 +64,17 @@ function UserEquipmentList(equipmentList) {
   return `
     <section class="equipment">
         <h1>Equipment List</h1>
-        </br>
         <select id="category_dropdown"></select>
         <div class="equipment_list">
-            ${equipmentList
-              .map((equipment) => {
+            ${equipmentList.map((equipment) => {
                 return `
                     <article>
-                        <h3 class="equipment_name" id="${equipment.id}">${
-                  equipment.name
-                }</h3>
-                        <img src="${equipment.image}" id="${
-                  equipment.id
-                }" class="equipment_image">
-                        <p class="equipment_category"><strong>${
-                          equipment.category.name
-                        }</strong></p>
-                        <p class="equipment_description">${equipment.description.slice(
-                          0,
-                          70
-                        )}<a class="description_link" id="${
-                  equipment.id
-                }">...</a></p>
+                        <h3 class="equipment_name" id="${equipment.id}">${equipment.name}</h3>
+                        <div class="imageDiv">
+                          <img src="${equipment.image}" id="${equipment.id}" class="equipment_image">
+                        </div>
+                        <p class="equipment_category"><strong>${equipment.category.name}</strong></p>
+                        <p class="equipment_description">${equipment.description.slice(0, 70)}<a class="description_link" id="${equipment.id}">...</a></p>
                     </article>
                     `;
               })
@@ -264,31 +255,21 @@ function AdminCategoryDropdownList(category) {
   return `
     <section class="equipment">
         <h1>${category.name} List</h1>
-        </br>
         <select id="category_dropdown"></select>
         <div class="equipment_list">
             ${category.equipmentList
               .map((equipment) => {
                 return `
                     <article>
-                        <h3 class="equipment_name" id="${equipment.id}">${
-                  equipment.name
-                }</h3>
-                        <img src="${
-                          equipment.image
-                        }" class="equipment_image" id="${equipment.id}">
-                        <p class="equipment_description">${equipment.description.slice(
-                          0,
-                          70
-                        )}<a class="description_link" id="${
-                  equipment.id
-                }">...</a></p>
-                        <button class="updateEquipmentBtn" id="${
-                          equipment.id
-                        }">Update Item</button>
-                        <button class="deleteEquipmentBtn" id="${
-                          equipment.id
-                        }">Delete Item</button>
+                        <h3 class="equipment_name" id="${equipment.id}">${equipment.name}</h3>
+                        <div class="imageDiv">
+                          <img src="${equipment.image}" class="equipment_image" id="${equipment.id}">
+                        </div>
+                        <p class="equipment_description">${equipment.description.slice(0, 70)}<a class="description_link" id="${equipment.id}">...</a></p>
+                        <div>
+                          <button class="updateEquipmentBtn" id="${equipment.id}">Update Item</button>
+                          <button class="deleteEquipmentBtn" id="${equipment.id}">Delete Item</button>
+                        </div>
                     </article>
                     `;
               })
@@ -296,18 +277,20 @@ function AdminCategoryDropdownList(category) {
         </div>
         <section class="equipmentForm">
             <h3>Add Item</h3>
+            <div class="inputDiv">
                 <input type="text" id="equipmentName" placeholder='Enter the name of this equipment' />
                 <div id='helpName' class="text-danger"></div>
                 <input type="text" id="serialNumber" placeholder='Enter Serial Number' />
                 <div id='helpSerial' class="text-danger"></div>
-                <select id="category">
-                </select>
+                <select id="category"></select>
+            </div>    
                 <br/>
-                <input type='text' id='description' placeholder='Description' />
+                <textarea rows="4" cols="90" id='description' placeholder='Description'></textarea>
                 <input type='hidden' id='rentalDates' value=""/>
+                </br>
                 <button id="saveEquipmentBtn">Save Item</button>
         </section>
-    </section>
+      </section>
     `;
 }
 
@@ -315,7 +298,6 @@ function UserCategoryDropdownList(category) {
   return `
     <section class="equipment">
         <h1>${category.name} List</h1>
-        </br>
         <select id="category_dropdown"></select>
         <div class="equipment_list">
             ${category.equipmentList
