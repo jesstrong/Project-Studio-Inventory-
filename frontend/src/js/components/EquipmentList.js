@@ -300,22 +300,14 @@ function UserCategoryDropdownList(category) {
         <h1>${category.name} List</h1>
         <select id="category_dropdown"></select>
         <div class="equipment_list">
-            ${category.equipmentList
-              .map((equipment) => {
+            ${category.equipmentList.map((equipment) => {
                 return `
                     <article>
-                        <h3 class="equipment_name" id="${equipment.id}">${
-                  equipment.name
-                }</h3>
-                        <img src="${
-                          equipment.image
-                        }" class="equipment_image" id="${equipment.id}">
-                        <p class="equipment_description">${equipment.description.slice(
-                          0,
-                          70
-                        )}<a class="description_link" id="${
-                  equipment.id
-                }">...</a></p>
+                        <h3 class="equipment_name" id="${equipment.id}">${equipment.name}</h3>
+                        <div class="imageDiv">
+                          <img src="${equipment.image}" class="equipment_image" id="${equipment.id}">
+                        </div>
+                        <p class="equipment_description">${equipment.description.slice(0, 70)}<a class="description_link" id="${equipment.id}">...</a></p>
                     </article>
                     `;
               })

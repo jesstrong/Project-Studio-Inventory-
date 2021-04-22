@@ -61,7 +61,7 @@ header {
     top: 0;
     padding: 0 0%;
     width: 100%;
-    background: rgb(246, 246, 246);
+    background: rgb(245, 245, 245);
     border-bottom: 1.5px solid rgb(238, 238, 238);
     box-shadow: 0px 0px 3px rgb(223, 223, 223);
     background-image: url("/images/natural-paper.png");
@@ -173,12 +173,11 @@ main{
     flex-direction: column;
     justify-content: center;
     margin: -.5em auto;
-    max-width: 1200px;
+    max-width: 1260px;
     width: auto;
     text-align: center;
     letter-spacing: .015em;
-    padding-top: 2rem;
-    padding-bottom: 4rem;
+    padding: 2rem 2rem 4rem 2rem;
 }
 
 .equipmentDetailPage{
@@ -217,6 +216,7 @@ main{
 .equipmentDetailsImage{
     width: auto;
     max-width: 400px;
+    max-height: 235px;
 }
 
 .equipment_list{
@@ -367,9 +367,6 @@ footer {
     text-align: center;
     padding-top: 1rem;
     padding-bottom: 2rem;
-    border-left: .5px solid rgb(238, 238, 238);
-    border-right: 1.5px solid rgb(238, 238, 238);
-    box-shadow: 0px 0px 3px rgb(223, 223, 223);
     padding-left: 5rem;
     padding-right: 5rem;
 }
