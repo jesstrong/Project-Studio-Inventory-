@@ -175,14 +175,20 @@ main{
     margin: -.5em auto;
     max-width: 1260px;
     width: auto;
-    text-align: center;
+    text-align: left;
     letter-spacing: .015em;
     padding: 2rem 2rem 4rem 2rem;
 }
 
+
 .equipmentDetailPage{
     padding-top: 2rem;
     padding-bottom: 1rem;
+}
+
+.equipmentDetailPage p{
+    text-indent: 40px;
+    text-align: left;
 }
 
 .picture {
@@ -204,6 +210,8 @@ main{
 
 .equipment_image{
     width: auto;
+    height: auto;
+    max-height: 235px;
     max-width: 225px;
 }
 
@@ -215,6 +223,7 @@ main{
 
 .equipmentDetailsImage{
     width: auto;
+    height: auto;
     max-width: 400px;
     max-height: 235px;
 }
@@ -249,6 +258,8 @@ h3 {
 .equipment_list article p{
     padding-top: 0;
     font-size: 14px;
+    text-align: left;
+    text-indent: 25px;
 }
 
 .equipmentForm{
@@ -338,8 +349,16 @@ footer {
     border-radius: 15px;
 }
 
-.category_name_user{
+.category_name_user:hover{
     cursor: pointer;
+}
+
+.category_name_user{
+    color: rgb(26, 134, 44);
+}
+
+.category_list_items{
+    margin: .5rem;
 }
 
 .text-danger{
@@ -369,4 +388,74 @@ footer {
     padding-bottom: 2rem;
     padding-left: 5rem;
     padding-right: 5rem;
+}
+
+a{
+    color: rgb(26, 134, 44);
+    text-decoration: underline;
+}
+
+.rental_detail_element, .rental_element{
+    color: rgb(26, 134, 44);
+}
+
+.rental_detail_element:hover, .rental_element:hover{
+    cursor: pointer;
+}
+
+.rental_list_item, .admin_ol{
+    margin-bottom: 2rem;
+}
+
+.rental_category_list{
+    margin: 1rem;
+}
+
+.rental_list, .rental_equipment_list{
+    list-style: none;
+}
+
+.submitRentalBtn{
+    margin: 1rem;
+}
+
+hr{
+    align-self: center;
+    margin: auto;
+}
+
+thead,
+tfoot {
+    background-color: #bdbdbd;
+    color: #fff;
+}
+
+tbody {
+    background-color: rgb(223, 223, 223);
+}
+
+caption {
+    padding: 10px;
+    caption-side: bottom;
+}
+
+table {
+    border-collapse: collapse;
+    border: 1px solid rgb(61, 61, 61);
+    letter-spacing: 1px;
+    font-family: sans-serif;
+    font-size: .8rem;
+    justify-content: center;
+    margin: auto;
+    margin-bottom: 1rem;
+}
+
+td,
+th {
+    border: 1px solid rgb(61, 61, 61);
+    padding: 5px 10px;
+}
+
+td {
+    text-align: center;
 }

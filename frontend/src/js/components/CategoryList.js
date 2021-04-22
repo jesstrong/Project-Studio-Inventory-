@@ -20,7 +20,7 @@ function AdminCategoryList(CategoryList){
     <ol>
         ${CategoryList.map(category =>{
             return `
-                <li>
+                <li class="category_list_items">
                     <h4 class="category_name_user" id="${category.id}">${category.name}</h4>
                     <button class="updateCategoryBtn" id="${category.id}">Update Item</button>
                     <button class="deleteCategoryBtn" id="${category.id}">Delete Item</button>
@@ -44,7 +44,7 @@ function UserCategoryList(CategoryList){
     <ol>
         ${CategoryList.map(category =>{
             return `
-                <li>
+                <li class="category_list_items">
                     <h4 class="category_name_user" id="${category.id}">${category.name}</h4>
                 </li>
             `

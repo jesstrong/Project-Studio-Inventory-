@@ -43,7 +43,7 @@ function UserEquipmentDetails(equipment){
             <section class='equipmentView'>
                 <img src="${equipment.image}" class='equipmentDetailsImage'>
                 <br/>
-                <p><em>${equipment.name}</em></p>
+                <div><em>${equipment.name}</em></div>
                 <br/>
                 <p>${equipment.description}</p>
                 <br/>
@@ -80,6 +80,7 @@ function UpdateEquipment(){
                 EquipmentList.UpdateEquipmentBtn();
                 EquipmentList.AddEquipment();
                 EquipmentList.RemoveEquipment();
+                EquipmentList.NavEquipmentSingle();
             })
         })
     })

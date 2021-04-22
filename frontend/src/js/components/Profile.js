@@ -22,6 +22,7 @@ function ProfilePage(User){
     <button class="updateProfileBtn" id="${User.id}">Update Profile</button>
     </br>
     <h4>Here is a record of your rentals:</h4>
+    </br>
     <ul>
     ${User.rentals.map(rental =>{
         var cancelButton = "";
@@ -43,8 +44,7 @@ function ProfilePage(User){
         }
 
         return `
-        <li>
-        </br>
+        <li class="rental_list_item">
             <h4 class ="rental_detail_element" id ="${rental.id}">${rental.rentalDate}</h4>
             <p>Request Status: ${rentalStatus}</p>
             ${cancelButton}

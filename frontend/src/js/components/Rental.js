@@ -37,7 +37,7 @@ function RentalFormPage(){
     <h1>Rental Form</h1>
 
     <input type = "date" id = "rentalDate" value='${minDate}' min='${minDate}' max='${maxDate}'>
-    <button class="dateBtn">Check Availablity</button>
+    <button class="dateBtn">Check Availability</button>
     <div id="availableEquipment">
 
     </div>
@@ -98,12 +98,12 @@ function DateBtn(){
 function PopulateEquipmentDiv(categories, rentalDate){
     return `
     <h2>Available Equipment</h2>
-    <ul>
+    <ul class="rental_list">
         ${categories.map(category =>{
             return `
-            <li>
+            <li class="rental_category_list">
                 <h4>${category.name}</h4>
-                <ol>
+                <ol class="rental_equipment_list">
                 ${category.equipmentList.map(equipment =>{
                     var isRented = false;
                     equipment.rentalDateList.forEach(date =>{
@@ -123,6 +123,7 @@ function PopulateEquipmentDiv(categories, rentalDate){
                 }).join('')}
                 </ol>
             </li>
+            <hr width="400px">
             `
         }).join('')}
     </ul>
@@ -203,7 +204,7 @@ function ApprovalPage(data){
             }).join("")}
         </ol>
         <h1>Denied Rentals</h1>
-        <ol>
+        <ol class="admin_ol">
             ${data.map(rental =>{
                 if(rental.isDenied == true){
                     return`
@@ -251,13 +252,16 @@ function RentalApprovalView(data){
 
 function PopulateEquipmentList(data){
     return`
-        <ol>
+        <table>
+        <thead><tr><th>Equipment Name</th><th>Category</th><th>Serial Number</th></tr></thead>
+            <tbody>
             ${data.map(equipment =>{
                 return`
-                    <li>${equipment.name} | ${equipment.category.name} | ${equipment.serialNumber}</li>
+                    <tr><td>${equipment.name}</td><td>${equipment.category.name}</td><td>${equipment.serialNumber}</td></tr>
                 `
             }).join("")}
-        </ol>
+            </tbody>
+        </table>
     `
 }
 
@@ -359,9 +363,9 @@ function RentalDetailView(data){
         <h4>Request Status: ${rentalStatus}</h4>
         <h4>Date: ${data.rentalDate}</h4>
         <h4>User: ${data.user.name}</h4>
+        <p>${data.feedBack}</p>
         <br/>
         <div id="equipmentList"></div>
         <br/>
-        <p>${data.feedBack}</p>
     `
 }

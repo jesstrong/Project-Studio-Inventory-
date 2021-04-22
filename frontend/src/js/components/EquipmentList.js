@@ -30,7 +30,7 @@ function AdminEquipmentList(equipmentList) {
                             <img src="${equipment.image}" class="equipment_image" id="${equipment.id}">
                         </div>
                         <p class="equipment_category"><strong>${equipment.category.name}</strong></p>
-                        <p class="equipment_description">${equipment.description.slice(0, 70)}<a class="description_link" id="${equipment.id}">...</a></p>
+                        <p class="equipment_description">   ${equipment.description.slice(0, 70)}... (<a class="description_link" id="${equipment.id}">More</a>)</p>
                         <div>
                             <button class="updateEquipmentBtn" id="${equipment.id}">Update Item</button>
                             <button class="deleteEquipmentBtn" id="${equipment.id}">Delete Item</button>
@@ -74,7 +74,7 @@ function UserEquipmentList(equipmentList) {
                           <img src="${equipment.image}" id="${equipment.id}" class="equipment_image">
                         </div>
                         <p class="equipment_category"><strong>${equipment.category.name}</strong></p>
-                        <p class="equipment_description">${equipment.description.slice(0, 70)}<a class="description_link" id="${equipment.id}">...</a></p>
+                        <p class="equipment_description">${equipment.description.slice(0, 70)}... (<a class="description_link" id="${equipment.id}">More</a>)</p>
                     </article>
                     `;
               })
@@ -265,7 +265,7 @@ function AdminCategoryDropdownList(category) {
                         <div class="imageDiv">
                           <img src="${equipment.image}" class="equipment_image" id="${equipment.id}">
                         </div>
-                        <p class="equipment_description">${equipment.description.slice(0, 70)}<a class="description_link" id="${equipment.id}">...</a></p>
+                        <p class="equipment_description">   ${equipment.description.slice(0, 70)}... (<a class="description_link" id="${equipment.id}">More</a>)</p>
                         <div>
                           <button class="updateEquipmentBtn" id="${equipment.id}">Update Item</button>
                           <button class="deleteEquipmentBtn" id="${equipment.id}">Delete Item</button>
@@ -276,21 +276,21 @@ function AdminCategoryDropdownList(category) {
               .join("")}
         </div>
         <section class="equipmentForm">
-            <h3>Add Item</h3>
-            <div class="inputDiv">
-                <input type="text" id="equipmentName" placeholder='Enter the name of this equipment' />
-                <div id='helpName' class="text-danger"></div>
-                <input type="text" id="serialNumber" placeholder='Enter Serial Number' />
-                <div id='helpSerial' class="text-danger"></div>
-                <select id="category"></select>
-            </div>    
-                <br/>
-                <textarea rows="4" cols="90" id='description' placeholder='Description'></textarea>
-                <input type='hidden' id='rentalDates' value=""/>
-                </br>
-                <button id="saveEquipmentBtn">Save Item</button>
-        </section>
-      </section>
+        <h3>Add Item</h3>
+        <div id='helpRequired' class="text-danger">*Required</div>
+        <div class="inputDiv">                
+            <input type="text" id="equipmentName" placeholder='*Name' />            
+            <input type="text" id="serialNumber" placeholder="*Serial Number" />               
+            <input type = "text" id = "equipmentImage" placeholder = "*Image URL"/>               
+            <select id="category"></select>
+        </div>
+        </br>    
+        <textarea rows="4" cols="90" id='description' placeholder='Description'></textarea>
+        <input type='hidden' id='rentalDates' value=""/>
+        </br>
+        <button id="saveEquipmentBtn">Save Item</button>
+    </section>
+</section>
     `;
 }
 
@@ -307,7 +307,7 @@ function UserCategoryDropdownList(category) {
                         <div class="imageDiv">
                           <img src="${equipment.image}" class="equipment_image" id="${equipment.id}">
                         </div>
-                        <p class="equipment_description">${equipment.description.slice(0, 70)}<a class="description_link" id="${equipment.id}">...</a></p>
+                        <p class="equipment_description">     ${equipment.description.slice(0, 70)}... (<a class="description_link" id="${equipment.id}">More</a>)</p>
                     </article>
                     `;
               })
